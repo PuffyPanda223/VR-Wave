@@ -9,14 +9,17 @@ public class HitBoxSpawner : MonoBehaviour
     private float time; 
     // Start is called before the first frame update
 
+        // the prefab hitbox mesh we will spawn in 
     public GameObject hitBox;
+    // the player camera
     public Camera cam; 
     private bool activated;
+    // all the object flags used to spawn in the hit boxes
     public GameObject spawnLocation_1;
     public GameObject spawnLocation_2;
     public GameObject spawnLocation_3;
-    public GameObject spawnLocation_4; 
-    bool destroyed = false;
+    public GameObject spawnLocation_4;
+    public GameObject spawn2HitBox; 
     // stores an instance of the hitbox object, if you destroy the actual gameobject it destroys the prefab as well for some stupid reason
     private GameObject _instance; 
     void Start()
@@ -33,20 +36,18 @@ public class HitBoxSpawner : MonoBehaviour
      
         if (time >= 8 && activated == false && time < 12)
         {
-            Vector3 position = spawnLocation_2.transform.position;
-            // makes sure that the hitbox is facing towards the camera, as the backside is not rendered in unity to save processing power. 
-            Quaternion lookRotation = Quaternion.identity;
-            lookRotation.z = spawnLocation_2.transform.eulerAngles.z ;
-
+            Vector3 position = spawnLocation_3.transform.position;
+            
+            // the rotation 
             Quaternion rotation = Quaternion.LookRotation(-cam.transform.up, -cam.transform.forward);
-            _instance = Instantiate(hitBox, position, rotation);
+            _instance = Instantiate(spawn2HitBox, position, rotation);
 
             activated = true; 
         } else if (time>20)
         {
             if (_instance)
             {
-               // Destroy(_instance);
+               Destroy(_instance);
             }
           
         }

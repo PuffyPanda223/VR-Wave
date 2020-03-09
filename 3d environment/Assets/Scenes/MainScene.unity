@@ -180,6 +180,8 @@ MonoBehaviour:
   spawnLocation_2: {fileID: 1504942195}
   spawnLocation_3: {fileID: 2123488215}
   spawnLocation_4: {fileID: 1771738478}
+  spawn2HitBox: {fileID: 6083706065899036622, guid: 0deaca8ae0323984084174fa32217e36,
+    type: 3}
 --- !u!1 &606526553
 GameObject:
   m_ObjectHideFlags: 0
