@@ -34,16 +34,17 @@ public class DrawLine : MonoBehaviour
         {
             // Whatever the mouse position project whats called a raycast until it hits an object able to be hit
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            Debug.Log(ray);
+            
             // The coords of the of the of the object able to be hit by the raycast are stored in this hit variable, Hit meaning target location of hit object
             RaycastHit hit; 
 
             // the first input is the ray used (which in this case is always projected from the mouse position), when it hits something the output will be stored in the hit variable
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("got here ");
+             
                 if ( DistanceToLastHit(hit.point) > 1f )
                 {
+                    Debug.Log(hit.point + " is the hit points");
                     positions.Add(hit.point);
 
                     line.positionCount = positions.Count;
