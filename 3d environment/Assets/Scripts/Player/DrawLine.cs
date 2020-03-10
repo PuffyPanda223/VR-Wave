@@ -9,11 +9,17 @@ public class DrawLine : MonoBehaviour
     // LineRenderer is a component that given a list of vector3 coords will draw a line. The list has to be vector3 so we can store the x,y,z coords of each point on the screen
     private LineRenderer line;
     private List<Vector3> positions = new List<Vector3>();
-
-    public Camera camera; 
+    int layer_mask;
+    int Distance; 
+    public Camera camera;
 
 
     // Start is called before the first frame update
+    private void Start()
+    {
+        layer_mask = LayerMask.GetMask("hitBox");
+        Distance = 49;
+    }
     void Awake ()
     {
         // make line of type LineRenderer the actual line renderer that will be used later on
@@ -39,16 +45,17 @@ public class DrawLine : MonoBehaviour
             RaycastHit hit; 
 
             // the first input is the ray used (which in this case is always projected from the mouse position), when it hits something the output will be stored in the hit variable
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Distance , layer_mask))
             {
-             
+                Debug.Log("got here yo");
                 if ( DistanceToLastHit(hit.point) > 1f )
                 {
                     Debug.Log(hit.point + " is the hit points");
                     positions.Add(hit.point);
-
+                   
                     line.positionCount = positions.Count;
-                    line.SetPositions(positions.ToArray()); 
+                    line.SetPositions(positions.ToArray());
+                    Destroy(hit.transform.gameObject);
                 }
             }
         }

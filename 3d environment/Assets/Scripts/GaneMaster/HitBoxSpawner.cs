@@ -22,6 +22,7 @@ public class HitBoxSpawner : MonoBehaviour
     public GameObject spawn2HitBox; 
     // stores an instance of the hitbox object, if you destroy the actual gameobject it destroys the prefab as well for some stupid reason
     private GameObject _instance; 
+   
     void Start()
     {
 
@@ -36,10 +37,10 @@ public class HitBoxSpawner : MonoBehaviour
      
         if (time >= 8 && activated == false && time < 12)
         {
-            Vector3 position = spawnLocation_3.transform.position;
+            Vector3 position = spawnLocation_2.transform.position;
             
             // the rotation 
-            Quaternion rotation = Quaternion.LookRotation(-cam.transform.up, -cam.transform.forward);
+            Quaternion rotation = Quaternion.LookRotation(-spawnLocation_2.transform.up, -spawnLocation_2.transform.forward);
             _instance = Instantiate(spawn2HitBox, position, rotation);
 
             activated = true; 
@@ -48,7 +49,11 @@ public class HitBoxSpawner : MonoBehaviour
             if (_instance)
             {
                Destroy(_instance);
+                
             }
+            // Becuase the hit box is either already destroyed or the player ran out of time their is no need to keep the script running and wasting resources, so we disable it
+            GetComponent<HitBoxSpawner>().enabled = false;
+            Debug.Log("Script should not print this more than once");
           
         }
 
