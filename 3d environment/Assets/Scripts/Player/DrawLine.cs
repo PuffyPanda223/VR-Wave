@@ -12,7 +12,8 @@ public class DrawLine : MonoBehaviour
     int layer_mask;
     int Distance; 
     public Camera camera;
-
+    // load the functions needed from point script to add to the player script 
+    private PointSystem pointScript; 
 
     // Start is called before the first frame update
     private void Start()
@@ -24,6 +25,11 @@ public class DrawLine : MonoBehaviour
     {
         // make line of type LineRenderer the actual line renderer that will be used later on
         line = GetComponent<LineRenderer>();
+
+        // These two lines of code get the game amster object in our game which contains a lot of scripts that keep track of the overall game and loads specifically 
+        // the point scoring script to give access to the function that increments the player score so whenever a hitbox is successfully hit we can increase the player score 
+        GameObject gameMaster = GameObject.Find("Game Master");
+        pointScript = (PointSystem) gameMaster.GetComponent(typeof(PointSystem));
       
 
        
@@ -45,17 +51,20 @@ public class DrawLine : MonoBehaviour
             RaycastHit hit; 
 
             // the first input is the ray used (which in this case is always projected from the mouse position), when it hits something the output will be stored in the hit variable
+            // The distance is set to just under the radius of the sphere so the video won't be deleted
             if (Physics.Raycast(ray, out hit, Distance , layer_mask))
             {
-                Debug.Log("got here yo");
+             
                 if ( DistanceToLastHit(hit.point) > 1f )
                 {
-                    Debug.Log(hit.point + " is the hit points");
+                  
                     positions.Add(hit.point);
                    
-                    line.positionCount = positions.Count;
-                    line.SetPositions(positions.ToArray());
+                    //line.positionCount = positions.Count;
+                    //line.SetPositions(positions.ToArray());
+                  
                     Destroy(hit.transform.gameObject);
+                    pointScript.addScore(5);
                 }
             }
         }
