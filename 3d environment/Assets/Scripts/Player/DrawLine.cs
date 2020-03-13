@@ -13,7 +13,9 @@ public class DrawLine : MonoBehaviour
     int Distance; 
     public Camera camera;
     // load the functions needed from point script to add to the player script 
-    private PointSystem pointScript; 
+    private PointSystem pointScript;
+
+    private Color safeHitBox = Color.green;
 
     // Start is called before the first frame update
     private void Start()
@@ -59,12 +61,28 @@ public class DrawLine : MonoBehaviour
                 {
                   
                     positions.Add(hit.point);
-                   
+
                     //line.positionCount = positions.Count;
                     //line.SetPositions(positions.ToArray());
-                  
+
+                    // The color tells us which level of difficult of wave was selected
+                    Color hitColor = hit.transform.gameObject.GetComponent<Renderer>().material.color; 
+                    // check to see which level of difficulty of wave the player hit
+                    if (hitColor == Color.green)
+                    {
+                        pointScript.addScore(5);
+                        Debug.Log("safe object hit");
+                    } else if(hitColor == Color.yellow)
+                    {
+                        Debug.Log("Medium hit box hit"); 
+                        pointScript.addScore(3); 
+                    } else
+                    {
+                        Debug.Log("Not safe hitbox hit");
+                        pointScript.addScore(1);
+                    }
                     Destroy(hit.transform.gameObject);
-                    pointScript.addScore(5);
+                  
                 }
             }
         }

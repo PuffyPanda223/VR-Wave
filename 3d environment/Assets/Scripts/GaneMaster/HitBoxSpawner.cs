@@ -9,7 +9,7 @@ public class HitBoxSpawner : MonoBehaviour
     private float time; 
     // Start is called before the first frame update
 
-        // the prefab hitbox mesh we will spawn in 
+        // the prefab hitbox we will spawn in. there is three per spawn location. That way we can indivdually customize each spawn locations hit box
     public GameObject hitBox;
     // the player camera
     public Camera cam; 
@@ -44,8 +44,10 @@ public class HitBoxSpawner : MonoBehaviour
             _instance = Instantiate(spawn2HitBox, position, rotation);
 
             activated = true; 
+            // the time is individualised per script
         } else if (time>20)
         {
+            // its possible that the hitbox is already been destroyed because of the player so we check to see if the instance is still their or not to avoid errors
             if (_instance)
             {
                Destroy(_instance);
