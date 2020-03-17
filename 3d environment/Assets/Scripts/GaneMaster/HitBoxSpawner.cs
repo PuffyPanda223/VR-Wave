@@ -12,7 +12,7 @@ public class HitBoxSpawner : MonoBehaviour
         // the prefab hitbox we will spawn in. there is three per spawn location. That way we can indivdually customize each spawn locations hit box
     public GameObject hitBox;
     // the player camera
-    public Camera cam; 
+   
     private bool activated;
     // all the object flags used to spawn in the hit boxes
     public GameObject spawnLocation_1;
@@ -25,7 +25,7 @@ public class HitBoxSpawner : MonoBehaviour
    
     void Start()
     {
-
+        // 
         activated = false;
 
     }

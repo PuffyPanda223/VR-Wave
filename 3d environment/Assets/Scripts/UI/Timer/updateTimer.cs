@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+// this script is attached to the UI elemeent timer on the main screen. It increments in whole number only the timer on the top of the screen
 public class updateTimer : MonoBehaviour
 {
     // Start is called before the first frame update
