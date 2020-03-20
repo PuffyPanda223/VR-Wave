@@ -20,7 +20,16 @@ public class DrawLine : MonoBehaviour
     private Color mediumHitBox = Color.yellow;
     private Color notSafeHitbox = Color.red;
 
-    // the static makes  
+    // floating text prefab which we will instaniate on whenever the user clicks on a wave
+    public GameObject floatingText;
+
+    // interger score values for the various waves. They're given values in the start function
+
+    private int safeWave;
+    private int mediumWave;
+    private int hardWave; 
+
+    // the static makes it able to be accessed by other components of the script  
      public static bool isGamePaused; 
 
 
@@ -30,6 +39,9 @@ public class DrawLine : MonoBehaviour
         layer_mask = LayerMask.GetMask("hitBox");
         Distance = 49;
         isGamePaused = false;
+        safeWave = 5;
+        mediumWave = 3;
+        hardWave = 1; 
     }
     void Awake ()
     {
@@ -55,6 +67,7 @@ public class DrawLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check to see if the game is paused. If not then proceed 
         if (!isGamePaused)
         {
             // when the user first holds down the left click it means they are inputting new lines to be drawn so clear out the previous coordinates in the positions list 
@@ -87,18 +100,21 @@ public class DrawLine : MonoBehaviour
                         // check to see which level of difficulty of wave the player hit
                         if (hitColor == Color.green)
                         {
-                            pointScript.addScore(5);
-                            Debug.Log("safe object hit");
+                            pointScript.addScore(safeWave);
+                            showFloatingText(safeWave, hit.transform.gameObject);
+                            //Debug.Log("safe object hit");
                         }
                         else if (hitColor == Color.yellow)
                         {
-                            Debug.Log("Medium hit box hit");
-                            pointScript.addScore(3);
+                            //Debug.Log("Medium hit box hit");
+                            pointScript.addScore(mediumWave);
+                            showFloatingText(mediumWave, hit.transform.gameObject); 
                         }
                         else
                         {
-                            Debug.Log("Not safe hitbox hit");
-                            pointScript.addScore(1);
+                            //Debug.Log("Not safe hitbox hit");
+                            pointScript.addScore(hardWave);
+                            showFloatingText(hardWave, hit.transform.gameObject);
                         }
                         Destroy(hit.transform.gameObject);
 
@@ -106,6 +122,14 @@ public class DrawLine : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void showFloatingText(int score, GameObject enemy)
+    {
+        
+       // genenerate some text at the location the hitbox was hit
+        var text = Instantiate(floatingText, enemy.transform.position, Quaternion.LookRotation(camera.transform.forward ) );
+        text.GetComponent<TextMesh>().text = "+" + score.ToString(); 
     }
 
     private float DistanceToLastHit(Vector3 hitPoint)
