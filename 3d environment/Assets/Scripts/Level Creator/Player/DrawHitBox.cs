@@ -81,28 +81,89 @@ public class DrawHitBox : MonoBehaviour
         
         Debug.Log("Width and height is " + width + " "+ height);
         float startX = startPos.x;
-        float startY = startPos.y; 
+        float startY = startPos.y;
         //  in order to draw a plane we need 4 vertices. with 4 verticies we can make two right handed triangles and it is with those two right handed triangles we can draw a plane
-        m.vertices = new Vector3[]
-        {
-            // starting position of the vertices in world space
-            new Vector3(startX,startY, zAxis), 
-            new Vector3(width,startY, zAxis),
-            new Vector3(width,height,zAxis), 
-            new Vector3(startX,height,zAxis)
-        };
 
-        m.uv = new Vector2[]
-        {
-            new Vector2(startX,startY),
-            new Vector2(width, startY), 
-            new Vector2(width,height ), 
-            new Vector2(startX, height)
-        };
 
+        // Due to something called a process called backwards culling items are only displayed if they triangles are created in the same order as vertices are inputted.
+        Vector3[] vertices; 
       
-        m.triangles = new int[] { 0 ,1 ,2 ,0 ,2 ,3};
 
+        
+
+        int[] triangles; 
+        if (startY < height)
+        {
+           
+
+            if (startX < width)
+            {
+                vertices = new Vector3[]
+               {
+                                // starting position of the vertices in world space
+                    new Vector3(startX,startY, zAxis),
+                    new Vector3(startX,height, zAxis),
+                    new Vector3(width,height,zAxis),
+                    new Vector3(width,startY,zAxis)
+
+               };
+                
+
+            } else
+            {
+                vertices = new Vector3[]
+                {
+                                // starting position of the vertices in world space
+                    new Vector3(startX,startY, zAxis),
+                    new Vector3(width,startY, zAxis),
+                    new Vector3(width,height,zAxis),
+                    new Vector3(startX,height,zAxis)
+
+                };
+
+             
+            }
+                
+
+
+
+           
+
+            
+        } else
+            {
+            if (width > startX)
+            {
+                vertices = new Vector3[]
+                {
+                    new Vector3(startX,startY,zAxis),
+                    new Vector3(width,startY,zAxis),
+                    new Vector3(width,height, zAxis),
+                    new Vector3(startX,height,zAxis)
+
+                };
+
+
+            } else
+            {
+               vertices = new Vector3[]
+                {
+                    new Vector3(startX,startY,zAxis),
+                    new Vector3(startX,height,zAxis),
+                    new Vector3(width,height, zAxis),
+                    new Vector3(width,startY,zAxis)
+
+                };
+               
+
+            }
+        }
+
+        triangles = new int[] { 0, 1, 2, 0, 2, 3 };
+        // calculate the uvs at some point
+        m.vertices = vertices;
+        m.triangles = triangles;
+        
 
         mf.mesh = m;
         m.RecalculateNormals();
