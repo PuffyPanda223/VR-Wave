@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 0}
+  timeLimit: 20
 --- !u!114 &438596032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1868,7 +1869,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: 50f47ae8c14d37745a41de29eb5a28ad,
+      objectReference: {fileID: 32900000, guid: 3894e238ee8efad48858ca281f989734,
         type: 3}
     - target: {fileID: 3068410078511310265, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}
