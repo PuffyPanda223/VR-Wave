@@ -1958,6 +1958,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3068410078511310259, guid: 9629d2ece215d3147bcb1edd7a92e83c,
+        type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 50f47ae8c14d37745a41de29eb5a28ad,
+        type: 3}
     - target: {fileID: 3068410078511310265, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}
       propertyPath: m_Name
