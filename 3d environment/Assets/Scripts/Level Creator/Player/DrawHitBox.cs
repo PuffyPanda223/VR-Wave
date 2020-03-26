@@ -142,18 +142,18 @@ public class DrawHitBox : MonoBehaviour
                 }
 
             }
-        else  if(endPos.z > 0 ) // right 
+        else if (endPos.z > 0) // right 
         {
             if (startX < width)
             {
                 if (startY < height)
                 {
-                    triangles = new int[] { 1,0,3,1,3,2};
-               
+                    triangles = new int[] { 0, 3, 2, 0, 2, 1 };
+
                 }
                 else
                 {
-                    triangles = new int[] {0,3,2,0,2,1 };
+                    triangles = new int[] { 0, 3, 2, 0, 2, 1 };
                 }
             }
             else
@@ -164,12 +164,13 @@ public class DrawHitBox : MonoBehaviour
                 }
                 else
                 {
-                    triangles = new int[] { 2,1,0,2,0,3};
+                    triangles = new int[] { 3, 2, 1, 3, 1, 0 };
                 }
 
             }
         }
-        else  if (startZ > 0 ){
+        else if (startZ > 0)
+        {
 
             if (startY > height)
             {
@@ -179,9 +180,10 @@ public class DrawHitBox : MonoBehaviour
             {
                 triangles = new int[] { 3, 2, 1, 3, 1, 0 };
             }
-        } else // backwards 
+        }
+        else // backwards 
         {
-           if(startX < width )
+            if (startX < width)
             {
                 if (startZ > endZ)
                 {
@@ -191,37 +193,42 @@ public class DrawHitBox : MonoBehaviour
                     }
                     else
                     {
-                        triangles = new int[] { 3,2,1,3,1,0 };
+                        triangles = new int[] { 3, 2, 1, 3, 1, 0 };
                     }
-                } else
+                }
+                else
                 {
                     if (startY < height)
                     {
-                        triangles = new int[] { 0,3,2,0,2,1 };
+                        triangles = new int[] { 0, 3, 2, 0, 2, 1 };
                     }
                     else
                     {
-                        triangles = new int[] { 3,2,1,3,1,0 };
+                        triangles = new int[] { 3, 2, 1, 3, 1, 0 };
                     }
                 }
 
-            } else
+            }
+            else
             {
-                if (startX > width )
+                if (startX > width)
                 {
                     if (startY > height)
                     {
                         triangles = new int[] { 2, 3, 0, 2, 0, 1 };
-                    } else
+                    }
+                    else
                     {
                         triangles = new int[] { 1, 0, 3, 1, 3, 2 };
                     }
-                }  else
+                }
+                else
                 {
-                    if (startY > height )
+                    if (startY > height)
                     {
                         triangles = new int[] { 3, 0, 1, 3, 1, 2 };
-                    } else
+                    }
+                    else
                     {
                         triangles = new int[] { 0, 3, 2, 0, 2, 1 };
                     }
@@ -326,7 +333,7 @@ public class DrawHitBox : MonoBehaviour
             {
                 if (startY < height)
                 {
-                    triangles = new int[] { 1, 0, 3, 1, 3, 2 };
+                    triangles = new int[] { 0,3,2,0,2,1};
 
                 }
                 else
@@ -342,7 +349,7 @@ public class DrawHitBox : MonoBehaviour
                 }
                 else
                 {
-                    triangles = new int[] { 2, 1, 0, 2, 0, 3 };
+                    triangles = new int[] { 3,2,1,3,1,0 };
                 }
 
             }
