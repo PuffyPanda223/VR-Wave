@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 970056115
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ad0feff5d868d59302711c60c83aa8ad
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f106dac3fdc2900390d84e482ab7f8f1
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 1953259897
+  Script: {instanceID: 0}
+Assets:
+- Assets/Textures/NewLayer 2.terrainlayer
+- Assets/Textures/NewLayer 3.terrainlayer
+Dependencies:
+- B:/Unity/Projects/VR-Wave/3d environment/OVRAssetBundles/OVRMasterBundle/asset_jpg0

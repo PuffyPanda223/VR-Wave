@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 4204592636
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fa73d92dd88791bece0a8a0fa2cfd494
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 4c6c8fc99ead083a5f8ccf318eab7a09
+HashAppended: 0
+ClassTypes:
+- Class: 329
+  Script: {instanceID: 0}
+Assets:
+- Assets/Videos/PlaceholderDog.mp4
+Dependencies: []

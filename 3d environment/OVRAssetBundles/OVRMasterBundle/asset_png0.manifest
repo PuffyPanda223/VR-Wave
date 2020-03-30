@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 3853140827
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 661e6100bcf66564d9bfe25f44d2ff68
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/TomVR Package/ReticuleOpen.png
+- Assets/Oculus/VR/Textures/gaze_cursor.png
+- Assets/TomVR Package/ReticuleClosed.png
+Dependencies: []

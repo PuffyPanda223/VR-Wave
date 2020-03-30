@@ -1,0 +1,32 @@
+ManifestFileVersion: 0
+CRC: 3052964999
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 535c031b8e4cb23f1e72095d823d61b7
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fe397485c3cec1106b49e9ff95e8f8a2
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/Materials/Menu Materials/Water.mat
+- Assets/Materials/Menu Materials/Rock.mat
+- Assets/Oculus/VR/Materials/gaze_cursor.mat
+- Assets/Materials/Hitbox Matieral/Safe Material.mat
+- Assets/Materials/Line Matieral.mat
+- Assets/Materials/Menu Materials/Glass.mat
+- Assets/Materials/Menu Materials/Glass 1.mat
+- Assets/Materials/Flip Normals Material.mat
+- Assets/Materials/Menu Materials/Screen.mat
+- Assets/Materials/Menu Materials/Black (No Light).mat
+Dependencies:
+- B:/Unity/Projects/VR-Wave/3d environment/OVRAssetBundles/OVRMasterBundle/asset_jpg0
+- B:/Unity/Projects/VR-Wave/3d environment/OVRAssetBundles/OVRMasterBundle/asset_png0
+- B:/Unity/Projects/VR-Wave/3d environment/OVRAssetBundles/OVRMasterBundle/asset_shader0
