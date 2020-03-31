@@ -13,7 +13,7 @@ public class updateTimer : MonoBehaviour
     void Start()
     {
         timerUpdate.text = 0.0.ToString();
-       // timeDisplay.GetComponent<TextMeshPro>().text = "Time remaining: " + 0.0.ToString();
+       //timeDisplay.GetComponent<TextMeshPro>().text = "Time remaining: " + 0.0.ToString();
     }
 
     // Update is called once per frame

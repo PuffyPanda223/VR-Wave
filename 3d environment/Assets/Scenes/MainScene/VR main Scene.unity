@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 438596034}
   - component: {fileID: 438596035}
   - component: {fileID: 438596036}
+  - component: {fileID: 438596037}
   m_Layer: 0
   m_Name: Game Master
   m_TagString: Untagged
@@ -298,6 +299,25 @@ MonoBehaviour:
   drawLineSystem: {fileID: 0}
   hitBoxSpawner: {fileID: 0}
   debug: {fileID: 962817617}
+--- !u!114 &438596037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438596029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63228e1f31d6dd14db47b12f414ed396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBox: {fileID: 0}
+  spawnLocation_1: {fileID: 1079180550}
+  spawnLocation_2: {fileID: 0}
+  spawnLocation_3: {fileID: 2123488215}
+  spawnLocation_4: {fileID: 0}
+  spawn2HitBox: {fileID: 7322139746178071169, guid: e2235e5af1b7b5647880600adc841cab,
+    type: 3}
 --- !u!1 &439568182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,7 +1987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212f30ae193978d4889cb5384a9590f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerUpdate: {fileID: 0}
+  timerUpdate: {fileID: 1563426446}
 --- !u!1 &1631827510
 GameObject:
   m_ObjectHideFlags: 0
@@ -2992,7 +3012,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: 03bf440a95285b54396680d6a08d07ec,
+      objectReference: {fileID: 32900000, guid: 3894e238ee8efad48858ca281f989734,
         type: 3}
     - target: {fileID: 3068410078511310265, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}
@@ -3077,7 +3097,7 @@ PrefabInstance:
     - target: {fileID: 3068410078511310271, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3068410078511310271, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}
