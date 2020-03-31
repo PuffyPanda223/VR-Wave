@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 918268750
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5bf90def5ae8cb18e6a60fb26af65ccd
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fdf6c57a251b9f6ec27bdd2fe01b033c
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+Assets:
+- Assets/Animations/Floating text.controller
+Dependencies:
+- B:/Unity/Projects/VR-Wave/3d environment/OVRAssetBundles/OVRMasterBundle/asset_anim0
