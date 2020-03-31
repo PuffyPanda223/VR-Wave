@@ -7,13 +7,13 @@ public class updateTimer : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    //public Text timerUpdate;
-    public TextMeshPro timeDisplay;
+    public Text timerUpdate;
+    //public TextMeshPro timeDisplay;
 
     void Start()
     {
-        //timerUpdate.text = 0.0.ToString();
-        timeDisplay.GetComponent<TextMeshPro>().text = "Time remaining: " + 0.0.ToString();
+        timerUpdate.text = 0.0.ToString();
+       // timeDisplay.GetComponent<TextMeshPro>().text = "Time remaining: " + 0.0.ToString();
     }
 
     // Update is called once per frame
@@ -23,8 +23,8 @@ public class updateTimer : MonoBehaviour
         float timer = CountDownTimer.timer;
         // the ToString F0 makes it so their is no decimal places. I have to make the timer it self a float because the user of delta time has to be used on a float so when making this 
         // a string just cut off any decimal places
-        //timerUpdate.text = timer.ToString("F0"); 
-        timeDisplay.GetComponent<TextMeshPro>().text = "Time passed: " + timer.ToString("F0"); 
+        timerUpdate.text = timer.ToString("F0"); 
+        //timeDisplay.GetComponent<TextMeshPro>().text = "Time passed: " + timer.ToString("F0"); 
         
     }
 }

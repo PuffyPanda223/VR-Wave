@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Intro.unity
     guid: 15061a748be5d4e419f1b05b1f257047
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/MainScene/VR main Scene.unity
     guid: be9ba2b4c8f662a4ca0665f6ca88e88c
   m_configObjects: {}

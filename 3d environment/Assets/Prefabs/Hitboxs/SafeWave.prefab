@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8734713172856483809}
   - component: {fileID: 9154463725415849302}
   - component: {fileID: 2172513025154315278}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: SafeWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
