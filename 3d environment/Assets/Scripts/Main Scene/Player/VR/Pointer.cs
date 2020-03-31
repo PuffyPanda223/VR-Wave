@@ -8,8 +8,8 @@ public class Pointer : MonoBehaviour
 
     public float m_Distance = 10.0f;
     public LineRenderer m_LineRenderer = null;
-    public LayerMask m_EverythingMask = 0;
-    public LayerMask m_InteractableMask = 0;
+    public LayerMask m_EverythingMask ;
+    public LayerMask m_InteractableMask ;
     public UnityAction<Vector3, GameObject> OnPointerUpdate = null;
 
     public GameObject DND_Pointer;

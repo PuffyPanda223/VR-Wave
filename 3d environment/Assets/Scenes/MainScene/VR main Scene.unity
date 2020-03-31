@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212f30ae193978d4889cb5384a9590f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeDisplay: {fileID: 2040142085}
+  timerUpdate: {fileID: 0}
 --- !u!114 &438596036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,6 +1378,11 @@ PrefabInstance:
       propertyPath: m_Distance
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 8094249848071314701, guid: b766dcfc1c8abb4408276a16f80399d3,
+        type: 3}
+      propertyPath: m_InteractableMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b766dcfc1c8abb4408276a16f80399d3, type: 3}
 --- !u!114 &1308942258 stripped
@@ -1778,7 +1783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212f30ae193978d4889cb5384a9590f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeDisplay: {fileID: 0}
+  timerUpdate: {fileID: 0}
 --- !u!1 &1631827510
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,7 +2610,7 @@ GameObject:
   - component: {fileID: 2135292733}
   - component: {fileID: 2135292732}
   - component: {fileID: 2135292736}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: SafeWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
