@@ -124,12 +124,14 @@ public class DrawLine : MonoBehaviour
         }
     }
 
-    public static void showFloatingText(int score, GameObject enemy, GameObject floatingText, Vector3 camera)
+    public static void showFloatingText(int score, GameObject enemy, GameObject floatingText, Vector3 direction)
     {
         
        // genenerate some text at the location the hitbox was hit
-        var text = Instantiate(floatingText, enemy.transform.position, Quaternion.LookRotation(camera) );
-        text.GetComponent<TextMesh>().text = "+" + score.ToString(); 
+        
+        var display = Instantiate(floatingText, enemy.transform.position, Quaternion.LookRotation(enemy.transform.position) );
+        display.GetComponent<TextMesh>().text = "+" + score.ToString();
+        Debug.Log("text should show");
     }
 
     private float DistanceToLastHit(Vector3 hitPoint)

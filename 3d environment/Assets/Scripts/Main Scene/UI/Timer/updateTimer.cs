@@ -8,6 +8,7 @@ public class updateTimer : MonoBehaviour
     // Start is called before the first frame update
 
     public Text timerUpdate;
+    private GameObject _instance; 
     //public TextMeshPro timeDisplay;
 
     void Start()

@@ -38,11 +38,13 @@ public class Interactable : MonoBehaviour
 
     public void Pressed(GameObject currentObject)
     {
+
         if (currentObject.gameObject.name.Substring(0, 4) == "Safe")
         {
             DrawLine.showFloatingText(5, currentObject, floatingText, camera.transform.position);
             pointScore.addScore(5);
             Destroy(currentObject);
+
         }else if (currentObject.gameObject.name.Substring(0, 4) == "hard")
         {
             DrawLine.showFloatingText(1, currentObject, floatingText, camera.transform.position);

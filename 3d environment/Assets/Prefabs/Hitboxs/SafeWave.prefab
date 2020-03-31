@@ -107,4 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointSystem: {fileID: 0}
   drawLineSystem: {fileID: 0}
+  hitBoxSpawner: {fileID: 0}
   debug: {fileID: 0}
+  floatingText: {fileID: 0}
+  camera: {fileID: 0}
