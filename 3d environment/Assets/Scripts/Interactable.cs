@@ -10,10 +10,18 @@ public class Interactable : MonoBehaviour
 
     public PointSystem pointSystem;
     public DrawLine drawLineSystem;
+    public HitBoxSpawner hitBoxSpawner;
     public TextMeshPro debug;
+
+    
 
     public void Pressed(GameObject currentObject)
     {
+        if (currentObject.gameObject.name.Substring(0, 4) == "Safe")
+        {
+            Destroy(currentObject);
+        }
+
         switch (currentObject.gameObject.name)
         {
             case "Play":
@@ -44,13 +52,7 @@ public class Interactable : MonoBehaviour
             case "Skip":
                 SceneManager.LoadScene(2);
                 break;
-            case "SafeWave":
-                pointSystem.addScore(5);
-                drawLineSystem.showFloatingText(5, currentObject);
-                Destroy(currentObject);
-                break;
             default:
-                debug.GetComponent<TextMeshPro>().text = currentObject.name;
                 break;
         }
     }

@@ -21,7 +21,7 @@ public class HitBoxSpawner : MonoBehaviour
     public GameObject spawnLocation_4;
     public GameObject spawn2HitBox; 
     // stores an instance of the hitbox object, if you destroy the actual gameobject it destroys the prefab as well for some stupid reason
-    private GameObject _instance; 
+    public GameObject _instance; 
    
     void Start()
     {
