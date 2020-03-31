@@ -43,11 +43,8 @@ public class Interactable : MonoBehaviour
             DrawLine.showFloatingText(5, currentObject, floatingText, camera.transform.position);
             pointScore.addScore(5);
             Destroy(currentObject);
-<<<<<<< HEAD
             Debug.Log("safe");
-=======
 
->>>>>>> c3f37d620c1b36375df60e4957081156b1828b0e
         }else if (currentObject.gameObject.name.Substring(0, 4) == "hard")
         {
             DrawLine.showFloatingText(1, currentObject, floatingText, camera.transform.position);
