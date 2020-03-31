@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212f30ae193978d4889cb5384a9590f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerUpdate: {fileID: 0}
+  timerUpdate: {fileID: 1563426446}
 --- !u!114 &438596036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,12 +1981,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563426444}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 212f30ae193978d4889cb5384a9590f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerUpdate: {fileID: 1563426446}
+  timerUpdate: {fileID: 0}
 --- !u!1 &1631827510
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,7 +3011,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: 3894e238ee8efad48858ca281f989734,
+      objectReference: {fileID: 32900000, guid: 03bf440a95285b54396680d6a08d07ec,
         type: 3}
     - target: {fileID: 3068410078511310265, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}
@@ -3093,10 +3093,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3068410078511310270, guid: 9629d2ece215d3147bcb1edd7a92e83c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3068410078511310271, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3068410078511310271, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}

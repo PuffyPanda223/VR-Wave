@@ -11,7 +11,6 @@ public class Interactable : MonoBehaviour
     public PointSystem pointSystem;
     public DrawLine drawLineSystem;
     public HitBoxSpawner hitBoxSpawner;
-    public TextMeshPro debug;
 
     private DrawLine drawLine;
     private PointSystem pointScore;
@@ -38,16 +37,23 @@ public class Interactable : MonoBehaviour
 
     public void Pressed(GameObject currentObject)
     {
+
         if (currentObject.gameObject.name.Substring(0, 4) == "Safe")
         {
             DrawLine.showFloatingText(5, currentObject, floatingText, camera.transform.position);
             pointScore.addScore(5);
             Destroy(currentObject);
+<<<<<<< HEAD
+            Debug.Log("safe");
+=======
+
+>>>>>>> c3f37d620c1b36375df60e4957081156b1828b0e
         }else if (currentObject.gameObject.name.Substring(0, 4) == "hard")
         {
             DrawLine.showFloatingText(1, currentObject, floatingText, camera.transform.position);
             pointScore.addScore(1);
             Destroy(currentObject);
+            Debug.Log("hard");
         }
 
         switch (currentObject.gameObject.name)
