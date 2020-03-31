@@ -101,20 +101,20 @@ public class DrawLine : MonoBehaviour
                         if (hitColor == Color.green)
                         {
                             pointScript.addScore(safeWave);
-                            showFloatingText(safeWave, hit.transform.gameObject);
+                            showFloatingText(safeWave, hit.transform.gameObject, floatingText, camera.transform.position);
                             //Debug.Log("safe object hit");
                         }
                         else if (hitColor == Color.yellow)
                         {
                             //Debug.Log("Medium hit box hit");
                             pointScript.addScore(mediumWave);
-                            showFloatingText(mediumWave, hit.transform.gameObject); 
+                            showFloatingText(mediumWave, hit.transform.gameObject, floatingText, camera.transform.position); 
                         }
                         else
                         {
                             //Debug.Log("Not safe hitbox hit");
                             pointScript.addScore(hardWave);
-                            showFloatingText(hardWave, hit.transform.gameObject);
+                            showFloatingText(hardWave, hit.transform.gameObject, floatingText, camera.transform.position);
                         }
                         Destroy(hit.transform.gameObject);
 
@@ -124,11 +124,11 @@ public class DrawLine : MonoBehaviour
         }
     }
 
-    public void showFloatingText(int score, GameObject enemy)
+    public static void showFloatingText(int score, GameObject enemy, GameObject floatingText, Vector3 camera)
     {
         
        // genenerate some text at the location the hitbox was hit
-        var text = Instantiate(floatingText, enemy.transform.position, Quaternion.LookRotation(camera.transform.forward ) );
+        var text = Instantiate(floatingText, enemy.transform.position, Quaternion.LookRotation(camera) );
         text.GetComponent<TextMesh>().text = "+" + score.ToString(); 
     }
 

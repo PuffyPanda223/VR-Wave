@@ -299,6 +299,9 @@ MonoBehaviour:
   drawLineSystem: {fileID: 0}
   hitBoxSpawner: {fileID: 0}
   debug: {fileID: 962817617}
+  floatingText: {fileID: 638249390857962725, guid: e4685b1e29c02df49be2b07f2d4c9a59,
+    type: 3}
+  camera: {fileID: 1242951164}
 --- !u!114 &438596037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3093,7 +3096,7 @@ PrefabInstance:
     - target: {fileID: 3068410078511310271, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3068410078511310271, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}

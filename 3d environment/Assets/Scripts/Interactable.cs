@@ -13,12 +13,40 @@ public class Interactable : MonoBehaviour
     public HitBoxSpawner hitBoxSpawner;
     public TextMeshPro debug;
 
-    
+    private DrawLine drawLine;
+    private PointSystem pointScore;
+    public GameObject floatingText;
+    public GameObject camera; 
+    private void Start()
+    {
+        getPointSystem();
+        getDrawLine(); 
+    }
+
+    private void getPointSystem()
+    {
+        // the point scoring script to give access to the function that increments the player score so whenever a hitbox is successfully hit we can increase the player score 
+        GameObject gameMaster = GameObject.Find("Game Master");
+        pointScore = (PointSystem)gameMaster.GetComponent(typeof(PointSystem));
+    }
+    private void getDrawLine()
+    {
+        // the point scoring script to give access to the function that increments the player score so whenever a hitbox is successfully hit we can increase the player score 
+        //GameObject player = GameObject.Find("Game Master");
+        //pointScore = (PointSystem)gameMaster.GetComponent(typeof(PointSystem));
+    }
 
     public void Pressed(GameObject currentObject)
     {
         if (currentObject.gameObject.name.Substring(0, 4) == "Safe")
         {
+            DrawLine.showFloatingText(5, currentObject, floatingText, camera.transform.position);
+            pointScore.addScore(5);
+            Destroy(currentObject);
+        }else if (currentObject.gameObject.name.Substring(0, 4) == "hard")
+        {
+            DrawLine.showFloatingText(1, currentObject, floatingText, camera.transform.position);
+            pointScore.addScore(1);
             Destroy(currentObject);
         }
 
