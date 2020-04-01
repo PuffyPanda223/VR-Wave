@@ -96,50 +96,9 @@ public class DrawHitBox : MonoBehaviour
     private void DrawShadowBox()
     {
 
-        
-        // the height and width is set to whatever the last position is
-        float height = endPos.y;
-        float width = endPos.x;
-        float endZ = endPos.z;
 
-        float startX = startPos.x;
-        float startY = startPos.y;
-        float startZ = startPos.z;
-        //  in order to draw a plane we need 4 vertices. with 4 verticies we can make two right handed triangles and it is with those two right handed triangles we can draw a plane
-        
-        Vector3[] vertices;
-        int[] triangles = calculateTriangles();
-        // Vector3 direction = player.transform.position - ; 
-        // Because of a process called backwards culling we need to make sure we feed in the vertices in a clockwise motion. So I get the velocity and height of the hitbox being drawn 
-        // and determine which way the numbers should be feed in 
-
-        // image four points each representing the positional data that act as the four points of a rectangle, we need to test in what direction on the x and y axis the user is drawing on 
-        // and where on the z axis the object is heading towards. Based on the direction we need to manipulate the direction that we draw our triangles in order for it be draw in on the map in the right
-        // direction
-        
-
-        vertices = new Vector3[]
-        {
-                // starting position of the vertices in world space
-                new Vector3(startX,startY, startZ),
-                new Vector3(width,startY, endZ),
-                new Vector3(width,height,endZ),
-                new Vector3(startX,height,startZ)
-        };
-
-
-        // calculate the uvs at some point
-        shadowMesh.vertices = vertices;
-        shadowMesh.triangles = triangles;
-
-
+        shadowMesh = calculateMesh(startPos, endPos, shadowMesh);
         shadowFilter.mesh = shadowMesh;
-        //Quaternion look = Quaternion.LookRotation(-camera.transform.up, -camera.transform.forward);
-        shadowBox.transform.LookAt(player.transform.position);
-        shadowMesh.RecalculateNormals();
-        shadowMesh.RecalculateBounds();
-
-
 
     }
 
@@ -149,66 +108,24 @@ public class DrawHitBox : MonoBehaviour
 
     public void generatePlane()
     {
-        Debug.Log("start pos is " + startPos);
-        Debug.Log("End position is " + endPos);
-
+      
 
         GameObject go = new GameObject("plane");
         MeshFilter mf = go.AddComponent(typeof(MeshFilter)) as MeshFilter;
         MeshRenderer mr = go.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
         Mesh m = new Mesh();
-
-
-        // the height and width is set to whatever the last position is
-        float height = endPos.y;
-        float width = endPos.x;
-        float endZ = endPos.z;
-
-        float startX = startPos.x;
-        float startY = startPos.y;
-        float startZ = startPos.z;
-        //  in order to draw a plane we need 4 vertices. with 4 verticies we can make two right handed triangles and it is with those two right handed triangles we can draw a plane
-
-
-        Vector3[] vertices;
-        int[] triangles = calculateTriangles(); 
-        // Vector3 direction = player.transform.position - ; 
-        // Because of a process called backwards culling we need to make sure we feed in the vertices in a clockwise motion. So I get the velocity and height of the hitbox being drawn 
-        // and determine which way the numbers should be feed in 
-
-        // image four points each representing the positional data that act as the four points of a rectangle, we need to test in what direction on the x and y axis the user is drawing on 
-        // and where on the z axis the object is heading towards. Based on the direction we need to manipulate the direction that we draw our triangles in order for it be draw in on the map in the right
-        // direction
-
-
-
-
-
-        vertices = new Vector3[]
-        {
-                // starting position of the vertices in world space
-                new Vector3(startX,startY, startZ),
-                new Vector3(width,startY, endZ),
-                new Vector3(width,height,endZ),
-                new Vector3(startX,height,startZ)
-        };
-
-        
-        // calculate the uvs at some point
-        m.vertices = vertices;
-        m.triangles = triangles;
-
+        m = calculateMesh(startPos, endPos, m); 
 
         mf.mesh = m;
         //Quaternion look = Quaternion.LookRotation(-camera.transform.up, -camera.transform.forward);
         //go.transform.LookAt(player.transform.position);
-        m.RecalculateNormals();
-        m.RecalculateBounds();
+      ;
 
 
     }
 
-    private int[] calculateTriangles()
+    // calculate the mesh given two points
+    public static Mesh calculateMesh(Vector3 startPos, Vector3 endPos, Mesh hitBoxMesh )
     {
         // the height and width is set to whatever the last position is
         float height = endPos.y;
@@ -336,7 +253,22 @@ public class DrawHitBox : MonoBehaviour
             }
         }
 
-        return triangles; 
+        Vector3[] vertices = new Vector3[]
+      {
+                // starting position of the vertices in world space
+                new Vector3(startX,startY, startZ),
+                new Vector3(width,startY, endZ),
+                new Vector3(width,height,endZ),
+                new Vector3(startX,height,startZ)
+      };
+        // calculate the uvs at some point
+        hitBoxMesh.vertices = vertices;
+        hitBoxMesh.triangles = triangles;
+
+        hitBoxMesh.RecalculateNormals();
+        hitBoxMesh.RecalculateBounds();
+
+        return hitBoxMesh; 
 
     }
 
