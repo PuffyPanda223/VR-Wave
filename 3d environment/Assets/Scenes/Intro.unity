@@ -172,7 +172,7 @@ PrefabInstance:
     - target: {fileID: 2893759711325958615, guid: 6617360f2c595da4dbe86dea28e0b90f,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2893759711996435000, guid: 6617360f2c595da4dbe86dea28e0b90f,
         type: 3}
@@ -1547,10 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4853a60b736f42a47950f2a95c0bc727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointSystem: {fileID: 0}
-  drawLineSystem: {fileID: 0}
-  hitBoxSpawner: {fileID: 0}
-  debug: {fileID: 0}
+  floatingText: {fileID: 0}
 --- !u!1001 &1700415874
 PrefabInstance:
   m_ObjectHideFlags: 0

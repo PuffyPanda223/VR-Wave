@@ -10,7 +10,7 @@ public class PointSystem : MonoBehaviour
 
 
     private float timer;
-    public void addScore(int score)
+    public static void addScore(int score)
     {
         playerScore += score;
         //Debug.Log(playerScore);

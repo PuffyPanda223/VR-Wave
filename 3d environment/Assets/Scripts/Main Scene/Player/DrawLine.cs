@@ -100,21 +100,21 @@ public class DrawLine : MonoBehaviour
                         // check to see which level of difficulty of wave the player hit
                         if (hitColor == Color.green)
                         {
-                            pointScript.addScore(safeWave);
-                            showFloatingText(safeWave, hit.transform.gameObject, floatingText, camera.transform.position);
+                            PointSystem.addScore(safeWave);
+                            showFloatingText(safeWave, hit.transform.gameObject, floatingText);
                             //Debug.Log("safe object hit");
                         }
                         else if (hitColor == Color.yellow)
                         {
                             //Debug.Log("Medium hit box hit");
-                            pointScript.addScore(mediumWave);
-                            showFloatingText(mediumWave, hit.transform.gameObject, floatingText, camera.transform.position); 
+                            PointSystem.addScore(mediumWave);
+                            showFloatingText(mediumWave, hit.transform.gameObject, floatingText); 
                         }
                         else
                         {
                             //Debug.Log("Not safe hitbox hit");
-                            pointScript.addScore(hardWave);
-                            showFloatingText(hardWave, hit.transform.gameObject, floatingText, camera.transform.position);
+                            PointSystem.addScore(hardWave);
+                            showFloatingText(hardWave, hit.transform.gameObject, floatingText);
                         }
                         Destroy(hit.transform.gameObject);
 
@@ -124,14 +124,13 @@ public class DrawLine : MonoBehaviour
         }
     }
 
-    public static void showFloatingText(int score, GameObject enemy, GameObject floatingText, Vector3 direction)
+    public static void showFloatingText(int score, GameObject enemy, GameObject floatingText)
     {
         
        // genenerate some text at the location the hitbox was hit
         
         var display = Instantiate(floatingText, enemy.transform.position, Quaternion.LookRotation(enemy.transform.position) );
         display.GetComponent<TextMesh>().text = "+" + score.ToString();
-        Debug.Log("text should show");
     }
 
     private float DistanceToLastHit(Vector3 hitPoint)

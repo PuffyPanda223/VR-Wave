@@ -8,8 +8,8 @@ public class Pointer : MonoBehaviour
 
     public float m_Distance = 10.0f;
     public LineRenderer m_LineRenderer = null;
-    public LayerMask m_EverythingMask ;
-    public LayerMask m_InteractableMask ;
+    public LayerMask m_EverythingMask  ;
+    public LayerMask m_InteractableMask  ;
     public UnityAction<Vector3, GameObject> OnPointerUpdate = null;
 
     public GameObject DND_Pointer;
@@ -94,6 +94,7 @@ public class Pointer : MonoBehaviour
 
         //Check Hit
         if (hit.collider)
+            // return a game object to the variable m_ CurrentObject
             return hit.collider.gameObject;
 
         //Return
@@ -123,10 +124,13 @@ public class Pointer : MonoBehaviour
 
     private void ProcessTouchpadDown()
     {
+        // m_CurrentObject is an object that is gotten from a raycast hit
         if (!m_CurrentObject)
             return;
 
         Interactable interactable = m_CurrentObject.GetComponent<Interactable>();
+        
+        // send the object to another function in the interactable script that will process what was pressed and what to do when it is pressed
         interactable.Pressed(m_CurrentObject);
 
     }
