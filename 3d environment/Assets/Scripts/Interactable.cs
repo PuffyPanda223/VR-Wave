@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-// attached to an object that when pressed will initiate this code
+// attached to an object. When pressed by the pointer it will pass through itself
 public class Interactable : MonoBehaviour
 {
 
@@ -35,6 +35,7 @@ public class Interactable : MonoBehaviour
             Debug.Log("hard");
             isHitBox = true;
         }
+        // if the object wasn't a hitbox this will false which will then proceed to execute the rest of the code
         if (!isHitBox)
         {
             switch (currentObject.gameObject.name)

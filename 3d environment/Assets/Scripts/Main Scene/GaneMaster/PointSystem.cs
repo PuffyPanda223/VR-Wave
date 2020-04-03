@@ -6,10 +6,8 @@ public class PointSystem : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public static float playerScore;
+    public static float playerScore = 0;
 
-
-    private float timer;
     public static void addScore(int score)
     {
         playerScore += score;

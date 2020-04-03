@@ -96,15 +96,16 @@ public class DrawLine : MonoBehaviour
                         //line.SetPositions(positions.ToArray());
 
                         // The color tells us which level of difficult of wave was selected
-                        Color hitColor = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                        string waveDifficulty = hit.transform.gameObject.name;
+                        
                         // check to see which level of difficulty of wave the player hit
-                        if (hitColor == Color.green)
+                        if (waveDifficulty == "Safe")
                         {
                             PointSystem.addScore(safeWave);
                             showFloatingText(safeWave, hit.transform.gameObject, floatingText);
                             //Debug.Log("safe object hit");
                         }
-                        else if (hitColor == Color.yellow)
+                        else if (waveDifficulty == "Medium")
                         {
                             //Debug.Log("Medium hit box hit");
                             PointSystem.addScore(mediumWave);
@@ -127,7 +128,7 @@ public class DrawLine : MonoBehaviour
     public static void showFloatingText(int score, GameObject enemy, GameObject floatingText)
     {
         
-       // genenerate some text at the location the hitbox was hit
+       // genenerate some text taken from a prefab at the location the hitbox was hit
         
         var display = Instantiate(floatingText, enemy.transform.position, Quaternion.LookRotation(enemy.transform.position) );
         display.GetComponent<TextMesh>().text = "+" + score.ToString();
