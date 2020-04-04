@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 
 // attached to an object. When pressed by the pointer it will pass through itself
