@@ -10,7 +10,7 @@ public class DrawHitBox : MonoBehaviour
     private LayerMask layer_mask;
     private Vector3 startPos;
     private Vector3 endPos;
-
+    public Material safe;
 
     // Shadow box is a temporory plane object whose dimensions will continiously change as the user draws a hitbox. It will show the user how big and where the hitbox will be drawn
     private GameObject shadowBox;
@@ -117,14 +117,20 @@ public class DrawHitBox : MonoBehaviour
         m = calculateMesh(startPos, endPos, m); 
 
         mf.mesh = m;
-        //Quaternion look = Quaternion.LookRotation(-camera.transform.up, -camera.transform.forward);
-        //go.transform.LookAt(player.transform.position);
-      ;
+
+        // the material is how we both visually and programmatically differentiate between the level of difficult the wave is
+        mr.material = safe;
+
+        go.AddComponent<HitBox>();
+        HitBox script = go.GetComponent<HitBox>();
+        script.startTime = GlobalTimer.timer;
+        //hitbox will remain spawned for 5 seconds
+        script.endTime = GlobalTimer.timer + 2f;
 
 
     }
 
-    // calculate the mesh given two points
+    // calculate the mesh  and the necessary components of a mesh given a startpoint and endpoint. Set the mesh of the gameobject you want a mesh for to the output of this function
     public static Mesh calculateMesh(Vector3 startPos, Vector3 endPos, Mesh hitBoxMesh )
     {
         // the height and width is set to whatever the last position is
@@ -137,7 +143,12 @@ public class DrawHitBox : MonoBehaviour
         float startZ = startPos.z;
         //  in order to draw a plane we need 4 vertices. with 4 verticies we can make two right handed triangles and it is with those two right handed triangles we can draw a plane
         int[] triangles;
-        // Vector3 direction = player.transform.position - ; 
+        Vector3[] vertices;
+        // uvs are coordinates that allow the renderer to apply textures to an object. Since UVs follow the same logic of backwards culling as triangles we have to manually calculate the uvs depending on the criteria of plane being drawn
+        Vector2[] uv;
+
+
+
         // Because of a process called backwards culling we need to make sure we feed in the vertices in a clockwise motion. So I get the velocity and height of the hitbox being drawn 
         // and determine which way the numbers should be feed in 
 
@@ -151,10 +162,24 @@ public class DrawHitBox : MonoBehaviour
                 if (height > startY)
                 {
                     triangles = new int[] { 0, 3, 2, 0, 2, 1 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1 1 = 1,0, 2 = 1,1
+                        new Vector2(0,0),
+                        new Vector2(0,1), 
+                        new Vector2(1,1),
+                        new Vector2(1,0)
+                    };
                 }
                 else
                 {
                     triangles = new int[] { 3, 0, 1, 3, 1, 2 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1 1 = 1,0, 2 = 1,1
+                        new Vector2(0,1),
+                        new Vector2(0,0),
+                        new Vector2(1,0),
+                        new Vector2(1,1)
+                    };
                 }
             }
             else
@@ -162,10 +187,24 @@ public class DrawHitBox : MonoBehaviour
                 if (height > startY)
                 {
                     triangles = new int[] { 1, 2, 3, 1, 3, 0 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,0),
+                        new Vector2(1,1),
+                        new Vector2(0,1),
+                        new Vector2(0,0)
+                    };
                 }
                 else
                 {
                     triangles = new int[] { 2, 1, 0, 2, 0, 3 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,1),
+                        new Vector2(1,0),
+                        new Vector2(0,0),
+                        new Vector2(0,1)
+                    };
                 }
 
             }
@@ -176,22 +215,50 @@ public class DrawHitBox : MonoBehaviour
                 if (startY > height)
                 {
                     triangles = new int[] { 2, 3, 0, 2, 0, 1 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,1),
+                        new Vector2(0,1),
+                        new Vector2(0,0),
+                        new Vector2(1,0)
+                    };
 
                 }
                 else
                 {
                     triangles = new int[] { 0,3,2,0,2,1 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(0,0),
+                        new Vector2(0,1),
+                        new Vector2(1,1),
+                        new Vector2(1,0)
+                    };
                 }
             } else
             {
                 if (startY > height)
                 {
                     triangles = new int[] { 2,1,0,2,0,3 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,1),
+                        new Vector2(1,0),
+                        new Vector2(0,0),
+                        new Vector2(0,1)
+                    };
 
                 }
                 else
                 {
                     triangles = new int[] { 1,0,3,1,3,2 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,0),
+                        new Vector2(0,0),
+                        new Vector2(0,1),
+                        new Vector2(1,1)
+                    };
                 }
             }
         }
@@ -202,24 +269,51 @@ public class DrawHitBox : MonoBehaviour
                 if (startY > height)
                 {
                     triangles = new int[] { 2, 1, 0, 2, 0, 3 };
-                    Debug.Log("left hand side going down");
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,1),
+                        new Vector2(1,0),
+                        new Vector2(0,0),
+                        new Vector2(0,1)
+                    };
                 }
                 else
                 {
                     triangles = new int[] { 1, 2, 3, 1 ,3 , 0  };
-                    Debug.Log("left hand side going up");
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,0),
+                        new Vector2(1,1),
+                        new Vector2(0,1),
+                        new Vector2(0,0)
+                    };
+
                 }
             } else
             {
                 if (startY > height)
                 {
                     triangles = new int[] { 2, 3, 0, 2, 0, 1 };
-                   
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,1),
+                        new Vector2(0,1),
+                        new Vector2(0,0),
+                        new Vector2(1,0)
+                    };
+
                 }
                 else
                 {
                     triangles = new int[] { 1, 0 , 3, 1, 3, 2 };
-        
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,0),
+                        new Vector2(0,0),
+                        new Vector2(0,1),
+                        new Vector2(1,1)
+                    };
+
                 }
             }
         }
@@ -230,13 +324,27 @@ public class DrawHitBox : MonoBehaviour
                
                     if (startY < height)
                     {
-                    triangles = new int[] { 0,3,2,0,2,1};
-                }
+                        triangles = new int[] { 0,3,2,0,2,1};
+                        uv = new Vector2[] {
+                            // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                            new Vector2(0,0),
+                            new Vector2(0,1),
+                            new Vector2(1,1),
+                            new Vector2(1,0)
+                        };
+                      }
                     else
                     {
                     triangles = new int[] {  2,3,0,2,0,1 };
-                    
-                    }
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,1),
+                        new Vector2(0,1),
+                        new Vector2(0,0),
+                        new Vector2(1,0)
+                    };
+
+                }
 
             }
             else
@@ -244,16 +352,30 @@ public class DrawHitBox : MonoBehaviour
 
                 if (startY < height)
                 {
-                    triangles = new int[] { 1,2,3,1,3,0 };
+                    triangles = new int[] { 1, 2, 3, 1, 3, 0 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,0),
+                        new Vector2(1,1),
+                        new Vector2(0,1),
+                        new Vector2(0,0)
+                    };
                 }
                 else
                 {
                     triangles = new int[] { 2,1,0,2,0,3 };
+                    uv = new Vector2[] {
+                        // x,y 3 = 0,1   1 = 1,0,    2 = 1,1
+                        new Vector2(1,1),
+                        new Vector2(1,0),
+                        new Vector2(0,0),
+                        new Vector2(0,1)
+                    };
                 }
             }
         }
 
-        Vector3[] vertices = new Vector3[]
+       vertices = new Vector3[]
       {
                 // starting position of the vertices in world space
                 new Vector3(startX,startY, startZ),
@@ -262,9 +384,15 @@ public class DrawHitBox : MonoBehaviour
                 new Vector3(startX,height,startZ)
       };
         // calculate the uvs at some point
+        
+
+
+
+
+
         hitBoxMesh.vertices = vertices;
         hitBoxMesh.triangles = triangles;
-
+        hitBoxMesh.uv = uv; 
         hitBoxMesh.RecalculateNormals();
         hitBoxMesh.RecalculateBounds();
 
