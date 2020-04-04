@@ -26,6 +26,7 @@ public class HitBox : MonoBehaviour
 
     private void Awake()
     {
+        // at start of game turn off the hitboxes. When the start specific to each script is hit the script will re-enable the hitbox
         gameObject.GetComponent<MeshRenderer>().enabled = false;
 
     }
@@ -41,7 +42,7 @@ public class HitBox : MonoBehaviour
           
             activated = true;
         }
-
+        // every hitbox is only up for a set amount of time. So when the time expires destroy the hitbox
         if(GlobalTimer.timer >= endTime)
         {
             Destroy(gameObject);
