@@ -99,7 +99,7 @@ public class DrawHitBox : MonoBehaviour
 
         shadowMesh = calculateMesh(startPos, endPos, shadowMesh);
         shadowFilter.mesh = shadowMesh;
-
+        shadowRenderer.material = safe;
     }
 
 
