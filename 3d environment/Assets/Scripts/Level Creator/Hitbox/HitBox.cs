@@ -12,17 +12,6 @@ public class HitBox : MonoBehaviour
     // use this to determine when to activate the collider and renderer and when to deactive them after a certain amount of time elapses
     private bool activated = false;
 
-    private void Start()
-    {
-
-        Debug.Log("start Time is " + startTime);
-        Debug.Log("end Time is " + endTime);
-        Debug.Log("timer is " + GlobalTimer.timer);
-        Debug.Log(activated);
-        // At beginning of game initlaize all the hitboxes to be spawned. Disable them until the correct start time elpases
-   
-        //Destroy(gameObject, startTime +1f); 
-    }
 
     private void Awake()
     {
@@ -37,7 +26,7 @@ public class HitBox : MonoBehaviour
         // when the start time has been reached activate the mesh renderer of the hitbox, allowing it to be targetted by the player
         if(GlobalTimer.timer >= startTime && activated == false)
         {
-            Debug.Log("should have enabled");
+        
             gameObject.GetComponent<MeshRenderer>().enabled = true;
           
             activated = true;
