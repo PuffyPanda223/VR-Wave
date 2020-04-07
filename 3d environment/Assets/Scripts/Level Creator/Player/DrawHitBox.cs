@@ -114,8 +114,10 @@ public class DrawHitBox : MonoBehaviour
         MeshFilter mf = go.AddComponent(typeof(MeshFilter)) as MeshFilter;
         MeshRenderer mr = go.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
         Mesh m = new Mesh();
-        m = calculateMesh(startPos, endPos, m); 
-
+        MeshCollider mc = new MeshCollider();
+        
+        m = calculateMesh(startPos, endPos, m);
+        
         mf.mesh = m;
 
         // the material is how we both visually and programmatically differentiate between the level of difficult the wave is
@@ -127,6 +129,9 @@ public class DrawHitBox : MonoBehaviour
         //hitbox will remain spawned for 5 seconds
         script.endTime = GlobalTimer.timer + 2f;
 
+
+        // give hitbox a layer. this will enable us to find and save them later on
+        go.gameObject.tag = "hitBox";
 
     }
 
