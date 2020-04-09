@@ -32,7 +32,8 @@ public class HitBox : MonoBehaviour
 
             activated = true;
         }
-        // every hitbox is only up for a set amount of time. So when the time expires destroy the hitbox
+        // every hitbox is only up for a set amount of time. So when the time expires disable the renderer so the user cannot interact with it at all. 
+        // We can't just destroy it because if we are creating a level we need the object to still be in the heirachy 
         
         if(GlobalTimer.timer >= endTime)
         {

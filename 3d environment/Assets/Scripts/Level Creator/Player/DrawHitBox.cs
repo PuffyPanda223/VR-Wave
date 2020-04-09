@@ -89,8 +89,6 @@ public class DrawHitBox : MonoBehaviour
     private void destroyShadow()
     {
         Destroy(shadowBox);
-
-        //implement at a later date. Some floating text that says the hitbox has been created
     }
 
     private void DrawShadowBox()
