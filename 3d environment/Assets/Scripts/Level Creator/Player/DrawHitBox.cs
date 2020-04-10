@@ -142,6 +142,7 @@ public class DrawHitBox : MonoBehaviour
         actor.endTime = script.endTime;
         actor.difficulty = mr.material.name;
 
+        //we have a static global list that is the same type as the above custom class. that makes sure there is one certialized location where all the list data of our hitboxes are being kept. this makes saving and loading a lot easier
         SaveData.AddToList(actor);
     }
 

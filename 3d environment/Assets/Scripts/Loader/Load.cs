@@ -10,6 +10,7 @@ public class Load : MonoBehaviour
     private MeshRenderer shadowRenderer;
     private Mesh shadowMesh;
     private HitBox shadowScript;
+    private MeshCollider shadowCollider;
     public Material safe;
     public Material medium;
     public Material hard;
@@ -24,10 +25,12 @@ public class Load : MonoBehaviour
             shadowFilter = shadowBox.AddComponent(typeof(MeshFilter)) as MeshFilter;
             shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
+            shadowCollider = shadowBox.AddComponent(typeof(MeshCollider)) as MeshCollider;
             Mesh shadowMesh = new Mesh();
             // data stores the triangles, uvs and vertices, give the mesh these values and then add them to the mesh filter
 
-
+            // the mesh of an object is split into different aspects, the vertices are the points in the world, the triangles are the way in which those points connect, the uvs tell the renderer where to put materials and normals 
+            // make the mesh collider possible
             shadowMesh.SetVertices(GenerateVertices(data[i].vertices));
             shadowMesh.triangles = data[i].triangles;
             shadowMesh.SetUVs(0, GenerateUV(data[i].uv));
@@ -55,7 +58,7 @@ public class Load : MonoBehaviour
             }
 
 
-           Debug.Log("sjahudfdiuaSHDifuasyhfiu7syhefiusyfuisdft7ui8sdtf67sdtrf");
+       
         }
     }
 
