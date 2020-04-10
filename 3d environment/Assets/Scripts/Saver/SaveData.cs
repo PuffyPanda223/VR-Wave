@@ -41,8 +41,7 @@ public class SaveData
 
 
         File.WriteAllText(path, json);
-        Debug.Log("saved");
-        Debug.Log(path);
+       
     }
 
     // called from the hitbox actor script. When a new actor is created this function will be called to add the hitbox to the global list of hitboxes

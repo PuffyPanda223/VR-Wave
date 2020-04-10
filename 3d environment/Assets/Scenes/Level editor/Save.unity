@@ -393,7 +393,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042309512}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -452,7 +452,7 @@ VideoPlayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042309512}
-  m_Enabled: 1
+  m_Enabled: 0
   m_VideoClip: {fileID: 32900000, guid: 2e3d77a3c2fb80946beabb55a77e4137, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
@@ -923,6 +923,12 @@ PrefabInstance:
       propertyPath: safe
       value: 
       objectReference: {fileID: 2100000, guid: 899af98b1fd693f42abd960c005bf52c, type: 2}
+    - target: {fileID: 4178510146192094827, guid: 2aa09765e1d68974ca03c68dc35bbbc9,
+        type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 6083706065899036622, guid: 0deaca8ae0323984084174fa32217e36,
+        type: 3}
     - target: {fileID: 8951528717991192816, guid: 2aa09765e1d68974ca03c68dc35bbbc9,
         type: 3}
       propertyPath: m_LocalPosition.x

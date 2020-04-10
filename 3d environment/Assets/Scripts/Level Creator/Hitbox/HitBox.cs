@@ -12,7 +12,7 @@ public class HitBox : MonoBehaviour
     // use this to determine when to activate the collider and renderer and when to deactive them after a certain amount of time elapses
     private bool activated = false;
 
-    private Color material_color; 
+    
     private void Awake()
     {
         
@@ -27,8 +27,8 @@ public class HitBox : MonoBehaviour
         if(GlobalTimer.timer >= startTime && activated == false)
         {
 
-         
-            gameObject.GetComponent<MeshRenderer>().material.color = material_color;
+
+            gameObject.GetComponent<MeshRenderer>().enabled = true; 
 
             activated = true;
         }

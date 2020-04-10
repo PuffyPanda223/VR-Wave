@@ -11,6 +11,8 @@ public class DrawHitBox : MonoBehaviour
     private Vector3 startPos;
     private Vector3 endPos;
     public Material safe;
+    public GameObject prefab;
+
 
     // Shadow box is a temporory plane object whose dimensions will continiously change as the user draws a hitbox. It will show the user how big and where the hitbox will be drawn
     private GameObject shadowBox;
@@ -103,7 +105,7 @@ public class DrawHitBox : MonoBehaviour
 
 
 
-
+    // creates a plane object given points from the user and adds the hitbox to a global list for saving
     public void generatePlane()
     {
       
@@ -131,6 +133,16 @@ public class DrawHitBox : MonoBehaviour
         // give hitbox a layer. this will enable us to find and save them later on
         go.gameObject.tag = "hitBox";
 
+
+        // now that all the details of the object have been finialised we populate this custom data class with the necessary information so that the mesh renderer and filter can generate the hitbox when loading from a save file
+        HitboxData actor = new HitboxData();
+
+        actor.GetMeshDetails(mf.mesh);
+        actor.startTime = script.startTime;
+        actor.endTime = script.endTime;
+        actor.difficulty = mr.material.name;
+
+        SaveData.AddToList(actor);
     }
 
     // calculate the mesh  and the necessary components of a mesh given a startpoint and endpoint. Set the mesh of the gameobject you want a mesh for to the output of this function
@@ -398,6 +410,13 @@ public class DrawHitBox : MonoBehaviour
         hitBoxMesh.uv = uv; 
         hitBoxMesh.RecalculateNormals();
         hitBoxMesh.RecalculateBounds();
+
+
+
+
+
+
+
 
         return hitBoxMesh; 
 
