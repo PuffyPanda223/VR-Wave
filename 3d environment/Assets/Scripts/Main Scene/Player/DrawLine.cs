@@ -21,7 +21,7 @@ public class DrawLine : MonoBehaviour
     private Color notSafeHitbox = Color.red;
 
     // floating text prefab which we will instaniate on whenever the user clicks on a wave
-    public GameObject floatingText;
+    private FloatingText FloatingText;
 
     // interger score values for the various waves. They're given values in the start function
 
@@ -51,6 +51,8 @@ public class DrawLine : MonoBehaviour
         // gets the global point system stored in the game master game object
         getPointSystem(); 
 
+        
+
        
     }
 
@@ -61,6 +63,7 @@ public class DrawLine : MonoBehaviour
         // the point scoring script to give access to the function that increments the player score so whenever a hitbox is successfully hit we can increase the player score 
         GameObject gameMaster = GameObject.Find("Game Master");
         pointScript = (PointSystem)gameMaster.GetComponent(typeof(PointSystem));
+        FloatingText = gameMaster.GetComponent<FloatingText>();
 
     }
 
@@ -96,26 +99,26 @@ public class DrawLine : MonoBehaviour
                         //line.SetPositions(positions.ToArray());
 
                         // The color tells us which level of difficult of wave was selected
-                        string waveDifficulty = hit.transform.gameObject.name;
+                        string waveDifficulty = hit.transform.GetComponent<MeshRenderer>().material.name;
                         
                         // check to see which level of difficulty of wave the player hit
-                        if (waveDifficulty == "Safe")
+                        if (waveDifficulty == "safe")
                         {
                             PointSystem.addScore(safeWave);
-                            showFloatingText(safeWave, hit.transform.gameObject, floatingText);
+                            FloatingText.showFloatingText(safeWave, hit.transform.gameObject);
                             //Debug.Log("safe object hit");
                         }
-                        else if (waveDifficulty == "Medium")
+                        else if (waveDifficulty == "medium")
                         {
                             //Debug.Log("Medium hit box hit");
                             PointSystem.addScore(mediumWave);
-                            showFloatingText(mediumWave, hit.transform.gameObject, floatingText); 
+                            FloatingText.showFloatingText(mediumWave, hit.transform.gameObject); 
                         }
                         else
                         {
                             //Debug.Log("Not safe hitbox hit");
                             PointSystem.addScore(hardWave);
-                            showFloatingText(hardWave, hit.transform.gameObject, floatingText);
+                            FloatingText.showFloatingText(hardWave, hit.transform.gameObject);
                         }
                         Destroy(hit.transform.gameObject);
 
@@ -125,15 +128,7 @@ public class DrawLine : MonoBehaviour
         }
     }
 
-    public static void showFloatingText(int score, GameObject enemy, GameObject floatingText)
-    {
-        
-       // genenerate some text taken from a prefab at the location the hitbox was hit
-        
-        var display = Instantiate(floatingText, enemy.transform.position, Quaternion.LookRotation(enemy.transform.position) );
-        display.GetComponent<TextMesh>().text = "+" + score.ToString();
-    }
-
+ 
     private float DistanceToLastHit(Vector3 hitPoint)
     {
         // the whole point of this is just make sure some distance has been made on the line otherwise their is not point is wasting processing power in order to add and update the line renderer

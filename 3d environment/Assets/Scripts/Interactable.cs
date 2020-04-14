@@ -6,10 +6,15 @@ using UnityEngine.SceneManagement;
 // attached to an object. When pressed by the pointer it will pass through itself
 public class Interactable : MonoBehaviour
 {
+    FloatingText FloatingText; 
 
-  
-    public GameObject floatingText;
-  
+    private void Awake()
+    {
+        GameObject master = GameObject.Find("Game Master");
+        FloatingText = master.GetComponent<FloatingText>(); 
+    }
+
+
 
     public void Pressed(GameObject currentObject)
     {
@@ -18,7 +23,7 @@ public class Interactable : MonoBehaviour
 
         if (currentObject.name.Substring(0, 4) == "Safe")
         {
-            DrawLine.showFloatingText(5, currentObject, floatingText);
+            FloatingText.showFloatingText(5, currentObject);
             PointSystem.addScore(5);
             Destroy(currentObject);
             Debug.Log("safe");
@@ -27,7 +32,7 @@ public class Interactable : MonoBehaviour
         }
         else if (currentObject.name.Substring(0, 4) == "hard")
         {
-            DrawLine.showFloatingText(1, currentObject, floatingText);
+            FloatingText.showFloatingText(1, currentObject);
             PointSystem.addScore(1);
             Destroy(currentObject);
             Debug.Log("hard");

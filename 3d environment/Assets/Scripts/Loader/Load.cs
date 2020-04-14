@@ -26,6 +26,7 @@ public class Load : MonoBehaviour
             shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
             shadowCollider = shadowBox.AddComponent(typeof(MeshCollider)) as MeshCollider;
+            shadowBox.AddComponent<Interactable>(); 
             Mesh shadowMesh = new Mesh();
             // data stores the triangles, uvs and vertices, give the mesh these values and then add them to the mesh filter
 
@@ -41,6 +42,12 @@ public class Load : MonoBehaviour
             shadowScript.startTime = data[i].startTime;
             shadowScript.endTime = data[i].endTime;
 
+
+            // layer 9 is the hitbox layer which the gameobject has to be in order for the game to detect if the user has hit it or not
+            shadowBox.layer = 9;
+
+
+            // figure out which difficulty of wave was saved and set the material to the corresponding difficulty 
             switch (data[i].difficulty)
             {
                 case "safe":
@@ -62,6 +69,8 @@ public class Load : MonoBehaviour
         }
     }
 
+
+    // The mesh dataclass takes a list of vector3s not an array of floats. But becasue we had to break it up to save it to a simple array we need to reasemble it. 
     private List<Vector3> GenerateNormals(float[] normals)
     {
         List<Vector3> normal = new List<Vector3>(); 
@@ -76,6 +85,8 @@ public class Load : MonoBehaviour
     }
 
 
+
+    // The mesh dataclass takes a list of vector3s not an array of floats. But becasue we had to break it up to save it to a simple array we need to reasemble it. 
     private List<Vector2> GenerateUV(float[] uv)
     {
         List<Vector2> listUV = new List<Vector2>(); 
@@ -90,6 +101,7 @@ public class Load : MonoBehaviour
     }
 
 
+    // The mesh dataclass takes a list of vector3s not an array of floats. But becasue we had to break it up to save it to a simple array we need to reasemble it. 
     private List<Vector3> GenerateVertices(float[] verts)
     {
         List<Vector3> vertices = new List<Vector3>(); 
