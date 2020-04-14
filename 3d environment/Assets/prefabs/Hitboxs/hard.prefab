@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6179851519744448167}
   m_Layer: 9
   m_Name: hard
-  m_TagString: Untagged
+  m_TagString: hitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +105,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4853a60b736f42a47950f2a95c0bc727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitBoxSpawner: {fileID: 0}
   floatingText: {fileID: 638249390857962725, guid: e4685b1e29c02df49be2b07f2d4c9a59,
     type: 3}

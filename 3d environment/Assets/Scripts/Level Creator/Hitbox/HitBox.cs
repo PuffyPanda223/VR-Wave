@@ -12,10 +12,10 @@ public class HitBox : MonoBehaviour
     // use this to determine when to activate the collider and renderer and when to deactive them after a certain amount of time elapses
     private bool activated = false;
 
-
+    
     private void Awake()
     {
-        // at start of game turn off the hitboxes. When the start specific to each script is hit the script will re-enable the hitbox
+        
         gameObject.GetComponent<MeshRenderer>().enabled = false;
 
     }
@@ -26,16 +26,20 @@ public class HitBox : MonoBehaviour
         // when the start time has been reached activate the mesh renderer of the hitbox, allowing it to be targetted by the player
         if(GlobalTimer.timer >= startTime && activated == false)
         {
-        
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
-          
+
+
+            gameObject.GetComponent<MeshRenderer>().enabled = true; 
+
             activated = true;
         }
-        // every hitbox is only up for a set amount of time. So when the time expires destroy the hitbox
+        // every hitbox is only up for a set amount of time. So when the time expires disable the renderer so the user cannot interact with it at all. 
+        // We can't just destroy it because if we are creating a level we need the object to still be in the heirachy 
+        
         if(GlobalTimer.timer >= endTime)
         {
-            Destroy(gameObject);
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
+        
         
     }
 

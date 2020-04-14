@@ -11,6 +11,8 @@ public class DrawHitBox : MonoBehaviour
     private Vector3 startPos;
     private Vector3 endPos;
     public Material safe;
+    public GameObject prefab;
+
 
     // Shadow box is a temporory plane object whose dimensions will continiously change as the user draws a hitbox. It will show the user how big and where the hitbox will be drawn
     private GameObject shadowBox;
@@ -89,8 +91,6 @@ public class DrawHitBox : MonoBehaviour
     private void destroyShadow()
     {
         Destroy(shadowBox);
-
-        //implement at a later date. Some floating text that says the hitbox has been created
     }
 
     private void DrawShadowBox()
@@ -105,7 +105,7 @@ public class DrawHitBox : MonoBehaviour
 
 
 
-
+    // creates a plane object given points from the user and adds the hitbox to a global list for saving
     public void generatePlane()
     {
       
@@ -114,8 +114,10 @@ public class DrawHitBox : MonoBehaviour
         MeshFilter mf = go.AddComponent(typeof(MeshFilter)) as MeshFilter;
         MeshRenderer mr = go.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
         Mesh m = new Mesh();
-        m = calculateMesh(startPos, endPos, m); 
-
+        MeshCollider mc = new MeshCollider();
+        
+        m = calculateMesh(startPos, endPos, m);
+        
         mf.mesh = m;
 
         // the material is how we both visually and programmatically differentiate between the level of difficult the wave is
@@ -128,6 +130,20 @@ public class DrawHitBox : MonoBehaviour
         script.endTime = GlobalTimer.timer + 2f;
 
 
+        // give hitbox a layer. this will enable us to find and save them later on
+        go.gameObject.tag = "hitBox";
+
+
+        // now that all the details of the object have been finialised we populate this custom data class with the necessary information so that the mesh renderer and filter can generate the hitbox when loading from a save file
+        HitboxData actor = new HitboxData();
+
+        actor.GetMeshDetails(mf.mesh);
+        actor.startTime = script.startTime;
+        actor.endTime = script.endTime;
+        actor.difficulty = mr.material.name;
+
+        //we have a static global list that is the same type as the above custom class. that makes sure there is one certialized location where all the list data of our hitboxes are being kept. this makes saving and loading a lot easier
+        SaveData.AddToList(actor);
     }
 
     // calculate the mesh  and the necessary components of a mesh given a startpoint and endpoint. Set the mesh of the gameobject you want a mesh for to the output of this function
@@ -395,6 +411,13 @@ public class DrawHitBox : MonoBehaviour
         hitBoxMesh.uv = uv; 
         hitBoxMesh.RecalculateNormals();
         hitBoxMesh.RecalculateBounds();
+
+
+
+
+
+
+
 
         return hitBoxMesh; 
 
