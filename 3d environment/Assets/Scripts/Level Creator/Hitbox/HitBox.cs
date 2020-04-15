@@ -17,7 +17,7 @@ public class HitBox : MonoBehaviour
     {
         
         gameObject.GetComponent<MeshRenderer>().enabled = false;
-
+        
     }
 
     // determine when to enable the hitbox based on the start time that was provided by the DrawHitBox script

@@ -86,10 +86,10 @@ public class DrawLine : MonoBehaviour
                 // The distance is set to just under the radius of the sphere so the video won't be deleted
                 if (Physics.Raycast(ray, out hit, Distance, layer_mask))
                 {
-                    Debug.Log("got here");
+                   
                     
 
-                 
+             
 
                     //line.positionCount = positions.Count;
                     //line.SetPositions(positions.ToArray());
@@ -102,6 +102,7 @@ public class DrawLine : MonoBehaviour
                     {
                         case "safe":
                             PointSystem.addScore(safeWave);
+                            FloatingText.showFloatingText(safeWave, hit.transform.gameObject);
                             break;
                         case "medi":
                             PointSystem.addScore(mediumWave);
