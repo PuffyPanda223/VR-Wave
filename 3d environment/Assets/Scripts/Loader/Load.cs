@@ -20,7 +20,7 @@ public class Load : MonoBehaviour
     {
         List<HitboxData> data = new List<HitboxData>();
         data = SaveData.load();
-        Debug.Log("Loaded in +" + data.Count);
+        
         for(int i = 0; i < data.Count; i++)
         {
             GameObject shadowBox = new GameObject("plane"+i);
@@ -69,7 +69,7 @@ public class Load : MonoBehaviour
                     shadowRenderer.material = safe;
                     break;
             }
-            Debug.Log(" the index in the loadingg for loop is " + i);
+          
 
        
         }
