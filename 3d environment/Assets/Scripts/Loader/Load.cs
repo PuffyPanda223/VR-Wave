@@ -59,7 +59,7 @@ public class Load : MonoBehaviour
                 case "safe":
                     shadowRenderer.material = safe;
                     break;
-                case "medium":
+                case "medi":
                     shadowRenderer.material = medium;
                     break;
                 case "hard":
