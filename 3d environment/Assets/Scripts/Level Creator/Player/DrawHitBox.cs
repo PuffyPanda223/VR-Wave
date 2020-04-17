@@ -93,6 +93,7 @@ public class DrawHitBox : MonoBehaviour
         Destroy(shadowBox);
     }
 
+    // as the user is drawing the hitbox show to the user how it is going to look. It has no components is merely a shell of what it will look like
     private void DrawShadowBox()
     {
 

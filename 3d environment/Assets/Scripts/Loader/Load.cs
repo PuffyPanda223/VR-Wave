@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Load : MonoBehaviour
 {
-    
+    /*
     private GameObject shadowBox;
     private MeshFilter shadowFilter;
     private MeshRenderer shadowRenderer;
     private Mesh shadowMesh;
     private HitBox shadowScript;
     private MeshCollider shadowCollider;
+    */
     public Material safe;
     public Material medium;
     public Material hard;
@@ -19,26 +20,31 @@ public class Load : MonoBehaviour
     {
         List<HitboxData> data = new List<HitboxData>();
         data = SaveData.load();
+        
         for(int i = 0; i < data.Count; i++)
         {
-            shadowBox = new GameObject("plane");
-            shadowFilter = shadowBox.AddComponent(typeof(MeshFilter)) as MeshFilter;
-            shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
-            shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
-            shadowCollider = shadowBox.AddComponent(typeof(MeshCollider)) as MeshCollider;
-            shadowBox.AddComponent<Interactable>(); 
+            GameObject shadowBox = new GameObject("plane"+i);
+            MeshFilter shadowFilter = shadowBox.AddComponent(typeof(MeshFilter)) as MeshFilter;
+            MeshRenderer shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
+            HitBox shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
+            MeshCollider shadowCollider = shadowBox.AddComponent(typeof(MeshCollider)) as MeshCollider;
+            shadowBox.AddComponent<Interactable>();
+
             Mesh shadowMesh = new Mesh();
             // data stores the triangles, uvs and vertices, give the mesh these values and then add them to the mesh filter
 
             // the mesh of an object is split into different aspects, the vertices are the points in the world, the triangles are the way in which those points connect, the uvs tell the renderer where to put materials and normals 
             // make the mesh collider possible
-            shadowMesh.SetVertices(GenerateVertices(data[i].vertices));
+            List<Vector3> verts = GenerateVertices(data[i].vertices);
+            shadowMesh.SetVertices(verts);
             shadowMesh.triangles = data[i].triangles;
             shadowMesh.SetUVs(0, GenerateUV(data[i].uv));
             shadowMesh.SetNormals(GenerateNormals(data[i].normals));
 
+            
             shadowFilter.mesh = shadowMesh;
-
+            shadowCollider.enabled = true;
+            shadowCollider.sharedMesh = shadowMesh;
             shadowScript.startTime = data[i].startTime;
             shadowScript.endTime = data[i].endTime;
 
@@ -48,12 +54,12 @@ public class Load : MonoBehaviour
 
 
             // figure out which difficulty of wave was saved and set the material to the corresponding difficulty 
-            switch (data[i].difficulty)
+            switch (data[i].difficulty.Substring(0,4))
             {
                 case "safe":
                     shadowRenderer.material = safe;
                     break;
-                case "medium":
+                case "medi":
                     shadowRenderer.material = medium;
                     break;
                 case "hard":
@@ -63,7 +69,7 @@ public class Load : MonoBehaviour
                     shadowRenderer.material = safe;
                     break;
             }
-
+          
 
        
         }

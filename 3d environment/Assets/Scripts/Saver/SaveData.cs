@@ -48,6 +48,7 @@ public class SaveData
     public static void AddToList(HitboxData data)
     {
         container.actors.Add(data);
+        Debug.Log(container.actors.Count); 
     }
 
 }

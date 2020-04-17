@@ -37,9 +37,9 @@ public class DrawLine : MonoBehaviour
     private void Start()
     {
         layer_mask = LayerMask.GetMask("hitBox");
-        Distance = 49;
+        Distance = 230;
         isGamePaused = false;
-        safeWave = 5;
+        safeWave = 6;
         mediumWave = 3;
         hardWave = 1; 
     }
@@ -73,11 +73,8 @@ public class DrawLine : MonoBehaviour
         // check to see if the game is paused. If not then proceed 
         if (!isGamePaused)
         {
-            // when the user first holds down the left click it means they are inputting new lines to be drawn so clear out the previous coordinates in the positions list 
-            if (Input.GetButtonDown("Fire1"))
-                positions.Clear();
 
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButtonDown("Fire1"))
             {
                 // Whatever the mouse position project whats called a raycast until it hits an object able to be hit
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
@@ -89,40 +86,38 @@ public class DrawLine : MonoBehaviour
                 // The distance is set to just under the radius of the sphere so the video won't be deleted
                 if (Physics.Raycast(ray, out hit, Distance, layer_mask))
                 {
+                   
+                    
 
-                    if (DistanceToLastHit(hit.point) > 1f)
-                    {
+             
 
-                        positions.Add(hit.point);
+                    //line.positionCount = positions.Count;
+                    //line.SetPositions(positions.ToArray());
 
-                        //line.positionCount = positions.Count;
-                        //line.SetPositions(positions.ToArray());
-
-                        // The color tells us which level of difficult of wave was selected
-                        string waveDifficulty = hit.transform.GetComponent<MeshRenderer>().material.name;
+                    // The color tells us which level of difficult of wave was selected
+                    string waveDifficulty = hit.transform.GetComponent<MeshRenderer>().material.name.Substring(0,4);
                         
-                        // check to see which level of difficulty of wave the player hit
-                        if (waveDifficulty == "safe")
-                        {
+                    // check to see which level of difficulty of wave the player hit
+                    switch(waveDifficulty)
+                    {
+                        case "safe":
                             PointSystem.addScore(safeWave);
                             FloatingText.showFloatingText(safeWave, hit.transform.gameObject);
-                            //Debug.Log("safe object hit");
-                        }
-                        else if (waveDifficulty == "medium")
-                        {
-                            //Debug.Log("Medium hit box hit");
+                            break;
+                        case "medi":
                             PointSystem.addScore(mediumWave);
-                            FloatingText.showFloatingText(mediumWave, hit.transform.gameObject); 
-                        }
-                        else
-                        {
-                            //Debug.Log("Not safe hitbox hit");
+                            break;
+                        case "hard":
                             PointSystem.addScore(hardWave);
-                            FloatingText.showFloatingText(hardWave, hit.transform.gameObject);
-                        }
-                        Destroy(hit.transform.gameObject);
-
+                            break;
+                        default:
+                            PointSystem.addScore(hardWave);
+                            break;
                     }
+
+                    Destroy(hit.transform.gameObject);
+
+                    
                 }
             }
         }

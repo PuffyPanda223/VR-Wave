@@ -21,23 +21,39 @@ public class Interactable : MonoBehaviour
         bool isHitBox = false;
        
 
-        if (currentObject.name.Substring(0, 4) == "Safe")
+        switch(currentObject.name.Substring(0,4))
         {
-            FloatingText.showFloatingText(5, currentObject);
-            PointSystem.addScore(5);
-            Destroy(currentObject);
-            Debug.Log("safe");
-            isHitBox = true;
+            case "safe":
+                FloatingText.showFloatingText(5, currentObject);
+                PointSystem.addScore(5);
+                Destroy(currentObject);
+                Debug.Log("safe");
+                isHitBox = true;
+                break;
+            case "medi":
+                FloatingText.showFloatingText(3, currentObject);
+                PointSystem.addScore(3);
+                Destroy(currentObject);
+                Debug.Log("medium");
+                isHitBox = true;
+                break;
+            case "hard":
+                FloatingText.showFloatingText(2, currentObject);
+                PointSystem.addScore(2);
+                Destroy(currentObject);
+                Debug.Log("hard");
+                isHitBox = true;
+                break;
+            case "default":
+                FloatingText.showFloatingText(5, currentObject);
+                PointSystem.addScore(5);
+                Destroy(currentObject);
+                Debug.Log("safe");
+                isHitBox = true;
+                break;
+        }
 
-        }
-        else if (currentObject.name.Substring(0, 4) == "hard")
-        {
-            FloatingText.showFloatingText(1, currentObject);
-            PointSystem.addScore(1);
-            Destroy(currentObject);
-            Debug.Log("hard");
-            isHitBox = true;
-        }
+       
         // if the object wasn't a hitbox this will false which will then proceed to execute the rest of the code
         if (!isHitBox)
         {
