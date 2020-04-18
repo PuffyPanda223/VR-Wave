@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: 56ed4751b3bdff54e941aaeeeab3f727
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Intro.unity
     guid: 15061a748be5d4e419f1b05b1f257047
+  - enabled: 1
+    path: Assets/Scenes/Level editor/Save.unity
+    guid: d89ecdcbb229e224187a7ffb0cc65222
   - enabled: 1
     path: Assets/Scenes/MainScene/VR main Scene.unity
     guid: be9ba2b4c8f662a4ca0665f6ca88e88c
