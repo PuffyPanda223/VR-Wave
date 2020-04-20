@@ -24,7 +24,7 @@ public class HitBox : MonoBehaviour
     private void Update()
     {
         // when the start time has been reached activate the mesh renderer of the hitbox, allowing it to be targetted by the player
-        if(GlobalTimer.timer >= startTime && activated == false)
+        if(CountDownTimer.timer >= startTime && activated == false)
         {
 
 
@@ -35,7 +35,7 @@ public class HitBox : MonoBehaviour
         // every hitbox is only up for a set amount of time. So when the time expires disable the renderer so the user cannot interact with it at all. 
         // We can't just destroy it because if we are creating a level we need the object to still be in the heirachy 
         
-        if(GlobalTimer.timer >= endTime)
+        if(CountDownTimer.timer >= endTime)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = false;
         }

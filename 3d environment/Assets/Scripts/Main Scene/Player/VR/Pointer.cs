@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Pointer : MonoBehaviour
 {
 
-    public float m_Distance = 10.0f;
+    public float m_Distance = 240.0f;
     public LineRenderer m_LineRenderer = null;
     public LayerMask m_EverythingMask  ;
     public LayerMask m_InteractableMask  ;
@@ -23,7 +23,7 @@ public class Pointer : MonoBehaviour
         VRController.OnControllerSource += UpdateOrigin;
         VRController.OnTouchpadDown += ProcessTouchpadDown;
 
-        DontDestroyOnLoad(DND_Pointer);
+        //DontDestroyOnLoad(DND_Pointer);
 
     }
 
@@ -132,6 +132,6 @@ public class Pointer : MonoBehaviour
         
         // send the object to another function in the interactable script that will process what was pressed and what to do when it is pressed
         interactable.Pressed(m_CurrentObject);
-
+         
     }
 }

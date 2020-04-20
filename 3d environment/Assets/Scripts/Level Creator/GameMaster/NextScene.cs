@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 public class NextScene : MonoBehaviour
 {
 
-    public float gameTime = 0f;
-
 
     private void Update()
     {
-        if (gameTime >20f)
+     
+        if (GlobalTimer.timer > 5f)
         {
-            SaveData.Save(); 
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
+
+            SaveData.Save();
+            SceneManager.LoadScene(1);
         }
     }
 }
