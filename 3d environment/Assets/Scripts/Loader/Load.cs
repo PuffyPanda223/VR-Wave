@@ -23,13 +23,7 @@ public class Load : MonoBehaviour
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
 
-    private void OnLevelWasLoaded(int level)
-    {
-        if (level == 1)
-        {
-            loadHitBoxes();
-        }
-    }
+    
     private void loadHitBoxes()
     {
         List<HitboxData> data = new List<HitboxData>();
@@ -140,6 +134,11 @@ public class Load : MonoBehaviour
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         SaveData.clearList();
+        Debug.Log(scene.name + " is the scene name");
+        if(scene.name == "VR main Scene")
+        {
+            loadHitBoxes();
+        }
     }
 
 }
