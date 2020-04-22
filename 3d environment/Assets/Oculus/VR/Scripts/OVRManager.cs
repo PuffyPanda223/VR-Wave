@@ -1605,7 +1605,7 @@ public class OVRManager : MonoBehaviour
 		{
 			try
 			{
-				Debug.Log("[OVRManager] InputFocusLost event");
+
 				if (InputFocusLost != null)
 					InputFocusLost();
 			}
@@ -1806,11 +1806,11 @@ public class OVRManager : MonoBehaviour
 
 		if (result != null)
 		{
-			Debug.LogFormat("[OVRManager] mainCamera found for MRC: ", result.gameObject.name);
+
 		}
 		else
 		{
-			Debug.Log("[OVRManager] unable to find a vaild camera");
+
 		}
 		lastFoundMainCamera = result;
 		return result;
@@ -1837,7 +1837,7 @@ public class OVRManager : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		Debug.Log("[OVRManager] OnDestroy");
+
 		OVRManagerinitialized = false;
 	}
 
@@ -1845,11 +1845,11 @@ public class OVRManager : MonoBehaviour
 	{
 		if (pause)
 		{
-			Debug.Log("[OVRManager] OnApplicationPause(true)");
+			
 		}
 		else
 		{
-			Debug.Log("[OVRManager] OnApplicationPause(false)");
+
 		}
 	}
 
@@ -1857,7 +1857,7 @@ public class OVRManager : MonoBehaviour
 	{
 		if (focus)
 		{
-			Debug.Log("[OVRManager] OnApplicationFocus(true)");
+		
 		}
 		else
 		{
@@ -1867,7 +1867,7 @@ public class OVRManager : MonoBehaviour
 
 	private void OnApplicationQuit()
 	{
-		Debug.Log("[OVRManager] OnApplicationQuit");
+
 	}
 
 #endregion // Unity Messages

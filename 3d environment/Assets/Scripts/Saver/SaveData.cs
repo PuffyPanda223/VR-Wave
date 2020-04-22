@@ -14,6 +14,10 @@ public class SaveData
     public static event SerializeAction onLoaded;
     public static event SerializeAction onBeforeSave; 
 
+
+
+  
+
     // get a list of from JSON and add it to the static hitbox list
     public static List<HitboxData> load()
     {
@@ -48,7 +52,12 @@ public class SaveData
     public static void AddToList(HitboxData data)
     {
         container.actors.Add(data);
-        Debug.Log(container.actors.Count); 
+       
+    }
+
+    public static void clearList()
+    {
+        container.actors.Clear();
     }
 
 }

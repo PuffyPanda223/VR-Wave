@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Pointer : MonoBehaviour
 {
 
-    public float m_Distance = 10.0f;
+    public float m_Distance = 240.0f;
     public LineRenderer m_LineRenderer = null;
     public LayerMask m_EverythingMask  ;
     public LayerMask m_InteractableMask  ;
@@ -48,20 +48,25 @@ public class Pointer : MonoBehaviour
     private Vector3 UpdateLine()
     {
         // Create ray
-        RaycastHit hit = CreateRaycast(m_EverythingMask);
+        if (m_CurrentOrigin != null)
+        {
+            RaycastHit hit = CreateRaycast(m_EverythingMask);
 
-        //Default end
-        Vector3 endPosition = m_CurrentOrigin.position + (m_CurrentOrigin.forward * m_Distance);
+            //Default end
+            Vector3 endPosition = m_CurrentOrigin.position + (m_CurrentOrigin.forward * m_Distance);
 
-        //Check hit
-        if (hit.collider != null)
-            endPosition = hit.point;
+            //Check hit
+            if (hit.collider != null)
+                endPosition = hit.point;
 
-        //Set Position
-        m_LineRenderer.SetPosition(0, m_CurrentOrigin.position);
-        m_LineRenderer.SetPosition(1, endPosition);
+            //Set Position
+            m_LineRenderer.SetPosition(0, m_CurrentOrigin.position);
+            m_LineRenderer.SetPosition(1, endPosition);
 
-        return endPosition;
+            return endPosition;
+        }
+
+        return Vector3.zero;
     }
 
     private void OnDestroy()
@@ -89,14 +94,19 @@ public class Pointer : MonoBehaviour
 
     private GameObject UpdatePointerStatus()
     {
-        //Create Ray
-        RaycastHit hit = CreateRaycast(m_InteractableMask);
+        if (m_CurrentOrigin != null)
+        {
+            //Create Ray
+            RaycastHit hit = CreateRaycast(m_InteractableMask);
 
-        //Check Hit
-        if (hit.collider)
-            // return a game object to the variable m_ CurrentObject
-            return hit.collider.gameObject;
+            //Check Hit
+            if (hit.collider)
+                // return a game object to the variable m_ CurrentObject
+                return hit.collider.gameObject;
+            return null;
 
+
+        }
         //Return
         return null;
 
@@ -129,9 +139,16 @@ public class Pointer : MonoBehaviour
             return;
 
         Interactable interactable = m_CurrentObject.GetComponent<Interactable>();
-        
+        if (interactable)
+        {
+            Debug.Log("interactable is attached to the script");
+            interactable.Pressed(m_CurrentObject);
+        } else
+        {
+            print("Interactable script could not be found");
+        }
         // send the object to another function in the interactable script that will process what was pressed and what to do when it is pressed
-        interactable.Pressed(m_CurrentObject);
-
+     
+         
     }
 }

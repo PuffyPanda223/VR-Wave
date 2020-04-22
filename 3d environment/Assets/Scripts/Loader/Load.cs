@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Load : MonoBehaviour
 {
@@ -16,19 +17,26 @@ public class Load : MonoBehaviour
     public Material medium;
     public Material hard;
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    
+    private void loadHitBoxes()
     {
         List<HitboxData> data = new List<HitboxData>();
         data = SaveData.load();
-        
-        for(int i = 0; i < data.Count; i++)
+
+        for (int i = 0; i < data.Count; i++)
         {
-            GameObject shadowBox = new GameObject("plane"+i);
+            GameObject shadowBox = new GameObject("plane" + i);
             MeshFilter shadowFilter = shadowBox.AddComponent(typeof(MeshFilter)) as MeshFilter;
             MeshRenderer shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             HitBox shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
             MeshCollider shadowCollider = shadowBox.AddComponent(typeof(MeshCollider)) as MeshCollider;
-            shadowBox.AddComponent<Interactable>();
+            Interactable shadowInteract = shadowBox.AddComponent<Interactable>();
 
             Mesh shadowMesh = new Mesh();
             // data stores the triangles, uvs and vertices, give the mesh these values and then add them to the mesh filter
@@ -41,7 +49,7 @@ public class Load : MonoBehaviour
             shadowMesh.SetUVs(0, GenerateUV(data[i].uv));
             shadowMesh.SetNormals(GenerateNormals(data[i].normals));
 
-            
+
             shadowFilter.mesh = shadowMesh;
             shadowCollider.enabled = true;
             shadowCollider.sharedMesh = shadowMesh;
@@ -54,7 +62,7 @@ public class Load : MonoBehaviour
 
 
             // figure out which difficulty of wave was saved and set the material to the corresponding difficulty 
-            switch (data[i].difficulty.Substring(0,4))
+            switch (data[i].difficulty.Substring(0, 4))
             {
                 case "safe":
                     shadowRenderer.material = safe;
@@ -69,9 +77,9 @@ public class Load : MonoBehaviour
                     shadowRenderer.material = safe;
                     break;
             }
-          
 
-       
+
+
         }
     }
 
@@ -120,6 +128,17 @@ public class Load : MonoBehaviour
         }
 
         return vertices;
+    }
+
+  
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        SaveData.clearList();
+        Debug.Log(scene.name + " is the scene name");
+        if(scene.name == "VR main Scene")
+        {
+            loadHitBoxes();
+        }
     }
 
 }

@@ -12,6 +12,7 @@ public class DrawLine : MonoBehaviour
     int layer_mask;
     int Distance; 
     public Camera camera;
+    public GameObject player;
     // load the functions needed from point script to add to the player script 
     private PointSystem pointScript;
 
@@ -49,9 +50,9 @@ public class DrawLine : MonoBehaviour
         line = GetComponent<LineRenderer>();
         
         // gets the global point system stored in the game master game object
-        getPointSystem(); 
+        getPointSystem();
 
-        
+        DontDestroyOnLoad(player);
 
        
     }

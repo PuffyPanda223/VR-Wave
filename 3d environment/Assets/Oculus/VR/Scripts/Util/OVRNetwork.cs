@@ -125,7 +125,7 @@ public class OVRNetwork
 		{
 			if (tcpListener == null)
 			{
-				Debug.LogWarning("[OVRNetworkTcpServer] tcpListener is null");
+				
 				return;
 			}
 
@@ -136,7 +136,7 @@ public class OVRNetwork
 			tcpListener.Stop();
 			tcpListener = null;
 
-			Debug.Log("[OVRNetworkTcpServer] Stopped listening");
+
 		}
 
 		private void DoAcceptTcpClientCallback(IAsyncResult ar)
