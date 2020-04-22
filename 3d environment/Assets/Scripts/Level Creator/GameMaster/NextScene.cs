@@ -9,7 +9,7 @@ public class NextScene : MonoBehaviour
     private void Update()
     {
      
-        if (GlobalTimer.timer > 5f)
+        if (GlobalTimer.timer > 15f)
         {
 
             SaveData.Save();

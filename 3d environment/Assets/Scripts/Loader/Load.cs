@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Load : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class Load : MonoBehaviour
     public Material medium;
     public Material hard;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
     void Start()
     {
         List<HitboxData> data = new List<HitboxData>();
@@ -28,7 +35,7 @@ public class Load : MonoBehaviour
             MeshRenderer shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             HitBox shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
             MeshCollider shadowCollider = shadowBox.AddComponent(typeof(MeshCollider)) as MeshCollider;
-            shadowBox.AddComponent<Interactable>();
+            Interactable shadowInteract = shadowBox.AddComponent<Interactable>();
 
             Mesh shadowMesh = new Mesh();
             // data stores the triangles, uvs and vertices, give the mesh these values and then add them to the mesh filter
@@ -120,6 +127,12 @@ public class Load : MonoBehaviour
         }
 
         return vertices;
+    }
+
+  
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        SaveData.clearList();
     }
 
 }

@@ -19,9 +19,9 @@ public class Interactable : MonoBehaviour
     public void Pressed(GameObject currentObject)
     {
         bool isHitBox = false;
-       
-
-        switch(currentObject.name.Substring(0,4))
+        string name = currentObject.transform.GetComponent<MeshRenderer>().material.name;
+        Debug.Log("name of the matieral in the interactable script is " + name); 
+        switch(name.Substring(0,4))
         {
             case "safe":
                 FloatingText.showFloatingText(5, currentObject);

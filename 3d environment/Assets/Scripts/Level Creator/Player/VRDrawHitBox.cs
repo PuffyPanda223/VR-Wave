@@ -34,8 +34,8 @@ public class VRDrawHitBox : MonoBehaviour
             VRController.OnControllerSource += UpdateOrigin;
         }
         //VRController.OnTouchpadDown += ProcessTouchpadDown;
+       
 
-        
 
     }
 
@@ -54,7 +54,7 @@ public class VRDrawHitBox : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
         {
             // clear the startPos, as we are creating a new hitbox
-            Debug.Log("Primary Button was touched down");
+         
             startPos = Vector3.zero;
             endPos = Vector3.zero;
             Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
@@ -83,7 +83,7 @@ public class VRDrawHitBox : MonoBehaviour
 
         if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
         {
-            Debug.Log("Primary Button is being held");
+        
             Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
             RaycastHit hit;
 
