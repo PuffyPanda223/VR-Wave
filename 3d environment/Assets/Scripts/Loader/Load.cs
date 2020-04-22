@@ -23,14 +23,21 @@ public class Load : MonoBehaviour
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
 
-    void Start()
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == 1)
+        {
+            loadHitBoxes();
+        }
+    }
+    private void loadHitBoxes()
     {
         List<HitboxData> data = new List<HitboxData>();
         data = SaveData.load();
-        
-        for(int i = 0; i < data.Count; i++)
+
+        for (int i = 0; i < data.Count; i++)
         {
-            GameObject shadowBox = new GameObject("plane"+i);
+            GameObject shadowBox = new GameObject("plane" + i);
             MeshFilter shadowFilter = shadowBox.AddComponent(typeof(MeshFilter)) as MeshFilter;
             MeshRenderer shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             HitBox shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
@@ -48,7 +55,7 @@ public class Load : MonoBehaviour
             shadowMesh.SetUVs(0, GenerateUV(data[i].uv));
             shadowMesh.SetNormals(GenerateNormals(data[i].normals));
 
-            
+
             shadowFilter.mesh = shadowMesh;
             shadowCollider.enabled = true;
             shadowCollider.sharedMesh = shadowMesh;
@@ -61,7 +68,7 @@ public class Load : MonoBehaviour
 
 
             // figure out which difficulty of wave was saved and set the material to the corresponding difficulty 
-            switch (data[i].difficulty.Substring(0,4))
+            switch (data[i].difficulty.Substring(0, 4))
             {
                 case "safe":
                     shadowRenderer.material = safe;
@@ -76,9 +83,9 @@ public class Load : MonoBehaviour
                     shadowRenderer.material = safe;
                     break;
             }
-          
 
-       
+
+
         }
     }
 
