@@ -33,11 +33,16 @@ public class VRDrawHitBox : MonoBehaviour
         {
             VRController.OnControllerSource += UpdateOrigin;
         }
-        //VRController.OnTouchpadDown += ProcessTouchpadDown;
+        DontDestroyOnLoad(DND_Pointer);
+    }
+
+    private void OnDestroy()
+    {
+        VRController.OnControllerSource -= UpdateOrigin;
        
 
-
     }
+
 
     private void Update()
     {
@@ -197,21 +202,12 @@ public class VRDrawHitBox : MonoBehaviour
     // creates a plane object given points from the user and adds the hitbox to a global list for saving
     public void generatePlane()
     {
-
-
         Mesh m = new Mesh();
 
 
         m = DrawHitBox.calculateMesh(startPos, endPos, m);
 
- 
-
         // the material is how we both visually and programmatically differentiate between the level of difficult the wave is
-
-
-     
-
-
 
 
         // now that all the details of the object have been finialised we populate this custom data class with the necessary information so that the mesh renderer and filter can generate the hitbox when loading from a save file

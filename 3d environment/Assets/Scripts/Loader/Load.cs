@@ -115,7 +115,7 @@ public class Load : MonoBehaviour
     }
 
 
-    // The mesh dataclass takes a list of vector3s not an array of floats. But becasue we had to break it up to save it to a simple array we need to reasemble it. 
+    // The mesh dataclass takes a list of vector3s not an array of floats. But becasue we had to break it up to save it to a simple array we need to reasemble it back into a list class
     private List<Vector3> GenerateVertices(float[] verts)
     {
         List<Vector3> vertices = new List<Vector3>(); 
@@ -133,10 +133,13 @@ public class Load : MonoBehaviour
   
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        // if you go from level editor to vr scene back to level editor the container class that holds all the hitboxes will have the hitboxes from both of the times it used, we clear the list so that only one instance of 
+        // the hitboxes created is used
         SaveData.clearList();
-        Debug.Log(scene.name + " is the scene name");
+        // static fields do not reset when loading from one scene to another, so if the scene is the main scene reset everything that needs to be reset for the game to be replayed 
         if(scene.name == "VR main Scene")
         {
+            PointSystem.playerScore = 0;
             loadHitBoxes();
         }
     }
