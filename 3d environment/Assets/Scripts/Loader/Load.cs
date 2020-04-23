@@ -20,12 +20,15 @@ public class Load : MonoBehaviour
 
     private void Awake()
     {
+        // attaching a delegate method to the scene loaded callback, it comes with the scene and scene mode
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
 
     
+    // when 
     private void loadHitBoxes()
     {
+        SaveData.clearList();
         List<HitboxData> data = new List<HitboxData>();
         data = SaveData.load();
 
@@ -133,9 +136,7 @@ public class Load : MonoBehaviour
   
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        // if you go from level editor to vr scene back to level editor the container class that holds all the hitboxes will have the hitboxes from both of the times it used, we clear the list so that only one instance of 
-        // the hitboxes created is used
-        SaveData.clearList();
+
         // static fields do not reset when loading from one scene to another, so if the scene is the main scene reset everything that needs to be reset for the game to be replayed 
         if(scene.name == "VR main Scene")
         {
