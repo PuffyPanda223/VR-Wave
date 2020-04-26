@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Video;
 
 public class Pointer : MonoBehaviour
 {
@@ -13,10 +14,14 @@ public class Pointer : MonoBehaviour
     public UnityAction<Vector3, GameObject> OnPointerUpdate = null;
 
     public GameObject DND_Pointer;
-
+    public GameObject DND_Reticule;
+    public GameObject Dot;
 
     private Transform m_CurrentOrigin = null;
     private GameObject m_CurrentObject = null;
+
+    private GameObject sphere;
+    private VideoPlayer videoPlayer;
 
     private void Awake()
     {
@@ -24,6 +29,7 @@ public class Pointer : MonoBehaviour
         VRController.OnTouchpadDown += ProcessTouchpadDown;
 
         DontDestroyOnLoad(DND_Pointer);
+        DontDestroyOnLoad(DND_Reticule);
 
     }
 
@@ -42,6 +48,29 @@ public class Pointer : MonoBehaviour
         if (OnPointerUpdate != null)
         {
             OnPointerUpdate(hitPoint, m_CurrentObject);
+        }
+
+        if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && Interactable.drawActive == true)
+        {
+            Instantiate(Dot, hitPoint, m_CurrentOrigin.rotation);
+        }
+
+        if (OVRInput.Get(OVRInput.Button.Back) && Interactable.drawActive == true)
+        {
+            GameObject[] Dots = GameObject.FindGameObjectsWithTag("Draw");
+
+            for (var i = 0; i < Dots.Length; i++)
+            {
+                Destroy(Dots[i]);
+            }
+
+            Interactable.drawActive = false;
+            DrawLine.isGamePaused = false;
+            // get the entire sphere object which once we have we can use to find the video player component
+            sphere = GameObject.Find("Sphere");
+            // get the video player component containing the 3d footage we are using. 
+            videoPlayer = sphere.GetComponent<VideoPlayer>();
+            videoPlayer.Play();
         }
     }
 

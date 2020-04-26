@@ -7,12 +7,12 @@ public class UpdateScoreVR : MonoBehaviour
 {
 
 
-    public TextMeshPro score; 
-    
+    public TextMeshPro score;
+
 
     // Update is called once per frame
     void Update()
     {
-        score.text = PointSystem.playerScore.ToString(); 
+        score.text = "Score: " + PointSystem.playerScore.ToString(); 
     }
 }
