@@ -766,6 +766,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PR_Pointer
       objectReference: {fileID: 0}
+    - target: {fileID: 8094249848071314700, guid: b766dcfc1c8abb4408276a16f80399d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8094249848071314701, guid: b766dcfc1c8abb4408276a16f80399d3,
         type: 3}
       propertyPath: m_Distance
@@ -1209,8 +1214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 47107447}
-  floatingText: {fileID: 638249390857962725, guid: e4685b1e29c02df49be2b07f2d4c9a59,
-    type: 3}
+  player: {fileID: 0}
 --- !u!120 &988602498
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1547,7 +1551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4853a60b736f42a47950f2a95c0bc727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatingText: {fileID: 0}
 --- !u!1001 &1700415874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1614,6 +1617,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PR_Reticule
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719581513286370011, guid: 7b062c117af2d814bab1ffe71c87c849,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3829761921512939976, guid: 7b062c117af2d814bab1ffe71c87c849,
         type: 3}

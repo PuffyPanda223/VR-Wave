@@ -26,7 +26,7 @@ public class UpdateVrTimer : MonoBehaviour
         float timer = CountDownTimer.timer;
         // the ToString F0 makes it so their is no decimal places. I have to make the timer it self a float because the user of delta time has to be used on a float so when making this 
         // a string just cut off any decimal places
-        vrTimer.text = timer.ToString("F0");
+        vrTimer.text = "Time: " + timer.ToString("F0");
         //timeDisplay.GetComponent<TextMeshPro>().text = "Time passed: " + timer.ToString("F0"); 
 
     }

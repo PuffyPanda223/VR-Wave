@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Option Set
   - hitBox
+  - Draw
   layers:
   - Default
   - TransparentFX

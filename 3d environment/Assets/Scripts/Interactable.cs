@@ -1,20 +1,25 @@
 ﻿
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine.Video;
 
 
 // attached to an object. When pressed by the pointer it will pass through itself
 public class Interactable : MonoBehaviour
 {
-    FloatingText FloatingText; 
-
-    private void Awake()
+    FloatingText FloatingText;
+    public static bool drawActive = false;
+    private GameObject sphere;
+    private VideoPlayer videoPlayer;
+    
+        private void Awake()
     {
         GameObject master = GameObject.Find("Game Master");
-        FloatingText = master.GetComponent<FloatingText>(); 
+        FloatingText = master.GetComponent<FloatingText>();
     }
 
-
+    
 
     public void Pressed(GameObject currentObject)
     {
@@ -24,6 +29,7 @@ public class Interactable : MonoBehaviour
         switch(currentObject.name.Substring(0,4))
         {
             case "safe":
+                DrawStart();
                 FloatingText.showFloatingText(5, currentObject);
                 PointSystem.addScore(5);
                 Destroy(currentObject);
@@ -203,4 +209,14 @@ public class Interactable : MonoBehaviour
         GameObject.Find("FullCredits").GetComponent<MeshRenderer>().enabled = true;
     }
 
+    void DrawStart()
+    {
+        // get the entire sphere object which once we have we can use to find the video player component
+        sphere = GameObject.Find("Sphere");
+        // get the video player component containing the 3d footage we are using. 
+        videoPlayer = sphere.GetComponent<VideoPlayer>();
+        DrawLine.isGamePaused = true;
+        drawActive = true;
+        videoPlayer.Pause();
+    }
 }

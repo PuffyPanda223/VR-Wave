@@ -28,6 +28,7 @@ public class CountDownTimer : MonoBehaviour
         if (timer > timeLimit)
         {
             timer = 0;
+            PointSystem.playerScore = 0;
             SceneManager.LoadScene(0);
         }
             

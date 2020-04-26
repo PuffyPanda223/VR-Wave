@@ -10,6 +10,7 @@ public class Reticle : MonoBehaviour
 
     public Sprite m_OpenSprite;
     public Sprite m_ClosedSprite;
+    public Sprite m_DrawSprite;
 
     public GameObject m_Player;
 
@@ -26,7 +27,21 @@ public class Reticle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_Player == null)
+        {
+            m_Player = GameObject.Find("Player");
+        }
         transform.LookAt(m_Player.gameObject.transform);
+
+        if (Interactable.drawActive == true)
+        {
+            m_CircleRenderer.sprite = m_DrawSprite;
+        }
+
+        else
+        {
+
+        }
     }
 
     private void OnDestroy()
@@ -38,13 +53,21 @@ public class Reticle : MonoBehaviour
     {
         transform.position = point;
 
-        if(hitObject)
+
+        if (Interactable.drawActive == false)
         {
-            m_CircleRenderer.sprite = m_ClosedSprite;
+            if (hitObject)
+            {
+                m_CircleRenderer.sprite = m_ClosedSprite;
+            }
+            else
+            {
+                m_CircleRenderer.sprite = m_OpenSprite;
+            }
         }
         else
         {
-            m_CircleRenderer.sprite = m_OpenSprite;
+            m_CircleRenderer.sprite = m_DrawSprite;
         }
     }
 }
