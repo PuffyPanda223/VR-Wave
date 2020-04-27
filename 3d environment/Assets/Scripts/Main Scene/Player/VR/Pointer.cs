@@ -20,7 +20,7 @@ public class Pointer : MonoBehaviour
     private Transform m_CurrentOrigin = null;
     private GameObject m_CurrentObject = null;
 
-    private GameObject sphere;
+    public  GameObject sphere;
     private VideoPlayer videoPlayer;
 
     private void Awake()
@@ -66,8 +66,6 @@ public class Pointer : MonoBehaviour
 
             Interactable.drawActive = false;
             DrawLine.isGamePaused = false;
-            // get the entire sphere object which once we have we can use to find the video player component
-            sphere = GameObject.Find("Sphere");
             // get the video player component containing the 3d footage we are using. 
             videoPlayer = sphere.GetComponent<VideoPlayer>();
             videoPlayer.Play();

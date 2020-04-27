@@ -403,6 +403,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: safeWave (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6083706065899036622, guid: 0deaca8ae0323984084174fa32217e36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7471783413241955246, guid: 0deaca8ae0323984084174fa32217e36,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -969,6 +974,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: safeWave (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6083706065899036622, guid: 0deaca8ae0323984084174fa32217e36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7471783413241955246, guid: 0deaca8ae0323984084174fa32217e36,
         type: 3}
