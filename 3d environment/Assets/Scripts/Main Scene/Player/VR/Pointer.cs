@@ -101,7 +101,7 @@ public class Pointer : MonoBehaviour
     private void OnDestroy()
     {
         VRController.OnControllerSource -= UpdateOrigin;
-        VRController.OnTouchpadDown += ProcessTouchpadDown;
+        VRController.OnTouchpadDown -= ProcessTouchpadDown;
 
     }
 

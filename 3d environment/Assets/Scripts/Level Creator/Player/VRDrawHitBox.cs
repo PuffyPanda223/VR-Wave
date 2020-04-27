@@ -31,8 +31,7 @@ public class VRDrawHitBox : MonoBehaviour
     {
         
          VRController.OnControllerSource += UpdateOrigin;
-        
-        DontDestroyOnLoad(DND_Pointer);
+       
     }
 
     private void OnDestroy()

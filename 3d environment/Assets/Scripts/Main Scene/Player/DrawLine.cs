@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq; 
+using System.Linq;
 public class DrawLine : MonoBehaviour
 {
 
@@ -10,13 +10,13 @@ public class DrawLine : MonoBehaviour
     private LineRenderer line;
     private List<Vector3> positions = new List<Vector3>();
     int layer_mask;
-    int Distance; 
+    int Distance;
     public Camera camera;
     public GameObject player;
     // load the functions needed from point script to add to the player script 
     private PointSystem pointScript;
 
-       // different tiers of wave difficulties
+    // different tiers of wave difficulties
     private Color safeHitBox = Color.green;
     private Color mediumHitBox = Color.yellow;
     private Color notSafeHitbox = Color.red;
@@ -28,10 +28,10 @@ public class DrawLine : MonoBehaviour
 
     private int safeWave;
     private int mediumWave;
-    private int hardWave; 
+    private int hardWave;
 
     // the static makes it able to be accessed by other components of the script  
-     public static bool isGamePaused; 
+    public static bool isGamePaused;
 
 
     // Start is called before the first frame update
@@ -42,16 +42,16 @@ public class DrawLine : MonoBehaviour
         isGamePaused = false;
         safeWave = 6;
         mediumWave = 3;
-        hardWave = 1; 
+        hardWave = 1;
     }
-    void Awake ()
+    void Awake()
     {
         // make line of type LineRenderer the actual line renderer that will be used later on
         line = GetComponent<LineRenderer>();
-        
+
         // gets the global point system stored in the game master game object
         getPointSystem();
-       
+
     }
 
     void getPointSystem()
@@ -84,19 +84,19 @@ public class DrawLine : MonoBehaviour
                 // The distance is set to just under the radius of the sphere so the video won't be deleted
                 if (Physics.Raycast(ray, out hit, Distance, layer_mask))
                 {
-                   
-                    
 
-             
+
+
+
 
                     //line.positionCount = positions.Count;
                     //line.SetPositions(positions.ToArray());
 
                     // The color tells us which level of difficult of wave was selected
-                    string waveDifficulty = hit.transform.GetComponent<MeshRenderer>().material.name.Substring(0,4);
-                        
+                    string waveDifficulty = hit.transform.GetComponent<MeshRenderer>().material.name.Substring(0, 4);
+
                     // check to see which level of difficulty of wave the player hit
-                    switch(waveDifficulty)
+                    switch (waveDifficulty)
                     {
                         case "safe":
                             PointSystem.addScore(safeWave);
@@ -115,21 +115,9 @@ public class DrawLine : MonoBehaviour
 
                     Destroy(hit.transform.gameObject);
 
-                    
+
                 }
             }
         }
-    }
-
- 
-    private float DistanceToLastHit(Vector3 hitPoint)
-    {
-        // the whole point of this is just make sure some distance has been made on the line otherwise their is not point is wasting processing power in order to add and update the line renderer
-        // however if this is the first time a point has registered then their is nothing to compare it to. So I use mathf.infinity in order to tell my program that it is fine to add this point to
-        // the positions list
-        if (!positions.Any())
-            return Mathf.Infinity;
-        // do a vector3 calculaton to gage the distance from the new coords from the raycast coords last stored in the positions list
-        return Vector3.Distance(positions.Last(), hitPoint); 
     }
 }
