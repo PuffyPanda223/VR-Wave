@@ -16,16 +16,28 @@ public class Load : MonoBehaviour
     public Material safe;
     public Material medium;
     public Material hard;
-    // Start is called before the first frame update
 
+   
     private void Awake()
     {
+        // attaching a delegate method to the scene loaded callback, it comes with the scene and scene mode
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
 
-    
+
+    // very important we unsubscribe our delegate methods once the scene is no longer used otherwise multiple functions will fire at the same time
+    private void OnDestroy()
+    {
+
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+
+    // when 
     private void loadHitBoxes()
     {
+        Debug.Log("Loading in hitboxes now");
+        SaveData.clearList();
         List<HitboxData> data = new List<HitboxData>();
         data = SaveData.load();
 
@@ -115,7 +127,7 @@ public class Load : MonoBehaviour
     }
 
 
-    // The mesh dataclass takes a list of vector3s not an array of floats. But becasue we had to break it up to save it to a simple array we need to reasemble it. 
+    // The mesh dataclass takes a list of vector3s not an array of floats. But becasue we had to break it up to save it to a simple array we need to reasemble it back into a list class
     private List<Vector3> GenerateVertices(float[] verts)
     {
         List<Vector3> vertices = new List<Vector3>(); 
@@ -133,11 +145,14 @@ public class Load : MonoBehaviour
   
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        SaveData.clearList();
-        Debug.Log(scene.name + " is the scene name");
+  
+        // static fields do not reset when loading from one scene to another, so if the scene is the main scene reset everything that needs to be reset for the game to be replayed 
         if(scene.name == "VR main Scene")
         {
-            loadHitBoxes();
+                Debug.Log(scene.name);
+                PointSystem.playerScore = 0;
+                loadHitBoxes();
+            
         }
     }
 

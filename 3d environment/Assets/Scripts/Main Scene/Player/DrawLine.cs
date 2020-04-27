@@ -51,9 +51,6 @@ public class DrawLine : MonoBehaviour
         
         // gets the global point system stored in the game master game object
         getPointSystem();
-
-        DontDestroyOnLoad(player);
-
        
     }
 
