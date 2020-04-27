@@ -9,10 +9,12 @@ public class NextScene : MonoBehaviour
     private void Update()
     {
      
-        if (GlobalTimer.timer > 15f)
+        if (GlobalTimer.timer > 30f)
         {
-
-            SaveData.Save();
+            if (SaveData.container.actors.Count > 1)
+            {
+                SaveData.Save();
+            }
             SceneManager.LoadScene(1);
         }
     }

@@ -29,10 +29,9 @@ public class VRDrawHitBox : MonoBehaviour
 
     private void Awake()
     {
-        if (m_LineRenderer != null)
-        {
-            VRController.OnControllerSource += UpdateOrigin;
-        }
+        
+         VRController.OnControllerSource += UpdateOrigin;
+        
         DontDestroyOnLoad(DND_Pointer);
     }
 

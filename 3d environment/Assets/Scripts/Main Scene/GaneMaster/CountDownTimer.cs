@@ -9,7 +9,7 @@ public class CountDownTimer : MonoBehaviour
 {
     // Static makes it so the variable becomes a member of the class and not an instance of the class, meaning we can access the variable from the class
     public static  float timer = 0f;
-    public float timeLimit = 20f;
+    public float timeLimit = 30f;
 
 
 

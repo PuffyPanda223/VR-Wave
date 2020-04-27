@@ -27,6 +27,7 @@ public class GlobalTimer : MonoBehaviour
         {
            
             SaveData.clearList();
+            Debug.Log("container has been emptied");
             timer = 0f; 
         }
     }
