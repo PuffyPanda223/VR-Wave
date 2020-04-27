@@ -38,7 +38,7 @@ public class DrawLine : MonoBehaviour
     private void Start()
     {
         layer_mask = LayerMask.GetMask("hitBox");
-        Distance = 230;
+        Distance = 240;
         isGamePaused = false;
         safeWave = 6;
         mediumWave = 3;
@@ -84,13 +84,6 @@ public class DrawLine : MonoBehaviour
                 // The distance is set to just under the radius of the sphere so the video won't be deleted
                 if (Physics.Raycast(ray, out hit, Distance, layer_mask))
                 {
-
-
-
-
-
-                    //line.positionCount = positions.Count;
-                    //line.SetPositions(positions.ToArray());
 
                     // The color tells us which level of difficult of wave was selected
                     string waveDifficulty = hit.transform.GetComponent<MeshRenderer>().material.name.Substring(0, 4);

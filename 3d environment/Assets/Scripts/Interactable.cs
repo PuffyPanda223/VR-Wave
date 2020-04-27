@@ -1,7 +1,6 @@
 ﻿
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 using UnityEngine.Video;
 
 
@@ -25,7 +24,6 @@ public class Interactable : MonoBehaviour
     {
         bool isHitBox = false;
         string name = currentObject.transform.GetComponent<MeshRenderer>().material.name;
-        Debug.Log("name of the matieral in the interactable script is " + name); 
         switch(name.Substring(0,4))
         {
             case "safe":
@@ -33,28 +31,25 @@ public class Interactable : MonoBehaviour
                 FloatingText.showFloatingText(5, currentObject);
                 PointSystem.addScore(5);
                 Destroy(currentObject);
-                Debug.Log("safe");
                 isHitBox = true;
                 break;
             case "medi":
                 FloatingText.showFloatingText(3, currentObject);
                 PointSystem.addScore(3);
                 Destroy(currentObject);
-                Debug.Log("medium");
                 isHitBox = true;
                 break;
             case "hard":
                 FloatingText.showFloatingText(2, currentObject);
                 PointSystem.addScore(2);
                 Destroy(currentObject);
-                Debug.Log("hard");
                 isHitBox = true;
                 break;
             case "default":
                 FloatingText.showFloatingText(5, currentObject);
                 PointSystem.addScore(5);
                 Destroy(currentObject);
-                Debug.Log("safe");
+             
                 isHitBox = true;
                 break;
         }

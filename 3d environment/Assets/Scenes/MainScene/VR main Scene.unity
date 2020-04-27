@@ -165,6 +165,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Player: {fileID: 1242951164}
   m_Reticule: {fileID: 2066748446}
+--- !u!1 &437801992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3068410078511310265, guid: 9629d2ece215d3147bcb1edd7a92e83c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3068410078201496042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!328 &437801994 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 3068410078511310259, guid: 9629d2ece215d3147bcb1edd7a92e83c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3068410078201496042}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &438596029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1152,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3630207892417836097, guid: aba2c79b76bf23f4f96fd12d31b90c52,
         type: 3}
+    - target: {fileID: 8094249848071314701, guid: b766dcfc1c8abb4408276a16f80399d3,
+        type: 3}
+      propertyPath: videoPlayer
+      value: 
+      objectReference: {fileID: 437801994}
+    - target: {fileID: 8094249848071314701, guid: b766dcfc1c8abb4408276a16f80399d3,
+        type: 3}
+      propertyPath: sphere
+      value: 
+      objectReference: {fileID: 437801992}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b766dcfc1c8abb4408276a16f80399d3, type: 3}
 --- !u!114 &1308942258 stripped

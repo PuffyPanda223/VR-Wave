@@ -27,9 +27,10 @@ public class Pointer : MonoBehaviour
     {
         VRController.OnControllerSource += UpdateOrigin;
         VRController.OnTouchpadDown += ProcessTouchpadDown;
-
+        /*
         DontDestroyOnLoad(DND_Pointer);
         DontDestroyOnLoad(DND_Reticule);
+        */
 
     }
 
@@ -165,19 +166,17 @@ public class Pointer : MonoBehaviour
     {
         // m_CurrentObject is an object that is gotten from a raycast hit
         if (!m_CurrentObject)
+        {
+            Debug.Log("No hitbox was detected when you clicked the button(Pointer script line 170)");
             return;
-
-        Interactable interactable = m_CurrentObject.GetComponent<Interactable>();
-        if (interactable)
-        {
-            Debug.Log("interactable is attached to the script");
-            interactable.Pressed(m_CurrentObject);
-        } else
-        {
-            print("Interactable script could not be found");
         }
+       
+
+        // each object has an interactable script attached to it, when the raycast hit gets a game object we get the script and activate the pressed function
+        Interactable interactable = m_CurrentObject.GetComponent<Interactable>();
+
         // send the object to another function in the interactable script that will process what was pressed and what to do when it is pressed
-     
+        interactable.Pressed(m_CurrentObject);
          
     }
 }

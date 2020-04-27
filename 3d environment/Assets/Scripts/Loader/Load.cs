@@ -48,9 +48,10 @@ public class Load : MonoBehaviour
             MeshRenderer shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             HitBox shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
             MeshCollider shadowCollider = shadowBox.AddComponent(typeof(MeshCollider)) as MeshCollider;
-            Interactable shadowInteract = shadowBox.AddComponent<Interactable>();
+            Interactable shadowInteract = shadowBox.AddComponent<Interactable>() as Interactable;
 
             Mesh shadowMesh = new Mesh();
+            // data stores the triangles, uvs and vertices, give the mesh these values and then add them to the mesh filter
             // data stores the triangles, uvs and vertices, give the mesh these values and then add them to the mesh filter
 
             // the mesh of an object is split into different aspects, the vertices are the points in the world, the triangles are the way in which those points connect, the uvs tell the renderer where to put materials and normals 
@@ -64,14 +65,14 @@ public class Load : MonoBehaviour
 
             shadowFilter.mesh = shadowMesh;
             shadowCollider.enabled = true;
-            shadowCollider.sharedMesh = shadowMesh;
+            shadowCollider.sharedMesh = shadowFilter.mesh;
             shadowScript.startTime = data[i].startTime;
             shadowScript.endTime = data[i].endTime;
 
 
             // layer 9 is the hitbox layer which the gameobject has to be in order for the game to detect if the user has hit it or not
             shadowBox.layer = 9;
-
+            shadowBox.tag = "hitBox";
 
             // figure out which difficulty of wave was saved and set the material to the corresponding difficulty 
             switch (data[i].difficulty.Substring(0, 4))
@@ -149,7 +150,6 @@ public class Load : MonoBehaviour
         // static fields do not reset when loading from one scene to another, so if the scene is the main scene reset everything that needs to be reset for the game to be replayed 
         if(scene.name == "VR main Scene")
         {
-                Debug.Log(scene.name);
                 PointSystem.playerScore = 0;
                 loadHitBoxes();
             
