@@ -10,7 +10,7 @@ public class SelfDestruct : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 10f);
+        //Destroy(gameObject, 10f);
         m_Player = GameObject.Find("Player");
         transform.LookAt(m_Player.gameObject.transform);
     }

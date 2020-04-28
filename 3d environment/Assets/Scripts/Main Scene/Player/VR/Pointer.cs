@@ -27,10 +27,10 @@ public class Pointer : MonoBehaviour
     {
         VRController.OnControllerSource += UpdateOrigin;
         VRController.OnTouchpadDown += ProcessTouchpadDown;
-        /*
+        
         DontDestroyOnLoad(DND_Pointer);
         DontDestroyOnLoad(DND_Reticule);
-        */
+        
 
     }
 
@@ -67,6 +67,7 @@ public class Pointer : MonoBehaviour
 
             Interactable.drawActive = false;
             DrawLine.isGamePaused = false;
+            sphere = GameObject.Find("Sphere");
             // get the video player component containing the 3d footage we are using. 
             videoPlayer = sphere.GetComponent<VideoPlayer>();
             videoPlayer.Play();
