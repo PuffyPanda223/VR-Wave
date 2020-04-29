@@ -48,7 +48,7 @@ public class Load : MonoBehaviour
             MeshRenderer shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             HitBox shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
             MeshCollider shadowCollider = shadowBox.AddComponent(typeof(MeshCollider)) as MeshCollider;
-            Interactable shadowInteract = shadowBox.AddComponent<Interactable>() as Interactable;
+           // Interactable shadowInteract = shadowBox.AddComponent<Interactable>() as Interactable;
 
             Mesh shadowMesh = new Mesh();
             // data stores the triangles, uvs and vertices, give the mesh these values and then add them to the mesh filter
@@ -64,7 +64,6 @@ public class Load : MonoBehaviour
 
 
             shadowFilter.mesh = shadowMesh;
-            shadowCollider.enabled = true;
             shadowCollider.sharedMesh = shadowFilter.mesh;
             shadowScript.startTime = data[i].startTime;
             shadowScript.endTime = data[i].endTime;
@@ -75,12 +74,12 @@ public class Load : MonoBehaviour
             shadowBox.tag = "hitBox";
 
             // figure out which difficulty of wave was saved and set the material to the corresponding difficulty 
-            switch (data[i].difficulty.Substring(0, 4))
+            switch (data[i].difficulty)
             {
                 case "safe":
                     shadowRenderer.material = safe;
                     break;
-                case "medi":
+                case "mediu":
                     shadowRenderer.material = medium;
                     break;
                 case "hard":
@@ -90,8 +89,6 @@ public class Load : MonoBehaviour
                     shadowRenderer.material = safe;
                     break;
             }
-
-
 
         }
     }

@@ -26,12 +26,14 @@ public class VRDrawHitBox : MonoBehaviour
 
 
     public Material safe;
+    public Material medium;
+    public Material hard;
 
     private void Awake()
     {
         
          VRController.OnControllerSource += UpdateOrigin;
-       
+        //DontDestroyOnLoad(DND_Pointer);
     }
 
     private void OnDestroy()
@@ -65,11 +67,28 @@ public class VRDrawHitBox : MonoBehaviour
             RaycastHit hit;
 
             // Create the shadowbox object which will show the user how the box is being drawn. It will continiously be updated while the user is holding down the fire button
-            // this object will be destroyed when the user releases the fire button
+            // this object will be destroyed when the user releases the fire button and when the user relicks down the primary button be created again
             shadowBox = new GameObject("plane");
             shadowFilter = shadowBox.AddComponent(typeof(MeshFilter)) as MeshFilter;
             shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             shadowMesh = new Mesh();
+            // the wave difficulty will not change once the new shadow box has been made so set the render material here
+            switch (ChangeWave.difficulty)
+            {
+                case "safe":
+                    shadowRenderer.material = safe;
+                    break;
+                case "medium":
+                    shadowRenderer.material = medium;
+                    break;
+                case "hard":
+                    shadowRenderer.material = hard;
+                    break;
+                default:
+                    shadowRenderer.material = safe;
+                    break;
+            }
+
 
             // get the pos of the start point and log them into the startPos variable. This will allow us calculate the distance we need to render the hitbox
             if (Physics.Raycast(ray, out hit))
@@ -101,6 +120,8 @@ public class VRDrawHitBox : MonoBehaviour
             }
         }
 
+
+        // if the button is released, generate the plane and destroy the shadow box
         if (OVRInput.GetUp(OVRInput.Button.PrimaryTouchpad))
         {
             // after the user has released the key create the hitbox
@@ -108,6 +129,12 @@ public class VRDrawHitBox : MonoBehaviour
             destroyShadow();
         }
 
+
+        if(OVRInput.Get(OVRInput.Button.Back) )
+        {
+            ChangeWave.Change(); 
+
+        }
 
     }
 
@@ -214,18 +241,35 @@ public class VRDrawHitBox : MonoBehaviour
         actor.GetMeshDetails(m);
         actor.startTime = GlobalTimer.timer;
         actor.endTime = GlobalTimer.timer + 2f;
-        actor.difficulty = safe.name;
+        switch (ChangeWave.difficulty)
+        {
+            case "safe":
+               actor.difficulty = "safe";
+                break;
+            case "medium":
+                actor.difficulty = "mediu";
+                break;
+            case "hard":
+                actor.difficulty = "hard";
+                break;
+            default:
+                Debug.Log("unable to determine the difficulty");
+                actor.difficulty = "safe";
+                break;
+        }
 
         //we have a static global list that is the same type as the above custom class. that makes sure there is one certialized location where all the list data of our hitboxes are being kept. this makes saving and loading a lot easier
         SaveData.AddToList(actor);
     }
 
-
+    // for each frame the user is holding down the draw button this method is being called, continiously updating and resizing the hitbox
     private void DrawShadowBox()
     {
 
         shadowMesh = DrawHitBox.calculateMesh(startPos, endPos, shadowMesh);
         shadowFilter.mesh = shadowMesh;
-        shadowRenderer.material = safe;
+  
+     
+        //shadowRenderer.material = safe;
     }
 }

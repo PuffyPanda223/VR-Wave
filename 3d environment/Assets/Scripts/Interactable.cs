@@ -33,7 +33,7 @@ public class Interactable : MonoBehaviour
                 Destroy(currentObject);
                 isHitBox = true;
                 break;
-            case "medi":
+            case "mediu":
                 FloatingText.showFloatingText(3, currentObject);
                 PointSystem.addScore(3);
                 Destroy(currentObject);
@@ -45,7 +45,7 @@ public class Interactable : MonoBehaviour
                 Destroy(currentObject);
                 isHitBox = true;
                 break;
-            case "default":
+            default:
                 FloatingText.showFloatingText(5, currentObject);
                 PointSystem.addScore(5);
                 Destroy(currentObject);

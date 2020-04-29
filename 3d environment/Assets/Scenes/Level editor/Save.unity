@@ -246,6 +246,8 @@ MonoBehaviour:
     m_Bits: 4294967295
   DND_Pointer: {fileID: 112600485}
   safe: {fileID: 2100000, guid: 899af98b1fd693f42abd960c005bf52c, type: 2}
+  medium: {fileID: 2100000, guid: 8974f1a6a2d96b74197e6d72874f982f, type: 2}
+  hard: {fileID: 2100000, guid: 56a7db13eb370ad40bdd151b5a0aad2b, type: 2}
 --- !u!1 &487800306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +1039,7 @@ Transform:
   m_GameObject: {fileID: 912374298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 230, y: 230, z: 230}
+  m_LocalScale: {x: 240, y: 240, z: 240}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
