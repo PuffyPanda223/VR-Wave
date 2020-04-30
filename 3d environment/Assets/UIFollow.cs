@@ -11,7 +11,8 @@ public class UIFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_Player = GameObject.Find("OVRCameraRig");
+        m_Reticule = GameObject.Find("PR_Reticule");
     }
 
     // Update is called once per frame

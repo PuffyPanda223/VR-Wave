@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using TMPro;
 
 
 // attached to an object. When pressed by the pointer it will pass through itself
@@ -28,18 +29,23 @@ public class Interactable : MonoBehaviour
         {
             case "safe":
                 DrawStart();
+                Results.addData(CountDownTimer.timer, 5);
                 FloatingText.showFloatingText(5, currentObject);
                 PointSystem.addScore(5);
                 Destroy(currentObject);
                 isHitBox = true;
                 break;
-            case "mediu":
+            case "medi":
+                DrawStart();
+                Results.addData(CountDownTimer.timer, 3);
                 FloatingText.showFloatingText(3, currentObject);
                 PointSystem.addScore(3);
                 Destroy(currentObject);
                 isHitBox = true;
                 break;
             case "hard":
+                DrawStart();
+                Results.addData(CountDownTimer.timer, 2);
                 FloatingText.showFloatingText(2, currentObject);
                 PointSystem.addScore(2);
                 Destroy(currentObject);
@@ -87,6 +93,9 @@ public class Interactable : MonoBehaviour
                     break;
                 case "Skip":
                     SceneManager.LoadScene(2);
+                    break;
+                case "BackR":
+                    ResultsToMain();
                     break;
                 default:
                     break;
@@ -202,6 +211,49 @@ public class Interactable : MonoBehaviour
         GameObject.Find("Credits").GetComponent<BoxCollider>().enabled = false;
 
         GameObject.Find("FullCredits").GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    void ResultsToMain()
+    {
+        GameObject.Find("WaveColumn").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("TimeColumn").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("ScoreColumn").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("TotalColumn").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("WaveTitle").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("TimeTitle").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("ScoreTitle").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("TotalTitle").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("BackR").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("BackRText").GetComponent<MeshRenderer>().enabled = false;
+
+        GameObject.Find("WaveColumn").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("TimeColumn").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("ScoreColumn").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("TotalColumn").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("BackR").GetComponent<BoxCollider>().enabled = false;
+
+        GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
+
+        GameObject.Find("Play").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("Options").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = true;
+
+        GameObject[] resultData = GameObject.FindGameObjectsWithTag("Result");
+
+        for (var i = 0; i < resultData.Length; i++)
+        {
+            Destroy(resultData[i]);
+        }
+
+        Results.scoreList.Clear();
+        Results.timesList.Clear();
+
+        GameObject.Find("Title").GetComponent<TextMeshPro>().text = "Surf VR Project";
     }
 
     void DrawStart()
