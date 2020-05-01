@@ -28,7 +28,7 @@ public class CountDownTimer : MonoBehaviour
         {
             timer = 0;
             PointSystem.playerScore = 0;
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(4);
         }
             
     }

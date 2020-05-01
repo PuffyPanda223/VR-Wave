@@ -7,7 +7,7 @@ using UnityEngine.Video;
 public class Pointer : MonoBehaviour
 {
 
-    public int m_Distance = 270;
+    int m_Distance = 270;
     public LineRenderer m_LineRenderer = null;
     public LayerMask m_EverythingMask  ;
     public LayerMask m_InteractableMask  ;
@@ -23,7 +23,6 @@ public class Pointer : MonoBehaviour
     public  GameObject sphere;
     private VideoPlayer videoPlayer;
 
-    public Camera camera; 
     private FloatingText FloatingText;
 
     // values for the waves 
@@ -35,11 +34,12 @@ public class Pointer : MonoBehaviour
     private void Awake()
     {
         VRController.OnControllerSource += UpdateOrigin;
-        VRController.OnTouchpadDown += ProcessTouchpadDown;
+        //VRController.OnTouchpadDown += ProcessTouchpadDown;
         
+        /*
         DontDestroyOnLoad(DND_Pointer);
         DontDestroyOnLoad(DND_Reticule);
-        
+        */
 
 
     }
@@ -83,54 +83,24 @@ public class Pointer : MonoBehaviour
             videoPlayer.Play();
         }
 
-        // Checks if item is hitbox and then if not checks to see if it is another object
+
         if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
         {
-            bool isHitBox = false;
+            //bool isHitBox = false; 
             Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
-           // Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+
             RaycastHit hit;
-            
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, m_InteractableMask))
+            if (Physics.Raycast(ray, out hit, m_Distance, m_InteractableMask))
             {
-                isHitBox = true; 
-                string waveDifficulty = hit.transform.GetComponent<MeshRenderer>().material.name.Substring(0, 4);
-
-                // check to see which level of difficulty of wave the player hit
-                switch (waveDifficulty)
-                {
-                    case "safe":
-                        PointSystem.addScore(5);
-                        FloatingText.showFloatingText(safeWave, hit.transform.gameObject);
-                        hit.transform.GetComponent<MeshRenderer>().enabled = false;
-                        break;
-                    case "mediu":
-                        PointSystem.addScore(mediumWave);
-                        FloatingText.showFloatingText(mediumWave, hit.transform.gameObject);
-                        hit.transform.GetComponent<MeshRenderer>().enabled = false;
-                        break;
-                    case "hard":
-                        FloatingText.showFloatingText(hardWave, hit.transform.gameObject);
-                        hit.transform.GetComponent<MeshRenderer>().enabled = false;
-                        PointSystem.addScore(hardWave);
-                        break;
-                    default :
-                        Debug.Log("hit a hitbox but couldn't tell which one it was ");
-                        break;
-
-                }
-                Destroy(hit.transform.gameObject);
-
+                Interactable interact = hit.transform.GetComponent<Interactable>();
+                interact.Pressed(hit.transform.gameObject);
+                
             }
-            if (isHitBox == false)
-            {
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, m_EverythingMask))
-                {
-                    Interactable interact = hit.transform.GetComponent<Interactable>();
-                    interact.Pressed(hit.transform.gameObject);
-                }
-            }
+
+        
+
         }
+
 
 
 
@@ -138,26 +108,22 @@ public class Pointer : MonoBehaviour
 
     private Vector3 UpdateLine()
     {
-        // Create ray
-        if (m_CurrentOrigin != null)
-        {
-            RaycastHit hit = CreateRaycast(m_EverythingMask);
+        
+        RaycastHit hit = CreateRaycast(m_EverythingMask);
 
-            //Default end
-            Vector3 endPosition = m_CurrentOrigin.position + (m_CurrentOrigin.forward * m_Distance);
+        //Default end
+        Vector3 endPosition = m_CurrentOrigin.position + (m_CurrentOrigin.forward * m_Distance);
 
-            //Check hit
-            if (hit.collider != null)
-                endPosition = hit.point;
+        //Check hit
+        if (hit.collider != null)
+            endPosition = hit.point;
 
-            //Set Position
-            m_LineRenderer.SetPosition(0, m_CurrentOrigin.position);
-            m_LineRenderer.SetPosition(1, endPosition);
+        //Set Position
+        m_LineRenderer.SetPosition(0, m_CurrentOrigin.position);
+        m_LineRenderer.SetPosition(1, endPosition);
 
-            return endPosition;
-        }
-
-        return Vector3.zero;
+        return endPosition;
+       
     }
 
     private void OnDestroy()
@@ -172,7 +138,6 @@ public class Pointer : MonoBehaviour
         //Set origin of pointer
 
         m_CurrentOrigin = controllerObject.transform;
-        Debug.Log(m_CurrentOrigin.position + " is the current position of the cursor" );
         //Is the laser visible?
         if(controller == OVRInput.Controller.Touchpad)
         {
@@ -210,7 +175,7 @@ public class Pointer : MonoBehaviour
         Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
        // int hit_layer = LayerMask.GetMask("hitBox");
         Physics.Raycast(ray, out hit, m_Distance, layer);
-
+      
         return hit; 
     }
 
@@ -225,68 +190,15 @@ public class Pointer : MonoBehaviour
         m_LineRenderer.endColor = endColor;
     }
 
-    private RaycastHit getCast()
-    {
-        RaycastHit hit;
-        Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
-        // int hit_layer = LayerMask.GetMask("hitBox");
-        Physics.Raycast(ray, out hit);
-
-        return hit;
-    }
 
     private void ProcessTouchpadDown()
     {
-        // m_CurrentObject is an object that is gotten from a raycast hit
-        // RaycastHit position = CreateRaycast(m_EverythingMask);
-        RaycastHit position = CreateRaycast(m_EverythingMask);
-
-        if (position.transform != null)
+       if (m_CurrentObject == null )
         {
-            Debug.Log("Position is not clear" );
             return;
         }
-
-        Debug.Log("there was a hitbox at when you clicekd ");
-        // each object has an interactable script attached to it, when the raycast hit gets a game object we get the script and activate the pressed function
-        //Interactable interactable = m_CurrentObject.GetComponent<Interactable>();
-
-        if (position.transform.GetComponent<Interactable>() )
-        {
-            Interactable interactable = position.transform.GetComponent<Interactable>();
-            interactable.Pressed(position.transform.gameObject);
-            return;
-        }
-
-        // send the object to another function in the interactable script that will process what was pressed and what to do when it is pressed
-        //interactable.Pressed(m_CurrentObject);
-        // The color tells us which level of difficult of wave was selected
-        if (position.transform.GetComponent<MeshRenderer>())
-        {
-            string waveDifficulty = position.transform.GetComponent<MeshRenderer>().material.name.Substring(0, 4);
-
-            // check to see which level of difficulty of wave the player hit
-            switch (waveDifficulty)
-            {
-                case "safe":
-                    PointSystem.addScore(5);
-                    FloatingText.showFloatingText(safeWave, position.transform.gameObject);
-                    position.transform.GetComponent<MeshRenderer>().enabled = false;
-                    break;
-                case "mediu":
-                    PointSystem.addScore(mediumWave);
-                    FloatingText.showFloatingText(mediumWave, position.transform.gameObject);
-                    position.transform.GetComponent<MeshRenderer>().enabled = false;
-                    break;
-                case "hard":
-                    FloatingText.showFloatingText(hardWave, position.transform.gameObject);
-                    position.transform.GetComponent<MeshRenderer>().enabled = false;
-                    PointSystem.addScore(hardWave);
-                    break;
-
-            }
-
-        }
-
+        Debug.Log(m_CurrentObject);
+        Interactable interact = m_CurrentObject.GetComponent<Interactable>();
+        interact.Pressed(m_CurrentObject.transform.gameObject);
     }
 }

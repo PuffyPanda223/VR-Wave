@@ -236,7 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f498d4cbc3f4f949a13364fb8f3e262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Distance: 250
   m_LineRenderer: {fileID: 112600486}
   m_EverythingMask:
     serializedVersion: 2

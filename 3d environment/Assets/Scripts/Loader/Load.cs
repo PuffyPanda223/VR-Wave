@@ -48,7 +48,7 @@ public class Load : MonoBehaviour
             MeshRenderer shadowRenderer = shadowBox.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             HitBox shadowScript = shadowBox.AddComponent(typeof(HitBox)) as HitBox;
             MeshCollider shadowCollider = shadowBox.AddComponent(typeof(MeshCollider)) as MeshCollider;
-           // Interactable shadowInteract = shadowBox.AddComponent<Interactable>() as Interactable;
+            Interactable shadowInteract = shadowBox.AddComponent<Interactable>() as Interactable;
 
             Mesh shadowMesh = new Mesh();
             // data stores the triangles, uvs and vertices, give the mesh these values and then add them to the mesh filter

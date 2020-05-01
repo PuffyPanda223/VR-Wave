@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class VRDrawHitBox : MonoBehaviour
 {
 
-    public float m_Distance = 250.0f;
+    float m_Distance = 250.0f;
     public LineRenderer m_LineRenderer = null;
     public LayerMask m_EverythingMask;
     public LayerMask m_InteractableMask;
@@ -129,7 +129,7 @@ public class VRDrawHitBox : MonoBehaviour
             destroyShadow();
         }
 
-
+        // change wave will go to the next wave in the selection pool safe -> medium -> hard - > safe
         if(OVRInput.Get(OVRInput.Button.Back) )
         {
             ChangeWave.Change(); 

@@ -769,7 +769,7 @@ PrefabInstance:
     - target: {fileID: 8094249848071314700, guid: b766dcfc1c8abb4408276a16f80399d3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8094249848071314701, guid: b766dcfc1c8abb4408276a16f80399d3,
         type: 3}
@@ -791,6 +791,11 @@ PrefabInstance:
       propertyPath: DND_VRController
       value: 
       objectReference: {fileID: 1259591766}
+    - target: {fileID: 8094249848071314701, guid: b766dcfc1c8abb4408276a16f80399d3,
+        type: 3}
+      propertyPath: m_InteractableMask.m_Bits
+      value: 1536
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b766dcfc1c8abb4408276a16f80399d3, type: 3}
 --- !u!114 &605564577 stripped
@@ -1621,7 +1626,7 @@ PrefabInstance:
     - target: {fileID: 2719581513286370011, guid: 7b062c117af2d814bab1ffe71c87c849,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3829761921512939976, guid: 7b062c117af2d814bab1ffe71c87c849,
         type: 3}

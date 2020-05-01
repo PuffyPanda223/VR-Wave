@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 // attached to an object. When pressed by the pointer it will pass through itself
@@ -12,52 +13,64 @@ public class Interactable : MonoBehaviour
     public static bool drawActive = false;
     private GameObject sphere;
     private VideoPlayer videoPlayer;
-    
+    Scene currentScene;
         private void Awake()
     {
-        GameObject master = GameObject.Find("Game Master");
-        FloatingText = master.GetComponent<FloatingText>();
+        currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+        if (sceneName == "VR main Scene")
+        {
+            GameObject master = GameObject.Find("Game Master");
+            FloatingText = master.GetComponent<FloatingText>();
+        }
+       
     }
 
     
 
     public void Pressed(GameObject currentObject)
     {
+        currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
         bool isHitBox = false;
-        string name = currentObject.transform.GetComponent<MeshRenderer>().material.name;
-        switch(name.Substring(0,4))
+        if (sceneName == "VR main Scene")
         {
-            case "safe":
-                DrawStart();
-                Results.addData(CountDownTimer.timer, 5);
-                FloatingText.showFloatingText(5, currentObject);
-                PointSystem.addScore(5);
-                Destroy(currentObject);
-                isHitBox = true;
-                break;
-            case "medi":
-                DrawStart();
-                Results.addData(CountDownTimer.timer, 3);
-                FloatingText.showFloatingText(3, currentObject);
-                PointSystem.addScore(3);
-                Destroy(currentObject);
-                isHitBox = true;
-                break;
-            case "hard":
-                DrawStart();
-                Results.addData(CountDownTimer.timer, 2);
-                FloatingText.showFloatingText(2, currentObject);
-                PointSystem.addScore(2);
-                Destroy(currentObject);
-                isHitBox = true;
-                break;
-            default:
-                FloatingText.showFloatingText(5, currentObject);
-                PointSystem.addScore(5);
-                Destroy(currentObject);
-             
-                isHitBox = true;
-                break;
+
+            string name = currentObject.transform.GetComponent<MeshRenderer>().material.name;
+            switch (name.Substring(0, 4))
+            {
+                case "safe":
+                    DrawStart();
+                    Results.addData(CountDownTimer.timer, 5);
+                    FloatingText.showFloatingText(5, currentObject);
+                    PointSystem.addScore(5);
+                    Destroy(currentObject);
+                    isHitBox = true;
+                    break;
+                case "mediu":
+                    DrawStart();
+                    Results.addData(CountDownTimer.timer, 3);
+                    FloatingText.showFloatingText(3, currentObject);
+                    PointSystem.addScore(3);
+                    Destroy(currentObject);
+                    isHitBox = true;
+                    break;
+                case "hard":
+                    DrawStart();
+                    Results.addData(CountDownTimer.timer, 2);
+                    FloatingText.showFloatingText(2, currentObject);
+                    PointSystem.addScore(2);
+                    Destroy(currentObject);
+                    isHitBox = true;
+                    break;
+                default:
+                    FloatingText.showFloatingText(5, currentObject);
+                    PointSystem.addScore(5);
+                    Destroy(currentObject);
+
+                    isHitBox = true;
+                    break;
+            }
         }
 
        
@@ -258,9 +271,9 @@ public class Interactable : MonoBehaviour
 
     void DrawStart()
     {
-        // get the entire sphere object which once we have we can use to find the video player component
-        sphere = GameObject.Find("Sphere");
+
         // get the video player component containing the 3d footage we are using. 
+        sphere = GameObject.Find("Sphere");
         videoPlayer = sphere.GetComponent<VideoPlayer>();
         DrawLine.isGamePaused = true;
         drawActive = true;
