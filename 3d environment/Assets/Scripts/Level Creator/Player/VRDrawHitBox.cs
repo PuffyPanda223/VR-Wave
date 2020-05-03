@@ -189,8 +189,7 @@ public class VRDrawHitBox : MonoBehaviour
 
     private GameObject UpdatePointerStatus()
     {
-        if (m_CurrentOrigin != null)
-        {
+        
             //Create Ray
             RaycastHit hit = CreateRaycast(m_InteractableMask);
 
@@ -201,9 +200,7 @@ public class VRDrawHitBox : MonoBehaviour
             return null;
 
 
-        }
-        //Return
-        return null;
+       
 
     }
 

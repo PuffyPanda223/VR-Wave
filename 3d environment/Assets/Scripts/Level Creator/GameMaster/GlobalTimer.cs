@@ -8,6 +8,9 @@ public class GlobalTimer : MonoBehaviour
 {
     public static float timer = 0f;
 
+    // when the menu is initiated, this variable will control whether we pause the game or not
+    public static bool paused = false;
+
     private void Awake()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
@@ -16,7 +19,11 @@ public class GlobalTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += 1 * Time.deltaTime;
+        if (!paused)
+        {
+            timer += 1 * Time.deltaTime;
+        }
+        
     }
 
     // static variables do not reset on scene loading so we need to manually reset the timer. This is a delegate method that is triggered whenever the scene loaded callback is triggered

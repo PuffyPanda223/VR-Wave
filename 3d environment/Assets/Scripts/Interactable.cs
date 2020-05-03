@@ -47,7 +47,7 @@ public class Interactable : MonoBehaviour
                     Destroy(currentObject);
                     isHitBox = true;
                     break;
-                case "mediu":
+                case "medi":
                     DrawStart();
                     Results.addData(CountDownTimer.timer, 3);
                     FloatingText.showFloatingText(3, currentObject);
@@ -64,10 +64,6 @@ public class Interactable : MonoBehaviour
                     isHitBox = true;
                     break;
                 default:
-                    FloatingText.showFloatingText(5, currentObject);
-                    PointSystem.addScore(5);
-                    Destroy(currentObject);
-
                     isHitBox = true;
                     break;
             }
