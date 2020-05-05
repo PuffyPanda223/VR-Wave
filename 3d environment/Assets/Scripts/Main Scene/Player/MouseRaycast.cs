@@ -25,11 +25,11 @@ public class MouseRaycast : MonoBehaviour
                     switch (hit.transform.gameObject.name)
                     {
                         case "Play":
-                            print("Play");
+                            
                             SceneManager.LoadScene(1);
                             break;
                         case "Options":
-                            print("Options");
+                            
                             MainToOptions();
                             break;
                         case "Back":
@@ -39,7 +39,7 @@ public class MouseRaycast : MonoBehaviour
                             OptionsToCredits();
                             break;
                         case "Quit":
-                            print("Quit");
+                            
                             MainToQuit();
                             break;
                         case "No":
@@ -48,6 +48,11 @@ public class MouseRaycast : MonoBehaviour
                         case "Yes":
                             print("Application Closes");
                             Application.Quit();
+                            break;
+                        case "level":
+                            SceneManager.LoadScene(3);
+                            break;
+                        case "High":                            
                             break;
                         default:
                             print(hit.transform.gameObject.name);
@@ -67,7 +72,10 @@ public class MouseRaycast : MonoBehaviour
         GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = false;
-
+        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = false;
 
         GameObject.Find("Back").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("BackText").GetComponent<MeshRenderer>().enabled = true;
@@ -78,6 +86,8 @@ public class MouseRaycast : MonoBehaviour
         GameObject.Find("Play").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("Options").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("level").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("high").GetComponent<BoxCollider>().enabled = false;
 
 
         GameObject.Find("Back").GetComponent<BoxCollider>().enabled = true;
@@ -93,6 +103,12 @@ public class MouseRaycast : MonoBehaviour
         GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = false;
+
+
 
         GameObject.Find("ConfirmationText").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("Yes").GetComponent<MeshRenderer>().enabled = true;
@@ -116,6 +132,13 @@ public class MouseRaycast : MonoBehaviour
         GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = true;
+
+
+
 
         GameObject.Find("ConfirmationText").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("Yes").GetComponent<MeshRenderer>().enabled = false;
@@ -126,6 +149,8 @@ public class MouseRaycast : MonoBehaviour
         GameObject.Find("Play").GetComponent<BoxCollider>().enabled = true;
         GameObject.Find("Options").GetComponent<BoxCollider>().enabled = true;
         GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("level").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("High").GetComponent<BoxCollider>().enabled = true;
 
         GameObject.Find("Yes").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("No").GetComponent<BoxCollider>().enabled = false;
@@ -139,7 +164,10 @@ public class MouseRaycast : MonoBehaviour
         GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
-
+        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = true;
 
         GameObject.Find("Back").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("BackText").GetComponent<MeshRenderer>().enabled = false;

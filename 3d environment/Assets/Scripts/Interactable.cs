@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 
 // attached to an object. When pressed by the pointer it will pass through itself
@@ -18,6 +17,8 @@ public class Interactable : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
+        // the game master game object does not exist in the menu scenes or intro scenes, we only want to display floating text when a user clicks on wave which is only done in the main scene so we check if its the main scene/ 
+        // if we don't do this check unity will freak out because the game object it is searching for doesn't exist and stop the rest of the script from complining and running
         if (sceneName == "VR main Scene")
         {
             GameObject master = GameObject.Find("Game Master");
@@ -76,11 +77,9 @@ public class Interactable : MonoBehaviour
             switch (currentObject.gameObject.name)
             {
                 case "Play":
-                    print("Play");
                     SceneManager.LoadScene(1);
                     break;
                 case "Options":
-                    print("Options");
                     MainToOptions();
                     break;
                 case "Back":
@@ -89,8 +88,7 @@ public class Interactable : MonoBehaviour
                 case "Credits":
                     OptionsToCredits();
                     break;
-                case "Quit":
-                    print("Quit");
+                case "Quit":               
                     MainToQuit();
                     break;
                 case "No":
@@ -101,16 +99,20 @@ public class Interactable : MonoBehaviour
                     Application.Quit();
                     break;
                 case "Skip":
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(3);
                     break;
                 case "BackR":
                     ResultsToMain();
+                    break;
+                case "level":
+                    SceneManager.LoadScene(2);
                     break;
                 default:
                     break;
             }
         }
     }
+
 
     void MainToOptions()
     {
@@ -120,7 +122,10 @@ public class Interactable : MonoBehaviour
         GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = false;
-
+        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = false;
 
         GameObject.Find("Back").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("BackText").GetComponent<MeshRenderer>().enabled = true;
@@ -131,6 +136,8 @@ public class Interactable : MonoBehaviour
         GameObject.Find("Play").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("Options").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("level").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("high").GetComponent<BoxCollider>().enabled = false;
 
 
         GameObject.Find("Back").GetComponent<BoxCollider>().enabled = true;
@@ -146,6 +153,12 @@ public class Interactable : MonoBehaviour
         GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = false;
+
+
 
         GameObject.Find("ConfirmationText").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("Yes").GetComponent<MeshRenderer>().enabled = true;
@@ -169,6 +182,13 @@ public class Interactable : MonoBehaviour
         GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = true;
+
+
+
 
         GameObject.Find("ConfirmationText").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("Yes").GetComponent<MeshRenderer>().enabled = false;
@@ -179,6 +199,8 @@ public class Interactable : MonoBehaviour
         GameObject.Find("Play").GetComponent<BoxCollider>().enabled = true;
         GameObject.Find("Options").GetComponent<BoxCollider>().enabled = true;
         GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("level").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("High").GetComponent<BoxCollider>().enabled = true;
 
         GameObject.Find("Yes").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("No").GetComponent<BoxCollider>().enabled = false;
@@ -192,7 +214,10 @@ public class Interactable : MonoBehaviour
         GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
-
+        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = true;
 
         GameObject.Find("Back").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("BackText").GetComponent<MeshRenderer>().enabled = false;

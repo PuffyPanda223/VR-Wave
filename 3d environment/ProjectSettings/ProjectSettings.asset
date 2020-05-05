@@ -163,7 +163,7 @@ PlayerSettings:
     iOS: com.oculus.UnitySample
   buildNumber: {}
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 21
+  AndroidMinSdkVersion: 20
   AndroidTargetSdkVersion: 27
   AndroidPreferredInstallLocation: 0
   aotOptions: 

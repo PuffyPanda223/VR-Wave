@@ -29,6 +29,8 @@ public class VRDrawHitBox : MonoBehaviour
     public Material medium;
     public Material hard;
 
+    public GameObject floatingText; 
+
     private void Awake()
     {
         
@@ -127,6 +129,7 @@ public class VRDrawHitBox : MonoBehaviour
             // after the user has released the key create the hitbox
             generatePlane();
             destroyShadow();
+
         }
 
         // change wave will go to the next wave in the selection pool safe -> medium -> hard - > safe
@@ -205,6 +208,7 @@ public class VRDrawHitBox : MonoBehaviour
     }
 
 
+    // different raycasts are cast for different layers so we made a function that takes a particular layer/layers and returns the hit if any 
     private RaycastHit CreateRaycast(int layer)
     {
         RaycastHit hit;
@@ -235,9 +239,13 @@ public class VRDrawHitBox : MonoBehaviour
         // now that all the details of the object have been finialised we populate this custom data class with the necessary information so that the mesh renderer and filter can generate the hitbox when loading from a save file
         HitboxData actor = new HitboxData();
 
+        // generate mesh details takes a mesh object and deconstructs it into a primative list of float arrays that can be reassembled on load. The reason we need to deconstruct the mesh is because unity specific classes are not serialiazble
         actor.GetMeshDetails(m);
         actor.startTime = GlobalTimer.timer;
         actor.endTime = GlobalTimer.timer + 2f;
+
+
+        // we only need to store the name of the material rather than the material itself. When loading in the loader has the necessary materials and checks against the name to determine which material to attach to the hitbox
         switch (ChangeWave.difficulty)
         {
             case "safe":
@@ -250,13 +258,14 @@ public class VRDrawHitBox : MonoBehaviour
                 actor.difficulty = "hard";
                 break;
             default:
-                Debug.Log("unable to determine the difficulty");
                 actor.difficulty = "safe";
                 break;
         }
 
         //we have a static global list that is the same type as the above custom class. that makes sure there is one certialized location where all the list data of our hitboxes are being kept. this makes saving and loading a lot easier
         SaveData.AddToList(actor);
+        var display = Instantiate(floatingText, endPos, Quaternion.LookRotation(endPos));
+        display.GetComponent<TextMesh>().text = "Hitbox created!!!!!";
     }
 
     // for each frame the user is holding down the draw button this method is being called, continiously updating and resizing the hitbox

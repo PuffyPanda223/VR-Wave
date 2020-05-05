@@ -9,7 +9,7 @@ public class SaveData
 {
 
     public static HitBoxList container = new HitBoxList();
-    private static string path = Application.persistentDataPath + "'\'save'\'hitbox.txt";
+    public static string path = Application.persistentDataPath + "'\'save'\'hitbox.txt";
     public delegate void SerializeAction();
     public static event SerializeAction onLoaded;
     public static event SerializeAction onBeforeSave; 

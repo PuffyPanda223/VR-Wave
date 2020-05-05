@@ -247,6 +247,8 @@ MonoBehaviour:
   safe: {fileID: 2100000, guid: 899af98b1fd693f42abd960c005bf52c, type: 2}
   medium: {fileID: 2100000, guid: 8974f1a6a2d96b74197e6d72874f982f, type: 2}
   hard: {fileID: 2100000, guid: 56a7db13eb370ad40bdd151b5a0aad2b, type: 2}
+  floatingText: {fileID: 638249390857962725, guid: e4685b1e29c02df49be2b07f2d4c9a59,
+    type: 3}
 --- !u!1001 &282151594
 PrefabInstance:
   m_ObjectHideFlags: 0
