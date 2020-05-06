@@ -252,12 +252,13 @@ public class VRDrawHitBox : MonoBehaviour
                actor.difficulty = "safe";
                 break;
             case "medium":
-                actor.difficulty = "mediu";
+                actor.difficulty = "medi";
                 break;
             case "hard":
                 actor.difficulty = "hard";
                 break;
             default:
+                Debug.Log("unable to determine the wave difficulty");
                 actor.difficulty = "safe";
                 break;
         }

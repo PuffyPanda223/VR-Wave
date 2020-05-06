@@ -1,29 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Oculus.Platform;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 // get the current logged in user from the oculus go and display it
 public class getAccount : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Users.GetLoggedInUser().OnComplete(GetLoggedInUser);
-    }
-
-    void GetLoggedInUser(Message msg)
-    {
-        if (msg.IsError)
+        if (PlayerName.playerName == "")
         {
-            Debug.LogError("Error is " + msg.GetError());
-        } else
+            // 5 is the create user name scene
+            SceneManager.LoadScene(5);
+        }   else
         {
-            if(msg.Type == Message.MessageType.User_GetLoggedInUser)
-            {
-                transform.GetComponent<TextMeshPro>().text = "Hello " + msg.GetUser().OculusID;
-            }
+            transform.GetComponentInChildren<TextMeshPro>().text = "Hello: "+ PlayerName.playerName;
         }
     }
-
 }

@@ -1,29 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.Events;
 using UnityEngine.Video;
 
-public class Pointer : MonoBehaviour
-{
 
+// pointer script attached to the vr pointer in the create user screen.
+public class keyPress : MonoBehaviour
+{
     int m_Distance = 270;
     public LineRenderer m_LineRenderer = null;
-    public LayerMask m_EverythingMask  ;
-    public LayerMask m_InteractableMask  ;
+    public LayerMask m_EverythingMask;
+    public LayerMask m_InteractableMask;
     public UnityAction<Vector3, GameObject> OnPointerUpdate = null;
 
     public GameObject DND_Pointer;
     public GameObject DND_Reticule;
-    public GameObject Dot;
 
     private Transform m_CurrentOrigin = null;
     private GameObject m_CurrentObject = null;
-
-    public  GameObject sphere;
-    private VideoPlayer videoPlayer;
-
-    private FloatingText FloatingText;
 
 
 
@@ -31,16 +27,8 @@ public class Pointer : MonoBehaviour
     private void Awake()
     {
         VRController.OnControllerSource += UpdateOrigin;
-
-        // we use this Vector3 to compare with the hitPoint variable which is used for determining the length of the line renderer
         isNull = new Vector3(0, 0, 0);
 
-        //VRController.OnTouchpadDown += ProcessTouchpadDown;
-
-        /*
-        DontDestroyOnLoad(DND_Pointer);
-        DontDestroyOnLoad(DND_Reticule);
-        */
 
 
     }
@@ -53,10 +41,10 @@ public class Pointer : MonoBehaviour
 
     private void Update()
     {
-        Vector3 hitPoint = new Vector3(0,0,0); 
+        Vector3 hitPoint = new Vector3(0, 0, 0);
         if (m_CurrentOrigin != null)
         {
-             hitPoint = UpdateLine();
+            hitPoint = UpdateLine();
         }
 
         m_CurrentObject = UpdatePointerStatus();
@@ -71,57 +59,31 @@ public class Pointer : MonoBehaviour
 
         }
 
-        if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && Interactable.drawActive == true)
-        {
-            if (hitPoint != isNull)
-            {
-                Instantiate(Dot, hitPoint, m_CurrentOrigin.rotation);
-            }
-        }
 
-        if (OVRInput.Get(OVRInput.Button.Back) && Interactable.drawActive == true)
-        {
-            GameObject[] Dots = GameObject.FindGameObjectsWithTag("Draw");
-
-            for (var i = 0; i < Dots.Length; i++)
-            {
-                Destroy(Dots[i]);
-            }
-
-            Interactable.drawActive = false;
-            DrawLine.isGamePaused = false;
-            sphere = GameObject.Find("Sphere");
-            // get the video player component containing the 3d footage we are using. 
-            videoPlayer = sphere.GetComponent<VideoPlayer>();
-            videoPlayer.Play();
-        }
-
-
+   
         if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
         {
             //bool isHitBox = false; 
             Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
 
             RaycastHit hit;
+            // do a raycast and see if it hits a key object
             if (Physics.Raycast(ray, out hit, m_Distance, m_InteractableMask))
             {
-                Interactable interact = hit.transform.GetComponent<Interactable>();
-                interact.Pressed(hit.transform.gameObject);
-                
+                hit.transform.GetComponent<keyFeedBack>().keyHit = true;
             }
 
-        
+
 
         }
 
 
-
-
     }
+
 
     private Vector3 UpdateLine()
     {
-        
+
         RaycastHit hit = CreateRaycast(m_EverythingMask);
 
         //Default end
@@ -138,7 +100,7 @@ public class Pointer : MonoBehaviour
         m_LineRenderer.SetPosition(1, endPosition);
 
         return endPosition;
-       
+
     }
 
     private void OnDestroy()
@@ -154,7 +116,7 @@ public class Pointer : MonoBehaviour
 
         m_CurrentOrigin = controllerObject.transform;
         //Is the laser visible?
-        if(controller == OVRInput.Controller.Touchpad)
+        if (controller == OVRInput.Controller.Touchpad)
         {
             m_LineRenderer.enabled = false;
         }
@@ -174,24 +136,24 @@ public class Pointer : MonoBehaviour
         //Check Hit
         if (hit.collider)
         {
-           
+
             // return a game object to the variable m_ CurrentObject
             return hit.collider.gameObject;
-            
+
         }
-           
-        return null;     
-   
+
+        return null;
+
     }
 
     private RaycastHit CreateRaycast(int layer)
     {
         RaycastHit hit;
         Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
-       // int hit_layer = LayerMask.GetMask("hitBox");
+        // int hit_layer = LayerMask.GetMask("hitBox");
         Physics.Raycast(ray, out hit, m_Distance, layer);
-      
-        return hit; 
+
+        return hit;
     }
 
     private void SetLineColor()
@@ -205,15 +167,4 @@ public class Pointer : MonoBehaviour
         m_LineRenderer.endColor = endColor;
     }
 
-
-    private void ProcessTouchpadDown()
-    {
-       if (m_CurrentObject == null )
-        {
-            return;
-        }
-        Debug.Log(m_CurrentObject);
-        Interactable interact = m_CurrentObject.GetComponent<Interactable>();
-        interact.Pressed(m_CurrentObject.transform.gameObject);
-    }
 }

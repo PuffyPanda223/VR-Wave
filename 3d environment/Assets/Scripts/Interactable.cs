@@ -102,7 +102,8 @@ public class Interactable : MonoBehaviour
                     SceneManager.LoadScene(3);
                     break;
                 case "BackR":
-                    ResultsToMain();
+                    //ResultsToMain();
+                    SceneManager.LoadScene(0);
                     break;
                 case "level":
                     SceneManager.LoadScene(2);
@@ -137,7 +138,7 @@ public class Interactable : MonoBehaviour
         GameObject.Find("Options").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("level").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("high").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("High").GetComponent<BoxCollider>().enabled = false;
 
 
         GameObject.Find("Back").GetComponent<BoxCollider>().enabled = true;
@@ -169,6 +170,8 @@ public class Interactable : MonoBehaviour
         GameObject.Find("Play").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("Options").GetComponent<BoxCollider>().enabled = false;
         GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("level").GetComponent<BoxCollider>().enabled = false;
+        GameObject.Find("High").GetComponent<BoxCollider>().enabled = false;
 
         GameObject.Find("Yes").GetComponent<BoxCollider>().enabled = true;
         GameObject.Find("No").GetComponent<BoxCollider>().enabled = true;
@@ -228,6 +231,8 @@ public class Interactable : MonoBehaviour
         GameObject.Find("Play").GetComponent<BoxCollider>().enabled = true;
         GameObject.Find("Options").GetComponent<BoxCollider>().enabled = true;
         GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("level").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("High").GetComponent<BoxCollider>().enabled = true;
 
 
         GameObject.Find("Back").GetComponent<BoxCollider>().enabled = false;

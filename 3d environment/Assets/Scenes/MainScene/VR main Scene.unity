@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2444401c4ce98c4f8b97321538f8fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 20
+  videoLength: {fileID: 437801994}
 --- !u!114 &438596033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,7 +705,7 @@ PrefabInstance:
     - target: {fileID: 128965042400552491, guid: 89955e973b6f1ab4e819b871dc662a6c,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3018148586309408763, guid: 89955e973b6f1ab4e819b871dc662a6c,
         type: 3}

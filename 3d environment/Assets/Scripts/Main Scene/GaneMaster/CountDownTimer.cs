@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 // this class is 
 public class CountDownTimer : MonoBehaviour
 {
     // Static makes it so the variable becomes a member of the class and not an instance of the class, meaning we can access the variable from the class
     public static  float timer = 0f;
-    public float timeLimit = 30f;
-    
-
+    double timeLimit;
+    public VideoPlayer videoLength; 
+    private void Awake()
+    {
+        timeLimit = videoLength.length;   
+    }
 
     // Update is called once per frame
     void Update()

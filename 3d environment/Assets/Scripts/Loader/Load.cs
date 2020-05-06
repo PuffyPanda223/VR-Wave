@@ -88,6 +88,7 @@ public class Load : MonoBehaviour
                     shadowRenderer.material = hard;
                     break;
                 default:
+                    Debug.Log("Unable to load the correct material");
                     shadowRenderer.material = safe;
                     break;
             }
