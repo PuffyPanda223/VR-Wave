@@ -7,7 +7,7 @@ public class UpdateVrTimer : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public TextMeshPro vrTimer;
+    public TextMeshProUGUI vrTimer;
     private TextMeshProUGUI timerUpdate; 
     
     //public TextMeshPro timeDisplay;

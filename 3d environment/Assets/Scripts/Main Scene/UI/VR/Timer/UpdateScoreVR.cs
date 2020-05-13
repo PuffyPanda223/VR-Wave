@@ -7,7 +7,7 @@ public class UpdateScoreVR : MonoBehaviour
 {
 
 
-    public TextMeshPro score;
+    public TextMeshProUGUI score;
 
 
     // Update is called once per frame

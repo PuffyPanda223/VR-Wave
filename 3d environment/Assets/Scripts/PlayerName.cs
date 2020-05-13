@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 // stores the player name from the input scene
 public class PlayerName : MonoBehaviour
 {
+    // variable can be used anywhere in the game, the function below adds to this static variable
     public static string playerName = "";
+
+
+    // unity actions are events that other scripts can subscribe to and get data from, 
     public UnityAction<string> playerNameUpdate = null;
 
     public void addChar(string character)
@@ -20,11 +24,13 @@ public class PlayerName : MonoBehaviour
                 delChar();
                 break;
             case "SAVE":
+                // only go to the next scene if they actually have put in a name
                 if (playerName.Length > 0)
                 {
                     SceneManager.LoadScene(0);
                 }
                 break;
+            // if it isnt any of the special keys than it is a normal key `
             default:
                 playerName += character;
                 break;
@@ -41,12 +47,10 @@ public class PlayerName : MonoBehaviour
 
     public static void delChar()
     {
-        // player name becomes all the characters except for the last one
+        // player name becomes all the characters except for the last one but only if there is a character
         if (playerName.Length > 0)
         {
             playerName = playerName.Substring(0, playerName.Length - 1);
-            
-
         }
         
     }

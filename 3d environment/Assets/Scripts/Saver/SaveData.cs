@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 
 // a static class that will act as an inbetween between the save and load functions and the game. This class contains a global list of hitboxes that it both and and get from and send the data to the appropriate functions
@@ -37,12 +38,17 @@ public class SaveData
     public static void Save()
     {
         string json = JsonUtility.ToJson(container);
+        try
+        {
+            StreamWriter sw = File.CreateText(path);
+            sw.Close();
+            File.WriteAllText(path, json);
+        } catch (Exception e )
+        {
+            Debug.Log(e); 
+        }
 
-        StreamWriter sw = File.CreateText(path);
-        sw.Close();
-
-
-        File.WriteAllText(path, json);
+       
        
     }
 

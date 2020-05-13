@@ -33,7 +33,7 @@ public class Reticle : MonoBehaviour
         }
         transform.LookAt(m_Player.gameObject.transform);
 
-        if (Interactable.drawActive == true)
+        if (Interactable.drawActive)
         {
             m_CircleRenderer.sprite = m_DrawSprite;
         }
@@ -52,8 +52,6 @@ public class Reticle : MonoBehaviour
     private void UpdateSprite(Vector3 point, GameObject hitObject)
     {
         transform.position = point;
-
-
         if (Interactable.drawActive == false)
         {
             if (hitObject)
@@ -67,7 +65,7 @@ public class Reticle : MonoBehaviour
         }
         else
         {
-            m_CircleRenderer.sprite = m_DrawSprite;
+            m_CircleRenderer.sprite = m_ClosedSprite;
         }
     }
 }

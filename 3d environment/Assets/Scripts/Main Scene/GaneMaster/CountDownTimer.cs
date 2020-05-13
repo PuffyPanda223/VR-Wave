@@ -10,11 +10,13 @@ public class CountDownTimer : MonoBehaviour
 {
     // Static makes it so the variable becomes a member of the class and not an instance of the class, meaning we can access the variable from the class
     public static  float timer = 0f;
-    double timeLimit;
+
+    //time limit has to be double because the videoplayer class returns a double on retrieveing the length of a clip
+    double timeLimit = 15;
     public VideoPlayer videoLength; 
     private void Awake()
     {
-        timeLimit = videoLength.length;   
+       // timeLimit = videoLength.length;   
     }
 
     // Update is called once per frame

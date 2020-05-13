@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
+// this script is attahced to the VR pointer in the level creator scene, it records two positions one at the start of the touchpad and one at the release of the touchpad and draws a hitbox in the game world with those dimensions
 public class VRDrawHitBox : MonoBehaviour
 {
 
@@ -9,22 +11,26 @@ public class VRDrawHitBox : MonoBehaviour
     public LineRenderer m_LineRenderer = null;
     public LayerMask m_EverythingMask;
     public LayerMask m_InteractableMask;
+    // this action is used by a script on our reticle gameobject to correctly update where in the game world it should be
     public UnityAction<Vector3, GameObject> OnPointerUpdate = null;
 
     public GameObject DND_Pointer;
+    //currentOrigin is the updated position of the pointer in the game, we uses it position to correctly draw and renderer the rest of the vr associated gear like the line renderer and the reticle
     private Transform m_CurrentOrigin = null;
     private GameObject m_CurrentObject = null;
 
+    // our two positions in the world we need to construct a hitbox
     private Vector3 startPos;
     private Vector3 endPos;
 
-    // Shadow box is a temporory plane object whose dimensions will continiously change as the user draws a hitbox. It will show the user how big and where the hitbox will be drawn
+    // Shadow box is a temporory plane object whose dimensions will continiously change as the user draws a hitbox. It will show the user how big the hitbox is and where in the game world the hitbox will be drawn
     private GameObject shadowBox;
     private MeshFilter shadowFilter;
     private MeshRenderer shadowRenderer;
     private Mesh shadowMesh;
 
 
+    // materials used to correctly display what difficulty of hitbox the user is drawing. Which material is used is determined by a global static string variable with the up to date difficulty 
     public Material safe;
     public Material medium;
     public Material hard;
@@ -33,9 +39,8 @@ public class VRDrawHitBox : MonoBehaviour
 
     private void Awake()
     {
-        
+        // subscribe the update origin script to the on controller source delegate method, this method is called when the pointer 
          VRController.OnControllerSource += UpdateOrigin;
-        //DontDestroyOnLoad(DND_Pointer);
     }
 
     private void OnDestroy()
@@ -145,26 +150,35 @@ public class VRDrawHitBox : MonoBehaviour
 
     private Vector3 UpdateLine()
     {
-        // Create ray
-        if (m_CurrentOrigin != null)
+        RaycastHit hit;
+        Vector3 endPosition = m_CurrentOrigin.position + (m_CurrentOrigin.forward * m_Distance);
+        // if the raycast doesnt happen return the default endPosition
+        try
         {
-            RaycastHit hit = CreateRaycast(m_EverythingMask);
+            hit = CreateRaycast(m_EverythingMask);
 
-            //Default end
-            Vector3 endPosition = m_CurrentOrigin.position + (m_CurrentOrigin.forward * m_Distance);
-
-            //Check hit
-            if (hit.collider != null)
-                endPosition = hit.point;
-
-            //Set Position
+        }
+        catch 
+        {
+    
             m_LineRenderer.SetPosition(0, m_CurrentOrigin.position);
             m_LineRenderer.SetPosition(1, endPosition);
-
             return endPosition;
         }
 
-        return Vector3.zero;
+
+
+        //Check hit
+        if (hit.collider != null)
+        {
+            endPosition = hit.point;
+        }
+        //Set Position
+
+        m_LineRenderer.SetPosition(0, m_CurrentOrigin.position);
+        m_LineRenderer.SetPosition(1, endPosition);
+
+        return endPosition;
     }
 
 
@@ -192,18 +206,30 @@ public class VRDrawHitBox : MonoBehaviour
 
     private GameObject UpdatePointerStatus()
     {
-        
-            //Create Ray
-            RaycastHit hit = CreateRaycast(m_InteractableMask);
 
-            //Check Hit
-            if (hit.collider)
-                // return a game object to the variable m_ CurrentObject
-                return hit.collider.gameObject;
+        //Create Ray
+        RaycastHit hit;
+        try
+        {
+            hit = CreateRaycast(m_InteractableMask);
+        }
+        catch 
+        {
             return null;
 
+        }
+        //Check Hit
+        if (hit.collider)
+        {
 
-       
+            // return a game object to the variable m_ CurrentObject
+            return hit.collider.gameObject;
+
+        }
+
+        return null;
+
+
 
     }
 
@@ -265,18 +291,27 @@ public class VRDrawHitBox : MonoBehaviour
 
         //we have a static global list that is the same type as the above custom class. that makes sure there is one certialized location where all the list data of our hitboxes are being kept. this makes saving and loading a lot easier
         SaveData.AddToList(actor);
-        var display = Instantiate(floatingText, endPos, Quaternion.LookRotation(endPos));
-        display.GetComponent<TextMesh>().text = "Hitbox created!!!!!";
+
+        //display a prompt informing the user they have successfully created a hitbox
+        if(startPos.y > endPos.y)
+        {
+            var display = Instantiate(floatingText, startPos, Quaternion.LookRotation(startPos));
+            display.GetComponent<TextMesh>().text = "Hitbox created!!!!!";
+        } else
+        {
+            var display = Instantiate(floatingText, endPos, Quaternion.LookRotation(endPos));
+            display.GetComponent<TextMesh>().text = "Hitbox created!!!!!";
+        }
+       
     }
 
-    // for each frame the user is holding down the draw button this method is being called, continiously updating and resizing the hitbox
+    // for each frame the user is holding down the draw button this method is being called, continiously updating and resizing the temporary hitbox
     private void DrawShadowBox()
     {
 
         shadowMesh = DrawHitBox.calculateMesh(startPos, endPos, shadowMesh);
         shadowFilter.mesh = shadowMesh;
   
-     
-        //shadowRenderer.material = safe;
+   
     }
 }

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System; // allows access to the serializable field
 
-// the data about the hitbox we want to store including everything the renderer needs to display the hitbox as well as the modified script attached to it
+
+/// <summary>
+/// HitBoxData class stores all the details of a mesh into primative data types so it can be stored in a json file
+/// </summary>
 [Serializable]
 public class HitboxData
 {
@@ -22,9 +25,13 @@ public class HitboxData
     public string difficulty;
 
     // this function seperates the parts of the mesh will will need to save in order to feed to the mesh filter on load
+    /// <summary>
+    /// Give a mesh of a plane object and the generate mesh detail will break in down into a serilizable format so it can be saved into a file 
+    /// </summary>
+    /// <param name="Mesh"></param>
     public void GetMeshDetails(Mesh m)
     {
-        
+       
         vertices = new float[m.vertexCount * 3];
         for(int i = 0; i < m.vertexCount; i++)
         {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Video;
-
+using System;
 public class Pointer : MonoBehaviour
 {
 
-    int m_Distance = 270;
+    int m_Distance = 250;
     public LineRenderer m_LineRenderer = null;
     public LayerMask m_EverythingMask  ;
     public LayerMask m_InteractableMask  ;
@@ -35,12 +35,7 @@ public class Pointer : MonoBehaviour
         // we use this Vector3 to compare with the hitPoint variable which is used for determining the length of the line renderer
         isNull = new Vector3(0, 0, 0);
 
-        //VRController.OnTouchpadDown += ProcessTouchpadDown;
-
-        /*
-        DontDestroyOnLoad(DND_Pointer);
-        DontDestroyOnLoad(DND_Reticule);
-        */
+       
 
 
     }
@@ -63,7 +58,7 @@ public class Pointer : MonoBehaviour
 
         if (OnPointerUpdate != null)
         {
-            // is null is a vector3 of 0,0,0 basically meaning null, but unity doesn't support null types on non booleans
+            // is null is a vector3 of 0,0,0 basically meaning null, but unity doesn't support null types on vector3 objects
             if (hitPoint != isNull)
             {
                 OnPointerUpdate(hitPoint, m_CurrentObject);
@@ -71,15 +66,33 @@ public class Pointer : MonoBehaviour
 
         }
 
-        if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && Interactable.drawActive == true)
+        drawDots(hitPoint);
+        destroyDots();
+        takeScreenshot();
+        findObject(); 
+        
+
+
+
+
+    }
+    private void drawDots(Vector3 hitPoint)
+    {
+        if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && Interactable.drawActive)
         {
             if (hitPoint != isNull)
             {
                 Instantiate(Dot, hitPoint, m_CurrentOrigin.rotation);
             }
         }
+    }
 
-        if (OVRInput.Get(OVRInput.Button.Back) && Interactable.drawActive == true)
+    /// <summary>
+    /// Destroy any dots drawn by the player whilst the game was paused
+    /// </summary>
+    private void destroyDots()
+    {
+        if (OVRInput.Get(OVRInput.Button.Back) && Interactable.drawActive)
         {
             GameObject[] Dots = GameObject.FindGameObjectsWithTag("Draw");
 
@@ -90,14 +103,19 @@ public class Pointer : MonoBehaviour
 
             Interactable.drawActive = false;
             DrawLine.isGamePaused = false;
-            sphere = GameObject.Find("Sphere");
             // get the video player component containing the 3d footage we are using. 
             videoPlayer = sphere.GetComponent<VideoPlayer>();
             videoPlayer.Play();
         }
+    }
 
-
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
+    /// <summary>
+    /// Project a raycast from the pointer object in the game and if a valid object is found use the interactable script attached to it
+    /// </summary>
+    private void findObject()
+    {
+        
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad) && !Interactable.drawActive)
         {
             //bool isHitBox = false; 
             Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
@@ -107,25 +125,55 @@ public class Pointer : MonoBehaviour
             {
                 Interactable interact = hit.transform.GetComponent<Interactable>();
                 interact.Pressed(hit.transform.gameObject);
-                
+
             }
 
-        
+
+
+        }
+    }
+
+    /// <summary>
+    /// if the game is paused and the touchpad is clicked take a screenshot of the current game and save it to the screenshots folder
+    /// </summary>
+     private void takeScreenshot()
+    {
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad) && Interactable.drawActive)
+        {
+            //disable the line renderer and reticle so it doesn't appear in the screenshot
+            m_LineRenderer.enabled = false;
+            
+            screenShot.TakeScreenShot(Screen.width, Screen.height);
+            Debug.Log("screenshot should have been taken");
+            m_LineRenderer.enabled = true;
 
         }
 
-
-
-
     }
+
 
     private Vector3 UpdateLine()
     {
-        
-        RaycastHit hit = CreateRaycast(m_EverythingMask);
-
-        //Default end
+        RaycastHit hit;
         Vector3 endPosition = m_CurrentOrigin.position + (m_CurrentOrigin.forward * m_Distance);
+        endPosition.x = endPosition.x * 0.9f;
+        endPosition.y = endPosition.x * 0.9f;
+        endPosition.z = endPosition.x * 0.9f;
+        // if the raycast doesnt happen return the defaul endPosition
+        try
+        {
+           hit = CreateRaycast(m_EverythingMask);
+
+        } catch (Exception e )
+        {
+            Debug.LogError(e);
+            m_LineRenderer.SetPosition(0, m_CurrentOrigin.position);
+            m_LineRenderer.SetPosition(1, endPosition);
+            return endPosition;
+        }
+     
+        
 
         //Check hit
         if (hit.collider != null)
@@ -169,8 +217,15 @@ public class Pointer : MonoBehaviour
     private GameObject UpdatePointerStatus()
     {
         //Create Ray
-        RaycastHit hit = CreateRaycast(m_InteractableMask);
-
+        RaycastHit hit;
+        try
+        {
+            hit = CreateRaycast(m_InteractableMask);
+        } catch 
+        {
+            return null;
+           
+        }
         //Check Hit
         if (hit.collider)
         {
@@ -205,15 +260,4 @@ public class Pointer : MonoBehaviour
         m_LineRenderer.endColor = endColor;
     }
 
-
-    private void ProcessTouchpadDown()
-    {
-       if (m_CurrentObject == null )
-        {
-            return;
-        }
-        Debug.Log(m_CurrentObject);
-        Interactable interact = m_CurrentObject.GetComponent<Interactable>();
-        interact.Pressed(m_CurrentObject.transform.gameObject);
-    }
 }
