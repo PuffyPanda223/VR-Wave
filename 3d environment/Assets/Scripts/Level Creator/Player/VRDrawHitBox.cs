@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using System;
+using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 // this script is attahced to the VR pointer in the level creator scene, it records two positions one at the start of the touchpad and one at the release of the touchpad and draws a hitbox in the game world with those dimensions
 public class VRDrawHitBox : MonoBehaviour
 {
@@ -35,8 +35,14 @@ public class VRDrawHitBox : MonoBehaviour
     public Material medium;
     public Material hard;
 
-    public GameObject floatingText; 
+    public GameObject floatingText;
 
+
+    public Canvas UICanvas;
+    public GameObject videoSphere;
+    public LayerMask buttonMask;
+
+    private bool lockFrame = false;
     private void Awake()
     {
         // subscribe the update origin script to the on controller source delegate method, this method is called when the pointer 
@@ -63,15 +69,129 @@ public class VRDrawHitBox : MonoBehaviour
         }
 
 
+        if (GameState.gameState)
+        {
+            if (!lockFrame)
+            {
+                startOfDraw();
+                continueToDraw();
+                release();
+                checkChange();
+                checkPause();
+            } else
+            {
+                if(OVRInput.GetUp(OVRInput.Button.PrimaryTouchpad))
+                {
+                    lockFrame = false;
+                }
+            }
+        } else
+        { 
+            checkRayCast();
+            checkUnPause();
+        }
+
+    }
+
+
+    /// <summary>
+    /// sends the UI canvas way away
+    /// </summary>
+    private void disableBoxCollider()
+    {
+        UICanvas.transform.position = UICanvas.transform.position * 1000;
+    }
+
+    private void checkRayCast()
+    {
+        if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
+        {
+          
+            Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
+            RaycastHit hit = new RaycastHit();
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                // the UI layer is where the buttons in the UI canvas live
+                if (hit.transform.tag == "UI")
+                {
+                   
+
+                    string name = hit.transform.gameObject.name;
+                    Debug.Log(name);
+                    switch (name)
+                    {
+                        case "Quit":
+                            SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.MAIN_MENU);
+                            break;
+                        case "Restart":
+                            SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.LEVEL_CREATOR);
+                            break;
+                        case "Resume":
+                            GameState.changeGameState();
+                            videoSphere.GetComponent<VideoPlayer>().Play();
+                            UICanvas.enabled = false;
+                            UICanvas.GetComponent<OverlayMenu>().enabled = false;
+                            disableBoxCollider();
+                            lockFrame = true;
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void checkUnPause()
+    {
+        if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        {
+            try
+            {
+
+                // disable the renderer for the canvas and the follow script so it doesnt eat up processing power when it isn't activate
+                UICanvas.enabled = false;
+                UICanvas.GetComponent<OverlayMenu>().enabled = false;
+                GameState.changeGameState();
+                videoSphere.GetComponent<VideoPlayer>().Play();
+                disableBoxCollider(); 
+            } catch(Exception e )
+            {
+                Debug.LogError(e);
+            }
+        }
+    }
+
+    private void checkPause()
+    {
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        {
+            // not really necessary at the moment because we always have the one video but later on when implementing online connectivity it will be important to make sure the game doesn't break if something goes wrong with 
+            // the video player
+            try
+            {
+                GameState.changeGameState();
+                UICanvas.enabled = true;
+                UICanvas.GetComponent<OverlayMenu>().enabled = true;
+                videoSphere.GetComponent<VideoPlayer>().Pause();
+            } catch (Exception e )
+            {
+                Debug.LogError(e);
+            }
+        }
+    }
+
+    // check to see if the player intention is draw on the current frame, if so setup all the necessary components for drawing the hitbox
+    private void startOfDraw()
+    {
         if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
         {
             // clear the startPos, as we are creating a new hitbox
-         
+
             startPos = Vector3.zero;
             endPos = Vector3.zero;
             Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
 
-            RaycastHit hit;
+            RaycastHit hit = new RaycastHit();
 
             // Create the shadowbox object which will show the user how the box is being drawn. It will continiously be updated while the user is holding down the fire button
             // this object will be destroyed when the user releases the fire button and when the user relicks down the primary button be created again
@@ -99,20 +219,20 @@ public class VRDrawHitBox : MonoBehaviour
 
             // get the pos of the start point and log them into the startPos variable. This will allow us calculate the distance we need to render the hitbox
             if (Physics.Raycast(ray, out hit))
-            {
-                // Make the start position = inital set of Vector3 coords that the user clicks on
-
+            { 
                 startPos = hit.point;
-                //Debug.Log("start pos is " + startPos);
-
-                // have the hitbox spawn closer to the player so it doesn't clip through the world
-
             }
         }
+    }
+
+
+    // check to see if 
+    private void continueToDraw()
+    {
 
         if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
         {
-        
+
             Ray ray = new Ray(m_CurrentOrigin.position, m_CurrentOrigin.forward);
             RaycastHit hit;
 
@@ -126,8 +246,10 @@ public class VRDrawHitBox : MonoBehaviour
                 DrawShadowBox();
             }
         }
+    }
 
-
+    private void release()
+    {
         // if the button is released, generate the plane and destroy the shadow box
         if (OVRInput.GetUp(OVRInput.Button.PrimaryTouchpad))
         {
@@ -137,13 +259,17 @@ public class VRDrawHitBox : MonoBehaviour
 
         }
 
+    }
+
+    // checks to see if the back button was pressed and if so change the color of the wave
+    private void checkChange()
+    {
         // change wave will go to the next wave in the selection pool safe -> medium -> hard - > safe
-        if(OVRInput.Get(OVRInput.Button.Back) )
+        if (OVRInput.Get(OVRInput.Button.Back) )
         {
-            ChangeWave.Change(); 
+            ChangeWave.Change();
 
         }
-
     }
 
 

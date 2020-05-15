@@ -9,6 +9,7 @@ TagManager:
   - Draw
   - Result
   - soundHandler
+  - UI
   layers:
   - Default
   - TransparentFX

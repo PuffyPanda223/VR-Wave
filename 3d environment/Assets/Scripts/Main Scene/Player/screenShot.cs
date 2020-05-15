@@ -54,9 +54,7 @@ public class screenShot : MonoBehaviour
         int numberOfFiles = GetNumber() + 1;
         try
         {
-            Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();
-            byte[] byteArray = texture.EncodeToPNG();
-            File.WriteAllBytes(Application.persistentDataPath + "/screenshots/wave(" + numberOfFiles + ").png", byteArray);
+            ScreenCapture.CaptureScreenshot("/screenshot/wave(" + numberOfFiles + ")");
         } catch (Exception e )
         {
             Debug.Log("error when capturing screen shot");

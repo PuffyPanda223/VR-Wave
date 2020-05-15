@@ -8,8 +8,7 @@ public class GlobalTimer : MonoBehaviour
 {
     public static float timer = 0f;
 
-    // when the menu is initiated, this variable will control whether we pause the game or not
-    public static bool paused = false;
+  
 
     private void Awake()
     {
@@ -19,7 +18,8 @@ public class GlobalTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!paused)
+        // when gamestate is true the game is running
+        if (GameState.gameState)
         {
             timer += 1 * Time.deltaTime;
         }
@@ -34,7 +34,6 @@ public class GlobalTimer : MonoBehaviour
         {
            
             SaveData.clearList();
-            Debug.Log("container has been emptied");
             timer = 0f; 
         }
     }
