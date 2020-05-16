@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// contains functionality for other scripts to determine which difficulty of wave to draw
+/// </summary>
 public class ChangeWave : MonoBehaviour
 {
 

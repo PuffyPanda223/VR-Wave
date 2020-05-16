@@ -5,7 +5,9 @@ using System.IO;
 using System;
 
 
-// a static class that will act as an inbetween between the save and load functions and the game. This class contains a global list of hitboxes that it both and and get from and send the data to the appropriate functions
+/// <summary>
+/// saves and loads from a static container a list of hitboxes. 
+/// </summary>
 public class SaveData 
 {
 
@@ -35,6 +37,9 @@ public class SaveData
     }
 
 
+    /// <summary>
+    /// Save the data currently in the static container
+    /// </summary>
     public static void Save()
     {
         string json = JsonUtility.ToJson(container);
@@ -52,13 +57,19 @@ public class SaveData
        
     }
 
-    // called from the hitbox actor script. When a new actor is created this function will be called to add the hitbox to the global list of hitboxes
+    /// <summary>
+    /// When a hitbox is created, this function is invoked. Adding the generated hitbox data to a list
+    /// </summary>
+    /// <param name="data"></param>
     public static void AddToList(HitboxData data)
     {
         container.actors.Add(data);
        
     }
 
+    /// <summary>
+    /// clear the current contains of the static container
+    /// </summary>
     public static void clearList()
     {
         container.actors.Clear();
