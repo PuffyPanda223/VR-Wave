@@ -39,6 +39,7 @@ public class keyFeedBack : MonoBehaviour
             transform.GetComponent<MeshRenderer>().material = pressed;
             Canvas Canvas = transform.GetComponentInChildren<Canvas>();
             TextMeshProUGUI txt = Canvas.GetComponentInChildren<TextMeshProUGUI>();
+            Debug.Log(txt.text);
             playerName.addChar(txt.text);
             
         }
