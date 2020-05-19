@@ -15,7 +15,7 @@ public class PlayerName : MonoBehaviour
 
     public void addChar(string character)
     {
-        Debug.Log(character);
+        // check which character
         switch (character)
         {
             case "SPACE":
