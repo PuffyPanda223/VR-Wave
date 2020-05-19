@@ -2767,8 +2767,9 @@ GameObject:
   - component: {fileID: 1068092622}
   - component: {fileID: 1068092621}
   - component: {fileID: 1068092620}
+  - component: {fileID: 1068092618}
   m_Layer: 10
-  m_Name: High
+  m_Name: Change
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2789,6 +2790,18 @@ Transform:
   m_Father: {fileID: 297786884}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1068092618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068092616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4853a60b736f42a47950f2a95c0bc727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &1068092620
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3062,6 +3075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4fc43971efb424d82f80d300e163e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundHandler: {fileID: 0}
 --- !u!1 &1105195757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4524,7 +4538,7 @@ GameObject:
   - component: {fileID: 1946160877}
   - component: {fileID: 1946160881}
   m_Layer: 0
-  m_Name: highText
+  m_Name: changeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4567,9 +4581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Highscores
-
-'
+  m_text: Change player
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4578,8 +4590,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286414205
-  m_fontColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4638,10 +4650,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1946160877}
-    characterCount: 11
+    characterCount: 13
     spriteCount: 0
     spaceCount: 1
-    wordCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -4721,12 +4733,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946160875}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 847c9fefbde7f6b4393a81f08276fa78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highScoreButton: {fileID: 1068092616}
+  highScoreButton: {fileID: 0}
 --- !u!1 &1969576923
 GameObject:
   m_ObjectHideFlags: 0

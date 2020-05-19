@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using TMPro;
+using System;
 
 
 // attached to an object. When pressed by the pointer it will pass through itself
@@ -101,12 +102,17 @@ public class Interactable : MonoBehaviour
                 case "Skip":
                     SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.MAIN_SCENE);
                     break;
+                // back from results to main menu 
                 case "BackR":
-                    //ResultsToMain();
                     SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.MAIN_MENU);
                     break;
+                // to the level editor
                 case "level":
                     SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.LEVEL_CREATOR);
+                    break;
+                // from main menu to the input scene
+                case "Change":
+                    SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.INPUT);
                     break;
                 default:
                     break;
@@ -117,128 +123,158 @@ public class Interactable : MonoBehaviour
 
     void MainToOptions()
     {
-        GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = false;
+        try
+        {
+            GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("level").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Change").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("changeText").GetComponent<MeshRenderer>().enabled = false;
 
-        GameObject.Find("Back").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("BackText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("Credits").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("CreditsText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("Sample Options").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Back").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("BackText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Credits").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("CreditsText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Sample Options").GetComponent<MeshRenderer>().enabled = true;
 
-        GameObject.Find("Play").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("Options").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("level").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("High").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Play").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Options").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("level").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Change").GetComponent<BoxCollider>().enabled = false;
 
 
-        GameObject.Find("Back").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("Credits").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("Sample Options").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Back").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Credits").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Sample Options").GetComponent<BoxCollider>().enabled = true;
+        } catch (Exception e)
+        {
+            Debug.Log("MainToOptions function stopped working");
+            Debug.LogError(e);
+        }
+
     }
 
     void MainToQuit()
     {
-        GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = false;
+        try
+        {
+            GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("level").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Change").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("changeText").GetComponent<MeshRenderer>().enabled = false;
 
 
 
-        GameObject.Find("ConfirmationText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("Yes").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("YesText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("No").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("NoText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("ConfirmationText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Yes").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("YesText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("No").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("NoText").GetComponent<MeshRenderer>().enabled = true;
 
-        GameObject.Find("Play").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("Options").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("level").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("High").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Play").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Options").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("level").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Change").GetComponent<BoxCollider>().enabled = false;
 
-        GameObject.Find("Yes").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("No").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Yes").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("No").GetComponent<BoxCollider>().enabled = true;
+        } catch (Exception e)
+        {
+            Debug.Log("something went wrong in the MainToQuit function");
+            Debug.LogError(e);
+
+        }
     }
 
     void QuitToMain()
     {
-        GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = true;
+        try
+        {
+            GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("level").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Change").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("changeText").GetComponent<MeshRenderer>().enabled = true;
 
 
 
 
-        GameObject.Find("ConfirmationText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("Yes").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("YesText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("No").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("NoText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("ConfirmationText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Yes").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("YesText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("No").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("NoText").GetComponent<MeshRenderer>().enabled = false;
 
-        GameObject.Find("Play").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("Options").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("level").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("High").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Play").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Options").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("level").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Change").GetComponent<BoxCollider>().enabled = true;
 
-        GameObject.Find("Yes").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("No").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Yes").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("No").GetComponent<BoxCollider>().enabled = false;
+        } catch (Exception e )
+        {
+            Debug.Log("something went in the QuitToMain function");
+            Debug.LogError(e); 
+        }
     }
 
     void OptionsToMain()
     {
-        GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("level").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("High").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("highText").GetComponent<MeshRenderer>().enabled = true;
+        try
+        {
+            GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("level").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("levelText").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("Change").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("changeText").GetComponent<MeshRenderer>().enabled = true;
 
-        GameObject.Find("Back").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("BackText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("Credits").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("CreditsText").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("Sample Options").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Back").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("BackText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Credits").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("CreditsText").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("Sample Options").GetComponent<MeshRenderer>().enabled = false;
 
-        GameObject.Find("Play").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("Options").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("level").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("High").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Play").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Options").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("level").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("Change").GetComponent<BoxCollider>().enabled = true;
 
 
-        GameObject.Find("Back").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("Credits").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Back").GetComponent<BoxCollider>().enabled = false;
+            GameObject.Find("Credits").GetComponent<BoxCollider>().enabled = false;
 
-        GameObject.Find("FullCredits").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("FullCredits").GetComponent<MeshRenderer>().enabled = false;
+        } catch (Exception e )
+        {
+            Debug.Log("something went wrong in the OptionsToMain function");
+            Debug.LogError(e); 
+        }
     }
 
     void OptionsToCredits()
@@ -252,48 +288,7 @@ public class Interactable : MonoBehaviour
         GameObject.Find("FullCredits").GetComponent<MeshRenderer>().enabled = true;
     }
 
-    void ResultsToMain()
-    {
-        GameObject.Find("WaveColumn").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("TimeColumn").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("ScoreColumn").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("TotalColumn").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("WaveTitle").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("TimeTitle").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("ScoreTitle").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("TotalTitle").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("BackR").GetComponent<MeshRenderer>().enabled = false;
-        GameObject.Find("BackRText").GetComponent<MeshRenderer>().enabled = false;
-
-        GameObject.Find("WaveColumn").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("TimeColumn").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("ScoreColumn").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("TotalColumn").GetComponent<BoxCollider>().enabled = false;
-        GameObject.Find("BackR").GetComponent<BoxCollider>().enabled = false;
-
-        GameObject.Find("Play").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("PlayText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("Options").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("OptionsText").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("Quit").GetComponent<MeshRenderer>().enabled = true;
-        GameObject.Find("QuitText").GetComponent<MeshRenderer>().enabled = true;
-
-        GameObject.Find("Play").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("Options").GetComponent<BoxCollider>().enabled = true;
-        GameObject.Find("Quit").GetComponent<BoxCollider>().enabled = true;
-
-        GameObject[] resultData = GameObject.FindGameObjectsWithTag("Result");
-
-        for (var i = 0; i < resultData.Length; i++)
-        {
-            Destroy(resultData[i]);
-        }
-
-        Results.scoreList.Clear();
-        Results.timesList.Clear();
-
-        GameObject.Find("Title").GetComponent<TextMeshPro>().text = "Surf VR Project";
-    }
+  
 
     void DrawStart()
     {
