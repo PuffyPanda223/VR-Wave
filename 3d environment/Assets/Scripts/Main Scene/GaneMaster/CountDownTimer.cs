@@ -12,7 +12,7 @@ public class CountDownTimer : MonoBehaviour
     public static  float timer = 0f;
 
     //time limit has to be double because the videoplayer class returns a double on retrieveing the length of a clip
-    double timeLimit = 15;
+    double timeLimit = 20;
     public VideoPlayer videoLength; 
     private void Awake()
     {

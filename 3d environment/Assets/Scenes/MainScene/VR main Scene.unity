@@ -436,7 +436,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 10.32}
+  m_AnchoredPosition: {x: 0, y: 7.34}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &444619907
@@ -735,7 +735,7 @@ PrefabInstance:
     - target: {fileID: 128965041729015237, guid: 89955e973b6f1ab4e819b871dc662a6c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 128965042400552490, guid: 89955e973b6f1ab4e819b871dc662a6c,
         type: 3}
@@ -746,6 +746,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 128965042400552493, guid: 89955e973b6f1ab4e819b871dc662a6c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2681584182269070863, guid: 89955e973b6f1ab4e819b871dc662a6c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3018148586309408763, guid: 89955e973b6f1ab4e819b871dc662a6c,
         type: 3}
@@ -1291,7 +1301,7 @@ PrefabInstance:
     - target: {fileID: 6083706065899036622, guid: 0deaca8ae0323984084174fa32217e36,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7471783413241955246, guid: 0deaca8ae0323984084174fa32217e36,
         type: 3}
@@ -1573,6 +1583,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2466123185028246813, guid: 7b062c117af2d814bab1ffe71c87c849,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466123185028246813, guid: 7b062c117af2d814bab1ffe71c87c849,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2719581513286370011, guid: 7b062c117af2d814bab1ffe71c87c849,
         type: 3}
       propertyPath: m_Name
@@ -1628,7 +1648,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: f92be8d55fbf66849a558b1128791f53,
+      objectReference: {fileID: 32900000, guid: b49c1eac56ff1c9469df2a08d064cbff,
         type: 3}
     - target: {fileID: 3068410078511310259, guid: 9629d2ece215d3147bcb1edd7a92e83c,
         type: 3}

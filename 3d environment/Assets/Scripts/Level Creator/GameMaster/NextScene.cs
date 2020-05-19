@@ -15,7 +15,7 @@ public class NextScene : MonoBehaviour
             {
                 SaveData.Save();
             }
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
     }
 }

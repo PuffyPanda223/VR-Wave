@@ -8,5 +8,5 @@ using UnityEngine;
 public static class sceneEnum
 {
 
-   public enum loadSceneEnum {MAIN_MENU = 0, INTRO = 1 , LEVEL_CREATOR = 2 , MAIN_SCENE = 3, RESULTS = 4, INPUT=5};
+   public enum loadSceneEnum {INTRO = 0, MAIN_MENU = 1 , LEVEL_CREATOR = 2 , MAIN_SCENE = 3, RESULTS = 4, INPUT=5};
 }

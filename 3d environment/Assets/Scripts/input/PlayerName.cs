@@ -29,7 +29,7 @@ public class PlayerName : MonoBehaviour
                 Debug.Log("got here aye");
                 if (playerName.Length > 0)
                 {
-                    SceneManager.LoadScene(0);
+                    SceneManager.LoadScene(1);
                 }
                 break;
             // if it isnt any of the special keys than it is a normal key `
