@@ -383,7 +383,7 @@ public class VRDrawHitBox : MonoBehaviour
         Mesh m = new Mesh();
 
 
-        m = CreateHitBox.calculateMesh(startPos, endPos, m);
+        m = DrawHitBox.calculateMesh(startPos, endPos, m);
 
         // the material is how we both visually and programmatically differentiate between the level of difficult the wave is
 
@@ -435,7 +435,7 @@ public class VRDrawHitBox : MonoBehaviour
     private void DrawShadowBox()
     {
 
-        shadowMesh = CreateHitBox.calculateMesh(startPos, endPos, shadowMesh);
+        shadowMesh = DrawHitBox.calculateMesh(startPos, endPos, shadowMesh);
         shadowFilter.mesh = shadowMesh;
   
    

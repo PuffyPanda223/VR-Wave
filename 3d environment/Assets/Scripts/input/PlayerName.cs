@@ -15,7 +15,6 @@ public class PlayerName : MonoBehaviour
 
     public void addChar(string character)
     {
-        Debug.Log(character);
         switch (character)
         {
             case "SPACE":
@@ -24,9 +23,8 @@ public class PlayerName : MonoBehaviour
             case "BACK":
                 delChar();
                 break;
-            case "OK":
+            case "SAVE":
                 // only go to the next scene if they actually have put in a name
-                Debug.Log("got here aye");
                 if (playerName.Length > 0)
                 {
                     SceneManager.LoadScene(1);
