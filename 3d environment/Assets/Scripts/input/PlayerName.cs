@@ -26,10 +26,10 @@ public class PlayerName : MonoBehaviour
                 break;
             case "OK":
                 // only go to the next scene if they actually have put in a name
-                Debug.Log("got here aye");
+               
                 if (playerName.Length > 0)
                 {
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.MAIN_MENU);
                 }
                 break;
             // if it isnt any of the special keys than it is a normal key `
