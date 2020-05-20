@@ -354,9 +354,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ba2773485ff3549a313a60ba32fcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  safe: {fileID: 2100000, guid: 899af98b1fd693f42abd960c005bf52c, type: 2}
-  medium: {fileID: 2100000, guid: 8974f1a6a2d96b74197e6d72874f982f, type: 2}
-  hard: {fileID: 2100000, guid: 56a7db13eb370ad40bdd151b5a0aad2b, type: 2}
+  safe: {fileID: 2100000, guid: 05976394bb3d1e649844c4f56d76bad2, type: 2}
+  medium: {fileID: 2100000, guid: de5158e6e79a1334291821e5548d8e9e, type: 2}
+  hard: {fileID: 2100000, guid: 0cb1f198c45efbc48ad5912140450e9f, type: 2}
 --- !u!114 &438596044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,7 +705,7 @@ PrefabInstance:
     - target: {fileID: 128965041729015237, guid: 89955e973b6f1ab4e819b871dc662a6c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 128965042400552490, guid: 89955e973b6f1ab4e819b871dc662a6c,
         type: 3}
@@ -962,7 +962,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1242951168}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

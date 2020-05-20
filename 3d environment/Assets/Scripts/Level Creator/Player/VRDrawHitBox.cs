@@ -134,26 +134,6 @@ public class VRDrawHitBox : MonoBehaviour
         }
     }
 
-    private void checkUnPause()
-    {
-        if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
-        {
-            try
-            {
-
-                // disable the renderer for the canvas and the follow script so it doesnt eat up processing power when it isn't activate
-                UICanvas.enabled = false;
-                UICanvas.GetComponent<OverlayMenu>().enabled = false;
-                GameState.changeGameState();
-                videoSphere.GetComponent<VideoPlayer>().Play();
-                
-            } catch(Exception e )
-            {
-                Debug.LogError(e);
-            }
-        }
-    }
-
     private void checkPause()
     {
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
@@ -388,7 +368,7 @@ public class VRDrawHitBox : MonoBehaviour
         // generate mesh details takes a mesh object and deconstructs it into a primative list of float arrays that can be reassembled on load. The reason we need to deconstruct the mesh is because unity specific classes are not serialiazble
         actor.GetMeshDetails(m);
         actor.startTime = GlobalTimer.timer;
-        actor.endTime = GlobalTimer.timer + 2f;
+        actor.endTime = GlobalTimer.timer + 6f;
 
 
         // we only need to store the name of the material rather than the material itself. When loading in the loader has the necessary materials and checks against the name to determine which material to attach to the hitbox

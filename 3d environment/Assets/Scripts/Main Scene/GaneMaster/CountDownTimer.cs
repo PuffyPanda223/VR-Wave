@@ -16,7 +16,8 @@ public class CountDownTimer : MonoBehaviour
     public VideoPlayer videoLength; 
     private void Awake()
     {
-       // timeLimit = videoLength.length;   
+        // timeLimit = videoLength.length;   
+       // SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
 
     // Update is called once per frame
@@ -33,11 +34,16 @@ public class CountDownTimer : MonoBehaviour
         if (timer > timeLimit)
         {
             timer = 0;
-            PointSystem.playerScore = 0;
-            SceneManager.LoadScene(4);
+           
+            SceneManager.LoadScene((int) sceneEnum.loadSceneEnum.RESULTS);
         }
+
+
+
             
     }
+
+  
 
 
 

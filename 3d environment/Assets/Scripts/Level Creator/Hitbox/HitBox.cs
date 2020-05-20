@@ -12,10 +12,19 @@ public class HitBox : MonoBehaviour
     // use this to determine when to activate the collider and renderer and when to deactive them after a certain amount of time elapses
     private bool activated = false;
 
-    
+    private Material safe;
+    private Material medium;
+    private Material hard;
+
+    // time alive is the max amount of time the hitbox is spawned for
+    private int timeAlive = 6; 
+    private float timeElpased;
     private void Awake()
     {
-        
+ 
+        medium = Resources.Load("medium.mat", typeof(Material)) as Material;
+        hard = Resources.Load("Material/hard.mat", typeof(Material)) as Material;
+        Debug.Log(hard);
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         
     }
@@ -37,10 +46,42 @@ public class HitBox : MonoBehaviour
         
         if(CountDownTimer.timer >= endTime)
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
+           
+            Destroy(this.transform.gameObject);
         }
+
+        // get the current time passed
+        if (activated == true && endTime > CountDownTimer.timer)
+        {
+            timeElpased = endTime - CountDownTimer.timer;
+            //Debug.Log( (timeElpased/timeAlive) * 100);
+        }
+
+
+
+
+        if (this.GetComponent<MeshRenderer>().material.name.Substring(0, 4) == "medi" && activated == true)
+        {
+            if ( (timeElpased / timeAlive) * 100 < 33.333)
+            {
+                this.GetComponent<MeshRenderer>().material.name = "hard";
+            }
+        }
+
+        // change from green to orange 
+        if (this.GetComponent<MeshRenderer>().material.name.Substring(0,4) == "safe" && activated == true)
+        {
+            if ( (timeElpased/timeAlive) * 100 <= 50 )
+            {
+               
+                this.GetComponent<MeshRenderer>().material.name = "medium"; 
+            }
+        }
+
         
-        
+
+
+
     }
 
 
