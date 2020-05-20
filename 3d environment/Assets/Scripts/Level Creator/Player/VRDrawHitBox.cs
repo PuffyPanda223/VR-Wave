@@ -69,7 +69,7 @@ public class VRDrawHitBox : MonoBehaviour
         }
 
 
-        if (GameState.gameState)
+        if (!GameState.gameState)
         {
             if (!lockFrame)
             {
@@ -88,7 +88,7 @@ public class VRDrawHitBox : MonoBehaviour
         } else
         { 
             checkRayCast();
-            checkUnPause();
+            //checkUnPause();
         }
 
     }

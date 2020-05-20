@@ -77,7 +77,7 @@ public class Interactable : MonoBehaviour
             switch (currentObject.gameObject.name)
             {
                 case "Play":
-                    SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.MAIN_SCENE);
+                    SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.INTRO);
                     break;
                 case "Options":
                     MainToOptions();
@@ -99,7 +99,7 @@ public class Interactable : MonoBehaviour
                     Application.Quit();
                     break;
                 case "Skip":
-                    SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.INPUT);
+                    SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.MAIN_SCENE);
                     break;
                 // back from results to main menu 
                 case "BackR":
