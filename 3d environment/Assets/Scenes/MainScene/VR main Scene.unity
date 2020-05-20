@@ -207,10 +207,8 @@ GameObject:
   - component: {fileID: 438596041}
   - component: {fileID: 438596031}
   - component: {fileID: 438596034}
-  - component: {fileID: 438596035}
   - component: {fileID: 438596036}
   - component: {fileID: 438596033}
-  - component: {fileID: 438596037}
   - component: {fileID: 438596040}
   - component: {fileID: 438596039}
   - component: {fileID: 438596030}
@@ -268,19 +266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e258c3a81646b34ca868a50f1ad0702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &438596035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438596029}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 212f30ae193978d4889cb5384a9590f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerUpdate: {fileID: 0}
 --- !u!114 &438596036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,21 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4853a60b736f42a47950f2a95c0bc727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &438596037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438596029}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63228e1f31d6dd14db47b12f414ed396, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnLocation_3: {fileID: 0}
-  spawn2HitBox: {fileID: 7322139746178071169, guid: e2235e5af1b7b5647880600adc841cab,
-    type: 3}
 --- !u!33 &438596039
 MeshFilter:
   m_ObjectHideFlags: 2
