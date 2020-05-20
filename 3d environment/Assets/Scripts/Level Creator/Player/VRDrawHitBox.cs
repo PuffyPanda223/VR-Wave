@@ -88,19 +88,13 @@ public class VRDrawHitBox : MonoBehaviour
         } else
         { 
             checkRayCast();
-            checkUnPause();
+            
         }
 
     }
 
 
-    /// <summary>
-    /// sends the UI canvas way away
-    /// </summary>
-    private void disableBoxCollider()
-    {
-        UICanvas.transform.position = UICanvas.transform.position * 1000;
-    }
+  
 
     private void checkRayCast()
     {
@@ -118,21 +112,20 @@ public class VRDrawHitBox : MonoBehaviour
                    
 
                     string name = hit.transform.gameObject.name;
-                    Debug.Log(name);
                     switch (name)
                     {
                         case "Quit":
                             SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.MAIN_MENU);
                             break;
                         case "Restart":
-                            SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.LEVEL_CREATOR);
+                            SceneManager.LoadScene((int)sceneEnum.loadSceneEnum.LEVEL_CREATOR );
                             break;
                         case "Resume":
                             GameState.changeGameState();
                             videoSphere.GetComponent<VideoPlayer>().Play();
                             UICanvas.enabled = false;
                             UICanvas.GetComponent<OverlayMenu>().enabled = false;
-                            disableBoxCollider();
+                            UICanvas.transform.position = UICanvas.transform.position * 1000; 
                             lockFrame = true;
                             break;
                     }
@@ -153,7 +146,7 @@ public class VRDrawHitBox : MonoBehaviour
                 UICanvas.GetComponent<OverlayMenu>().enabled = false;
                 GameState.changeGameState();
                 videoSphere.GetComponent<VideoPlayer>().Play();
-                disableBoxCollider(); 
+                
             } catch(Exception e )
             {
                 Debug.LogError(e);
@@ -173,6 +166,7 @@ public class VRDrawHitBox : MonoBehaviour
                 UICanvas.enabled = true;
                 UICanvas.GetComponent<OverlayMenu>().enabled = true;
                 videoSphere.GetComponent<VideoPlayer>().Pause();
+
             } catch (Exception e )
             {
                 Debug.LogError(e);
